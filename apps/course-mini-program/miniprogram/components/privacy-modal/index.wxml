@@ -1,0 +1,13 @@
+<view wx:if="{{visible}}" class="privacy-mask">
+  <view class="privacy-card">
+    <view class="privacy-title">隐私授权说明</view>
+    <scroll-view scroll-y class="privacy-body">
+      <text>使用本课程小程序前，请阅读并同意《隐私保护指引》。我们将通过微信登录凭证（code）建立你的课程账号；你在"问答"模块输入的文字、语音、图片、文档会用于生成课程相关回答；我们仅保存你主动设置的展示名与头像，不会在未经授权的情况下获取你的微信头像、昵称等个人信息。课程教材、参考文献与项目平台通过内嵌网页打开，其数据遵循对应网站政策。你可以随时修改展示信息、查看问答历史或注销账号。</text>
+    </scroll-view>
+    <view class="privacy-link" bindtap="openDetail">查看完整《隐私保护指引》</view>
+    <view class="privacy-actions">
+      <button class="privacy-cancel" bindtap="onCancel">暂不使用</button>
+      <button class="privacy-agree" bindtap="onAgree">同意并继续</button>
+    </view>
+  </view>
+</view>

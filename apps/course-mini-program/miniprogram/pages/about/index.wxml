@@ -1,0 +1,55 @@
+<view class="about-page">
+  <view class="about-hero">
+    <view class="brand-mark"><image class="brand-logo" src="../../assets/course-logo.png" mode="aspectFit"></image></view>
+    <view class="eyebrow light">ABOUT / 关于</view>
+    <view class="about-title">内容、作者与建设计划</view>
+    <view class="about-copy">本工具面向公共管理学习者，帮助你理解技术如何改变组织、分析制度，并判断 AI 进入公共部门后的现实后果。</view>
+    <view class="hero-org">
+      <image class="org-logo" src="../../assets/nju-government-logo.png" mode="aspectFit"></image>
+      <view class="org-text">内容来源：南京大学政府管理学院</view>
+    </view>
+  </view>
+
+  <view class="about-body">
+    <view class="teacher-card">
+      <image src="../../assets/yujunbo.jpg" mode="aspectFill"></image>
+      <view class="teacher-info">
+        <view class="eyebrow">CONTENT AUTHOR / 内容作者</view>
+        <view class="teacher-name">于君博</view>
+        <view class="teacher-role">南京大学政府管理学院教授 · 行政管理系</view>
+        <view class="teacher-bio">清华大学公共管理学院管理科学与工程专业博士。主要研究数字政府治理、行政管理理论、公共政策分析与定量评价方法，以及政企关系与营商环境优化。</view>
+        <view class="teacher-meta">
+          <view>办公地点：南京大学仙林校区圣达楼 463</view>
+          <view>邮箱：junbo_yu@nju.edu.cn</view>
+        </view>
+        <view class="text-link" bindtap="openOfficial">查看南京大学官方主页 →</view>
+      </view>
+    </view>
+
+    <view class="about-section">
+      <view class="section-no">01</view>
+      <view><view class="section-title">内容研究什么</view><view class="section-copy">人工智能如何改变组织的信息处理、内部控制、团队协作、公共服务、行政裁量与问责。内容同时使用国际组织理论和中国数字治理案例。</view></view>
+    </view>
+    <view class="about-section dark">
+      <view class="section-no">02</view>
+      <view><view class="section-title">内容怎样组织</view><view class="section-copy">内容按 30 分钟讲解理论与现象、60 分钟案例讨论与实操来组织。练习围绕一个公共部门 AI 案例逐步推进。</view></view>
+    </view>
+
+    <view class="roadmap">
+      <view class="section-heading"><view class="eyebrow">ROADMAP / 后续规划</view><view class="section-title">下一阶段建设</view></view>
+      <view class="roadmap-grid">
+        <view class="roadmap-item"><view class="roadmap-no">01</view><view class="roadmap-name">内容体系 Vlog</view><view class="roadmap-copy">制作内容与架构介绍视频，发布在“关于”板块。</view><view class="roadmap-tag">下一轮制作</view></view>
+        <view class="roadmap-item"><view class="roadmap-no">02</view><view class="roadmap-name">每期集锦视频</view><view class="roadmap-copy">随内容更新整理每期集锦，嵌入内容大纲对应周次。</view><view class="roadmap-tag">随内容更新</view></view>
+        <view class="roadmap-item"><view class="roadmap-no">03</view><view class="roadmap-name">公开域名上线</view><view class="roadmap-copy">完善版权、账号、存储与安全配置后，将内容平台部署至正式域名。</view><view class="roadmap-tag">上线前实施</view></view>
+        <view class="roadmap-item highlight"><view class="roadmap-no">04</view><view class="roadmap-name">微信小程序</view><view class="roadmap-copy">整理并呈现相关内容，并适配移动端。本小程序即该项成果。</view><view class="roadmap-tag">本期交付</view></view>
+      </view>
+    </view>
+
+    <view class="contact-card">
+      <view class="eyebrow">CONTACT</view>
+      <view>办公地点：南京大学仙林校区圣达楼 463</view>
+      <view>邮箱：junbo_yu@nju.edu.cn</view>
+    </view>
+    <view class="source-note">作者信息与网站“关于”页面保持一致，来源为南京大学政府管理学院官网。</view>
+  </view>
+</view>

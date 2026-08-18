@@ -1,0 +1,26 @@
+<view class="splash-page" bindtap="skipSplash">
+  <view class="splash-stage" wx:if="{{showVideo}}">
+    <video
+      class="splash-video"
+      src="{{videoSrc}}"
+      autoplay
+      muted
+      initial-time="0"
+      show-center-play-btn="{{false}}"
+      show-play-btn="{{false}}"
+      enable-progress-gesture="{{false}}"
+      object-fit="cover"
+      bindplay="onVideoPlay"
+      bindended="onEnded"
+      binderror="onError"
+    ></video>
+  </view>
+  <view class="splash-fallback" wx:elif="{{showFallback}}">
+    <view class="splash-fallback-inner">
+      <view class="splash-orb"></view>
+      <view class="splash-course">{{courseName}}</view>
+      <view class="splash-org">{{orgName}}</view>
+    </view>
+  </view>
+  <view class="splash-skip">轻触任意位置跳过</view>
+</view>

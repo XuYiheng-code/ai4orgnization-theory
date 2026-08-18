@@ -1,0 +1,6 @@
+{
+  "description": "复制为 project.private.config.json 后填写本机设置。该文件不要提交。",
+  "setting": {
+    "urlCheck": false
+  }
+}

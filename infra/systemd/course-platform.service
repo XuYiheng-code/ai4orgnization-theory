@@ -1,0 +1,24 @@
+[Unit]
+Description=AI and Organization course platform
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=courseweb
+Group=courseweb
+WorkingDirectory=/srv/ai4organization-theory/current/apps/course-platform-prototype
+EnvironmentFile=/srv/ai4organization-theory/shared/course-platform.env
+ExecStart=/usr/bin/python3 /srv/ai4organization-theory/current/apps/course-platform-prototype/server.py
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/tmp
+
+[Install]
+WantedBy=multi-user.target
+

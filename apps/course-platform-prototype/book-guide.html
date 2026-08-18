@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#071d35" />
+<title>Organizations 导读 · 人工智能与公共组织</title>
+<link rel="icon" href="course-logo-v2.svg" type="image/svg+xml" />
+<style>
+:root {
+  --navy-deep: #082f5b; --navy: #0a407a; --blue: #1a65b6;
+  --orange: #df7625; --ivory: #f7f4ed; --paper: #fffdf8;
+  --ink: #142235; --muted: #5e6e7f; --navy-soft: #8fb1c2; --dark: #071d35;
+  --display: "Songti SC", "STSong", "SimSun", Georgia, serif;
+  --body: -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", sans-serif;
+  --mono: "SF Mono", Menlo, Consolas, monospace;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --line: rgba(8, 47, 91, .14); --line-soft: rgba(8, 47, 91, .08);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+.topnav { position: sticky; top: 0; z-index: 120; background: var(--dark); color: #fff; border-bottom: 1px solid rgba(255,255,255,.08); }
+.topnav-inner { max-width: 1180px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; gap: 14px; }
+.topnav .mini-logo { width: 34px; height: 34px; border-radius: 8px; flex: none; overflow: hidden; background: #fff; }
+.topnav .mini-logo img { width: 100%; height: 100%; display: block; }
+.topnav .course { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+.topnav .course .cn { font: 500 15px/1.3 var(--display); white-space: nowrap; }
+.topnav .course .en { font: 700 9px/1 var(--mono); color: rgba(226,238,248,.55); letter-spacing: .12em; white-space: nowrap; }
+.topnav .sep { width: 1px; height: 26px; background: rgba(255,255,255,.18); flex: none; }
+.topnav .book { font: 500 15px/1.3 var(--display); color: rgba(226,238,248,.9); white-space: nowrap; }
+.topnav .back { margin-left: auto; color: rgba(226,238,248,.7); text-decoration: none; font-size: 13px; white-space: nowrap; }
+.topnav .back:hover { color: #fff; }
+
+.controls { position: sticky; top: 55px; z-index: 110; background: rgba(255,253,248,.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-soft); }
+.controls-inner { max-width: 1180px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.field { display: flex; align-items: center; gap: 8px; }
+.field label { font: 700 12px/1 var(--mono); letter-spacing: .06em; color: var(--muted); white-space: nowrap; }
+.field select {
+  appearance: none; -webkit-appearance: none; font: 400 15px/1.4 var(--body); color: var(--ink);
+  background: #fff; border: 1px solid rgba(8,47,91,.22); border-radius: 10px; padding: 9px 34px 9px 14px; cursor: pointer; min-width: 170px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%235e6e7f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; transition: border-color 160ms ease;
+}
+.field select:hover, .field select:focus { border-color: var(--orange); outline: none; }
+.mode-toggle { margin-left: auto; display: flex; border: 1px solid rgba(8,47,91,.22); border-radius: 12px; overflow: hidden; }
+.mode-toggle button { border: 0; background: #fff; color: var(--muted); cursor: pointer; font: 500 14px/1 var(--body); padding: 10px 22px; transition: background 160ms ease, color 160ms ease; }
+.mode-toggle button.active { background: var(--navy-deep); color: #fff; }
+
+/* ===== 文字版 ===== */
+.text-view { max-width: 900px; margin: 0 auto; padding: 40px 24px 96px; }
+.text-view .kicker { font: 700 13px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--orange); }
+.text-view h1 { margin: 14px 0 0; font: 500 40px/1.2 var(--display); color: var(--navy-deep); }
+.text-view .en-title { margin-top: 8px; font: 400 15px/1.5 var(--mono); color: var(--muted); letter-spacing: .02em; }
+.text-view .rule { margin: 22px 0 0; height: 2px; width: 60px; background: var(--orange); }
+.deep { margin-top: 28px; }
+.deep-block { margin-top: 30px; }
+.deep-label { font: 700 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+.deep-q .qtext { font: 500 22px/1.6 var(--display); color: var(--navy-deep); padding: 22px 26px; background: var(--ivory); border-left: 3px solid var(--orange); border-radius: 0 12px 12px 0; }
+.deep-block ol { margin: 0; padding-left: 20px; counter-reset: step; }
+.deep-block ol li { list-style: none; position: relative; padding: 0 0 16px 30px; font-size: 16px; color: #2a3747; counter-increment: step; }
+.deep-block ol li::before { content: counter(step); position: absolute; left: 0; top: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--navy-deep); color: #fff; font: 700 11px/20px var(--mono); text-align: center; }
+.deep-block ol li strong { color: var(--navy-deep); }
+.deep-block p { font-size: 16px; color: #2a3747; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.card { background: #fff; border: 1px solid var(--line-soft); border-radius: 14px; padding: 18px; }
+.card .no { font: 700 12px/1 var(--mono); color: var(--orange); }
+.card h3 { margin: 8px 0 0; font: 500 19px/1.3 var(--display); color: var(--navy-deep); }
+.card .en { margin-top: 4px; font: 700 11px/1.5 var(--mono); color: var(--muted); }
+.card p { margin: 8px 0 0; font-size: 14px; color: #3d4a5c; }
+.example { padding: 20px 24px; background: #f6f9fc; border: 1px dashed rgba(26,101,182,.35); border-radius: 12px; font-size: 15.5px; color: #2a3747; }
+.example .tag { display: inline-block; margin-bottom: 8px; font: 700 11px/1 var(--mono); letter-spacing: .1em; color: var(--blue); }
+.discuss { padding: 20px 24px; background: #fbf6ef; border: 1px solid rgba(223,118,37,.22); border-radius: 12px; }
+.discuss ul { margin: 0; padding-left: 18px; }
+.discuss li { margin: 10px 0; font-size: 15.5px; color: #2a3747; }
+.discuss li strong { color: var(--orange); }
+.link { padding: 18px 24px; background: var(--navy-deep); border-radius: 12px; color: rgba(238,244,250,.92); font-size: 15.5px; }
+.link .tag { display: block; margin-bottom: 6px; font: 700 11px/1 var(--mono); letter-spacing: .12em; color: var(--orange); }
+
+/* ===== 动画舞台 ===== */
+.stage-view { max-width: 1180px; margin: 0 auto; padding: 24px 24px 88px; }
+.stage { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 16px; isolation: isolate;
+  background: radial-gradient(circle at 50% 40%, #113a62 0%, var(--dark) 55%, #041423 100%);
+  box-shadow: 0 24px 70px rgba(8,47,91,.3); }
+.stage .grid { position: absolute; inset: 0; opacity: .4; pointer-events: none;
+  background-image: linear-gradient(rgba(200,222,242,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(200,222,242,.055) 1px, transparent 1px);
+  background-size: 56px 56px; -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 12%, transparent 82%); mask-image: radial-gradient(circle at 50% 42%, #000 12%, transparent 82%); }
+.big-play { position: absolute; z-index: 40; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; align-items: center; gap: 12px; background: var(--orange); color: #fff; border: 0; border-radius: 999px; padding: 16px 30px; cursor: pointer; font: 500 17px/1 var(--body); box-shadow: 0 12px 40px rgba(223,118,37,.4); transition: transform 160ms var(--ease), box-shadow 160ms ease; }
+.big-play:hover { transform: translate(-50%,-50%) scale(1.05); box-shadow: 0 16px 50px rgba(223,118,37,.55); }
+.big-play .bp-icon { font-size: 20px; }
+.big-play.hidden { display: none; }
+.player-bar { position: absolute; z-index: 42; left: 16px; right: 16px; bottom: 14px; display: flex; align-items: center; gap: 12px; background: rgba(2,17,31,.68); border: 1px solid rgba(255,255,255,.16); border-radius: 999px; padding: 8px 14px; backdrop-filter: blur(10px); }
+.player-bar[hidden] { display: none; }
+.pbtn { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: rgba(238,244,250,.9); cursor: pointer; font: 500 14px/1 var(--body); text-decoration: none; transition: background 160ms ease; }
+.pbtn:hover { background: rgba(255,255,255,.12); }
+.pbar { flex: 1; height: 4px; border-radius: 999px; background: rgba(255,255,255,.18); cursor: pointer; position: relative; }
+.pbar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 999px; background: var(--orange); pointer-events: none; }
+.ptime { flex: none; font: 700 11px/1 var(--mono); color: rgba(226,238,248,.7); letter-spacing: .04em; white-space: nowrap; }
+.subtitle { position: absolute; z-index: 45; left: 50%; bottom: 74px; transform: translateX(-50%); display: inline-block; max-width: 95%; white-space: nowrap; padding: 10px 22px; background: rgba(2,17,31,.72); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; color: #fff; font: 500 22px/1.4 var(--display); text-align: center; opacity: 0; transition: opacity 180ms ease; pointer-events: none; }
+.subtitle.show { opacity: 1; }
+
+/* 第一幕封面 */
+.cover { position: absolute; z-index: 10; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.cover-nju { position: absolute; top: 26px; right: 30px; display: flex; align-items: center; gap: 10px; opacity: 0; }
+.cover-nju img { height: 40px; width: auto; display: block; }
+.cover-nju .txt { text-align: right; line-height: 1.2; }
+.cover-nju .txt strong { display: block; font: 500 14px/1.3 var(--display); color: rgba(238,244,250,.92); white-space: nowrap; }
+.cover-nju .txt span { display: block; font: 400 10px/1.4 var(--body); color: rgba(226,238,248,.55); white-space: nowrap; }
+.logo-lab { position: relative; width: 220px; aspect-ratio: 1; }
+.logo-lab svg { width: 100%; height: 100%; display: block; }
+.tech-grid { fill: url(#logo-grid); opacity: 0; }
+.alignment-ring { fill: none; stroke: var(--blue); stroke-width: 1; stroke-dasharray: 3 9; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.logo-piece { color: #fff; transform-box: fill-box; transform-origin: center; opacity: 0; filter: drop-shadow(0 10px 14px rgba(0,0,0,.3)); }
+.logo-piece.orange-piece { color: var(--orange); }
+.ao-mark { fill: none; stroke: #fff; stroke-width: 8; stroke-linecap: square; stroke-linejoin: round; }
+.ao-stroke { stroke-dasharray: 360; stroke-dashoffset: 360; opacity: 0; }
+.ao-joint, .energy-core { fill: var(--orange); stroke: #fff; stroke-width: 5; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.energy-halo { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.scan-line { fill: var(--blue); opacity: 0; filter: drop-shadow(0 0 6px rgba(26,101,182,.7)); }
+.micro-particles { opacity: 0; }
+.assembly-status { position: absolute; z-index: 7; left: 50%; bottom: -8%; transform: translateX(-50%); white-space: nowrap; color: rgba(160,194,205,.8); font: 700 11px/1 var(--mono); letter-spacing: .14em; opacity: 0; }
+.cover-course { margin-top: 24px; font: 500 44px/1.2 var(--display); color: var(--ivory); letter-spacing: .02em; opacity: 0; white-space: nowrap; }
+.cover-course-sub { margin-top: 12px; font: 700 13px/1 var(--mono); letter-spacing: .22em; color: rgba(160,194,205,.8); text-transform: uppercase; opacity: 0; white-space: nowrap; }
+
+/* 第二幕起：内容 scene */
+.scene { position: absolute; z-index: 8; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 7%; opacity: 0; visibility: hidden; }
+.scene.active { opacity: 1; visibility: visible; }
+.scene-label { font: 700 14px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--orange); margin-bottom: 24px; }
+.scene-label::before { content: ""; display: inline-block; width: 36px; height: 1px; margin-right: 12px; vertical-align: middle; background: var(--orange); }
+.scene-q { font: 500 46px/1.4 var(--display); color: #fff; max-width: 15em; }
+.scene-q .accent { color: var(--orange); }
+.scene-q.intro, .scene-step { font: 500 30px/1.55 var(--display); color: rgba(238,244,250,.95); max-width: 26em; text-align: left; }
+.scene-q.intro { text-align: center; }
+
+.arg-list { display: flex; flex-direction: column; gap: 14px; }
+.arg-item { display: flex; align-items: flex-start; gap: 16px; }
+.arg-item .n { flex: none; width: 30px; height: 30px; border-radius: 50%; background: rgba(10,64,122,.7); border: 1px solid rgba(200,222,242,.3); color: #fff; font: 700 14px/30px var(--mono); text-align: center; }
+.arg-item .txt { font: 400 26px/1.4 var(--display); color: rgba(238,244,250,.94); padding-top: 1px; }
+
+.concept-list { display: flex; gap: 18px; flex-wrap: wrap; }
+.concept-item { background: rgba(10,64,122,.35); border: 1px solid rgba(200,222,242,.2); border-radius: 14px; padding: 20px 26px; min-width: 200px; }
+.concept-item .zh { font: 500 32px/1.2 var(--display); color: #fff; }
+.concept-item .en { margin-top: 8px; font: 700 13px/1.4 var(--mono); color: var(--orange); letter-spacing: .04em; }
+
+.insight-text { font: 500 38px/1.5 var(--display); color: var(--ivory); max-width: 16em; }
+.insight-text .accent { color: var(--orange); }
+
+.link-text { font: 500 36px/1.5 var(--display); color: #fff; max-width: 16em; }
+.link-text .accent { color: var(--orange); }
+.chapter-stamp { margin-top: 28px; font: 700 15px/1 var(--mono); letter-spacing: .18em; color: rgba(160,194,205,.75); }
+
+.replay { display: none; }
+
+.guide-foot { max-width: 1180px; margin: 0 auto; padding: 0 24px 56px; }
+.guide-foot .inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 20px; font-size: 13px; color: var(--muted); }
+
+/* 封面 CSS 动画（复用课程 keyframes） */
+@keyframes gridCalibrate { from { opacity: 0; transform: scale(.96); transform-origin: center; } to { opacity: .48; transform: scale(1); } }
+@keyframes ringLock { 0% { opacity: 0; stroke-dashoffset: 170; transform: scale(.72) rotate(-18deg); } 65% { opacity: .32; } 100% { opacity: .22; stroke-dashoffset: 0; transform: scale(1) rotate(0); } }
+@keyframes assemble1 { from { opacity: 0; transform: translate(-135px,-105px) rotate(-62deg) scale(.52); } to { opacity: 1; transform: translate(0) rotate(0) scale(1); } }
+@keyframes assemble2 { from { opacity: 0; transform: translate(105px,-130px) rotate(55deg) scale(.48); } to { opacity: 1; transform: translate(0) rotate(0) scale(1); } }
+@keyframes assemble3 { from { opacity: 0; transform: translate(155px,-8px) rotate(82deg) scale(.46); } to { opacity: 1; transform: translate(0) rotate(0) scale(1); } }
+@keyframes assemble4 { from { opacity: 0; transform: translate(120px,130px) rotate(65deg) scale(.5); } to { opacity: 1; transform: translate(0) rotate(0) scale(1); } }
+@keyframes assemble5 { from { opacity: 0; transform: translate(-15px,150px) rotate(-44deg) scale(.44); } 76% { filter: drop-shadow(0 0 22px rgba(223,118,37,.44)); } to { opacity: 1; transform: translate(0) rotate(0) scale(1); } }
+@keyframes assemble6 { from { opacity: 0; transform: translate(-155px,22px) rotate(-76deg) scale(.48); } to { opacity: 1; transform: translate(0) rotate(0) scale(1); } }
+@keyframes traceMark { from { opacity: 0; stroke-dashoffset: 360; } to { opacity: 1; stroke-dashoffset: 0; } }
+@keyframes coreLock { from { opacity: 0; transform: scale(0); } 72% { transform: scale(1.28); } to { opacity: 1; transform: scale(1); } }
+@keyframes energyRelease { 0% { opacity: 0; transform: scale(.15); } 38% { opacity: .7; } 100% { opacity: 0; transform: scale(3.25); } }
+@keyframes scanAssembly { 0% { opacity: 0; transform: translateY(0); } 12% { opacity: .72; } 88% { opacity: .38; } 100% { opacity: 0; transform: translateY(280px); } }
+@keyframes particleResolve { 0% { opacity: 0; transform: scale(.65); transform-origin: center; } 34% { opacity: .8; } 100% { opacity: .54; transform: scale(1); } }
+@keyframes statusResolve { 0% { opacity: 0; transform: translate(-50%,10px); } 26%, 82% { opacity: .72; } 100% { opacity: .45; transform: translate(-50%,0); } }
+@keyframes coverFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes coverOut { to { opacity: 0; visibility: hidden; } }
+
+.stage.is-playing .tech-grid { animation: gridCalibrate 760ms ease-out both; }
+.stage.is-playing .alignment-ring { animation: ringLock 1600ms var(--ease) both; }
+.stage.is-playing .ring-b { animation-delay: 120ms; }
+.stage.is-playing .piece-1 { animation: assemble1 1100ms var(--ease) 280ms both; }
+.stage.is-playing .piece-2 { animation: assemble2 1100ms var(--ease) 410ms both; }
+.stage.is-playing .piece-3 { animation: assemble3 1100ms var(--ease) 540ms both; }
+.stage.is-playing .piece-4 { animation: assemble4 1100ms var(--ease) 670ms both; }
+.stage.is-playing .piece-5 { animation: assemble5 1100ms var(--ease) 800ms both; }
+.stage.is-playing .piece-6 { animation: assemble6 1100ms var(--ease) 930ms both; }
+.stage.is-playing .ao-stroke { animation: traceMark 920ms var(--ease) 1020ms both; }
+.stage.is-playing .ao-joint { animation: coreLock 560ms cubic-bezier(.34,1.56,.64,1) 1670ms both; }
+.stage.is-playing .energy-core { animation: coreLock 560ms cubic-bezier(.34,1.56,.64,1) 1780ms both; }
+.stage.is-playing .energy-halo { animation: energyRelease 1100ms ease-out 1840ms both; }
+.stage.is-playing .scan-line { animation: scanAssembly 1600ms cubic-bezier(.4,0,.2,1) 300ms both; }
+.stage.is-playing .micro-particles { animation: particleResolve 1900ms ease-out both; }
+.stage.is-playing .assembly-status { animation: statusResolve 2200ms ease-out both; }
+.stage.is-playing .cover-nju { animation: coverFade 600ms ease 300ms both; }
+.stage.is-playing .cover-course { animation: riseInC 700ms var(--ease) 2400ms both; }
+.stage.is-playing .cover-course-sub { animation: riseInC 700ms var(--ease) 2600ms both; }
+.stage.is-playing .cover { animation: coverOut 600ms var(--ease) 3400ms both; }
+/* 待播放（idle）静态封面 + 暂停态 */
+.stage.idle .logo-piece, .stage.idle .ao-stroke, .stage.idle .ao-joint,
+.stage.idle .energy-core, .stage.idle .cover-course, .stage.idle .cover-course-sub,
+.stage.idle .cover-nju, .stage.idle .tech-grid, .stage.idle .alignment-ring,
+.stage.idle .micro-particles { opacity: 1; transform: none; }
+.stage.idle .ao-stroke, .stage.idle .alignment-ring { stroke-dashoffset: 0; }
+.stage.idle .assembly-status, .stage.idle .scan-line, .stage.idle .energy-halo { opacity: 0; }
+.stage.paused .cover, .stage.paused .cover * { animation-play-state: paused; }
+
+@keyframes riseInC { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) { .stage.is-playing * { animation: none !important; opacity: 1 !important; } }
+@media (max-width: 720px) {
+  .scene-q { font-size: 26px; } .arg-item .txt { font-size: 17px; } .concept-item .zh { font-size: 22px; }
+  .insight-text, .link-text { font-size: 23px; } .logo-lab { width: 150px; } .cover-course { font-size: 27px; }
+  .topnav .book, .topnav .sep { display: none; }
+}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-inner">
+    <span class="mini-logo"><img src="course-logo-v2.svg" alt="课程标识" /></span>
+    <span class="course"><span class="cn">人工智能与公共组织</span><span class="en">AI &amp; PUBLIC ORGANIZATION</span></span>
+    <span class="sep"></span>
+    <span class="book">Organizations · 经典精读</span>
+    <a class="back" href="knowledge.html">← 返回知识广场</a>
+  </div>
+</nav>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="field"><label for="chapterSel">章节</label><select id="chapterSel"></select></div>
+    <div class="field"><label for="sectionSel">小节</label><select id="sectionSel"></select></div>
+    <div class="mode-toggle" role="tablist" aria-label="展示模式">
+      <button id="modeText" class="active" type="button" role="tab" aria-selected="true">文字版</button>
+      <button id="modeAnim" type="button" role="tab" aria-selected="false">动画版</button>
+    </div>
+  </div>
+</div>
+
+<main class="text-view" id="textView">
+  <div class="kicker" id="tKicker">Ch1 · 1.1</div>
+  <h1 id="tTitle">组织作为社会制度的重要性</h1>
+  <div class="en-title" id="tEn">The Significance of Organizations as Social Institutions</div>
+  <div class="rule"></div>
+  <div class="deep" id="tDeep"></div>
+</main>
+
+<div class="stage-view" id="stageView" hidden>
+  <div class="stage" id="stage">
+    <div class="grid"></div>
+    <div class="cover" id="cover">
+      <div class="cover-nju">
+        <img src="assets/nju-government-logo.png" alt="南京大学政府管理学院" />
+        <div class="txt"><strong>南京大学政府管理学院</strong><span>2026—2027 学年本科生课程</span></div>
+      </div>
+      <div class="logo-lab">
+        <svg class="assembly-logo" viewBox="0 0 520 520" role="img" aria-label="人工智能与公共组织课程标识动画">
+          <defs>
+            <pattern id="logo-grid" width="52" height="52" patternUnits="userSpaceOnUse"><path d="M52 0H0V52" fill="none" stroke="#0a407a" stroke-opacity=".18" stroke-width="1"/></pattern>
+            <radialGradient id="core-glow"><stop offset="0" stop-color="#f58a2a" stop-opacity=".9"/><stop offset=".45" stop-color="#df7625" stop-opacity=".24"/><stop offset="1" stop-color="#df7625" stop-opacity="0"/></radialGradient>
+            <g id="chain-link"><path d="M0-34C29-34 58-14 82 0C58 14 29 34 0 34C-20 34-36 19-36 0S-20-34 0-34ZM0-14A14 14 0 1 0 0 14A14 14 0 1 0 0-14Z" fill="currentColor" fill-rule="evenodd"/></g>
+          </defs>
+          <rect class="tech-grid" x="18" y="18" width="484" height="484" rx="28" fill="url(#logo-grid)"/>
+          <g class="micro-particles" aria-hidden="true">
+            <circle cx="61" cy="95" r="2"/><circle cx="454" cy="73" r="2.5"/><circle cx="478" cy="255" r="2"/><circle cx="75" cy="426" r="2.5"/><circle cx="420" cy="450" r="1.8"/><circle cx="269" cy="53" r="1.8"/><circle cx="45" cy="279" r="1.5"/><circle cx="299" cy="463" r="2"/>
+          </g>
+          <circle class="alignment-ring ring-a" cx="278" cy="260" r="181"/><circle class="alignment-ring ring-b" cx="278" cy="260" r="148"/>
+          <g class="logo-pieces">
+            <g transform="translate(143 159) rotate(-47)"><g class="logo-piece piece-1"><use href="#chain-link"/></g></g>
+            <g transform="translate(244 102) rotate(6)"><g class="logo-piece piece-2"><use href="#chain-link"/></g></g>
+            <g transform="translate(363 139) rotate(48)"><g class="logo-piece piece-3"><use href="#chain-link"/></g></g>
+            <g transform="translate(419 246) rotate(96)"><g class="logo-piece piece-4"><use href="#chain-link"/></g></g>
+            <g transform="translate(365 363) rotate(145)"><g class="logo-piece piece-5"><use href="#chain-link"/></g></g>
+            <g transform="translate(236 422) rotate(8)"><g class="logo-piece piece-6 orange-piece"><use href="#chain-link"/></g></g>
+          </g>
+          <g class="ao-mark" aria-hidden="true">
+            <path class="ao-stroke ao-a" d="M54 344L102 244 132 286M76 303H120"/>
+            <circle class="ao-stroke ao-o" cx="169" cy="299" r="49"/>
+            <circle class="ao-joint" cx="132" cy="286" r="8"/>
+          </g>
+          <circle class="energy-halo" cx="279" cy="294" r="66" fill="url(#core-glow)"/>
+          <circle class="energy-core" cx="279" cy="294" r="18"/>
+          <rect class="scan-line" x="42" y="92" width="436" height="2" rx="1"/>
+        </svg>
+        <div class="assembly-status" aria-hidden="true"><span></span>NODE ASSEMBLY&nbsp;&nbsp;/&nbsp;&nbsp;06</div>
+      </div>
+      <div class="cover-course">人工智能与公共组织</div>
+      <div class="cover-course-sub">AI &amp; Public Organization</div>
+    </div>
+
+    <div class="scene" data-scene="intro">
+      <div class="scene-label">引子</div>
+      <div class="scene-q intro" id="aqIntro"></div>
+    </div>
+    <div class="scene" data-scene="q">
+      <div class="scene-label">本节要回答的问题</div>
+      <div class="scene-q" id="aqQuestion"></div>
+    </div>
+    <div class="scene" data-scene="a1"><div class="scene-label">论证 · 一</div><div class="scene-step" id="aqA1"></div></div>
+    <div class="scene" data-scene="a2"><div class="scene-label">论证 · 二</div><div class="scene-step" id="aqA2"></div></div>
+    <div class="scene" data-scene="a3"><div class="scene-label">论证 · 三</div><div class="scene-step" id="aqA3"></div></div>
+    <div class="scene" data-scene="a4"><div class="scene-label">论证 · 四</div><div class="scene-step" id="aqA4"></div></div>
+    <div class="scene" data-scene="a5"><div class="scene-label">论证 · 五</div><div class="scene-step" id="aqA5"></div></div>
+    <div class="scene" data-scene="a6"><div class="scene-label">论证 · 六</div><div class="scene-step" id="aqA6"></div></div>
+    <div class="scene" data-scene="concepts">
+      <div class="scene-label">关键概念</div>
+      <div class="concept-list" id="aqConcepts"></div>
+    </div>
+    <div class="scene" data-scene="insight">
+      <div class="scene-label">深度追问</div>
+      <div class="insight-text" id="aqInsight"></div>
+    </div>
+    <div class="scene" data-scene="link">
+      <div class="link-text" id="aqLink"></div>
+      <div class="chapter-stamp" id="aqStamp"></div>
+    </div>
+
+    <div class="subtitle" id="subtitle"></div>
+
+    <button class="big-play" id="bigPlay" type="button" aria-label="播放动画">
+      <span class="bp-icon" aria-hidden="true">▶</span>
+      <span class="bp-text">播放</span>
+    </button>
+    <div class="player-bar" id="playerBar" hidden>
+      <button class="pbtn" id="playPause" type="button" aria-label="暂停">⏸</button>
+      <div class="pbar" id="pbar" aria-label="播放进度"><i id="pbarFill"></i></div>
+      <span class="ptime" id="ptime">00:00 / 00:28</span>
+      <button class="pbtn" id="replayBtn" type="button" aria-label="重播">↻</button>
+      <a class="pbtn" id="downloadBtn" href="assets/guide-organizations-ch1-1.mp4" download="Organizations-1.1-组织作为社会制度的重要性.mp4" aria-label="下载视频">↓ 下载</a>
+    </div>
+  </div>
+</div>
+
+<footer class="guide-foot">
+  <div class="inner"><span>《人工智能与公共组织》课程 · 文献导读</span><span>AI 辅助学习 · 教师保留正式评价权</span></div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+  const CHAPTERS = [
+    { no: "Ch1", title: "组织行为", en: "Organizational Behavior", ready: true, sections: [
+      { id: "1.1", title: "组织作为社会制度的重要性", en: "The Significance of Organizations as Social Institutions",
+        deep: { question: "组织为什么重要？它区别于其他社会影响过程的独特性究竟是什么？",
+          argument: ["先从「量」入手：成年人超过三分之一清醒时间在组织里，儿童几乎同等程度处于学校组织——组织无处不在。","但更根本的是「质」：组织的独特性在于影响的<strong>特定性（specificity）</strong>，与社会影响的<strong>弥散性（diffuseness）</strong>相对。","用两个对比把「特定性」讲透——<strong>谣言</strong>沿弥散、多向渠道扩散，若不铺开很快消亡；<strong>客户订单</strong>则沿特定渠道传到特定目的地。组织沟通不仅在渠道上特定，在<strong>内容</strong>上也特定：可极度简洁、依赖双方共享的技术语言。","特定性落在社会学概念<strong>「角色」（role）</strong>上：组织角色高度精细化、稳定、常书面化，于是每个成员所处的「他人环境」高度可预测。","可预测性带来<strong>协调（coordination）</strong>：再与市场对比，组织内交易是「预先计划、预先协调」的，并用生物类比收束——组织是「相互作用的个人集合体」，拥有某种中枢协调系统。"],
+          concepts: [{zh:"影响的特定性",en:"specificity",def:"组织影响区别于社会影响的核心特征——渠道与内容都高度特定"},{zh:"角色",en:"role",def:"高度精细化、稳定、书面化的位置界定，使他人环境可预测"},{zh:"协调",en:"coordination",def:"由可预测性支撑的组织一致应对环境的能力"}],
+          example: "① 谣言（弥散）vs 客户订单（特定渠道）；② 发动机部门知道生产多少缸体——不是靠预测市场，而是靠与其他部门的生产计划对齐；③ 「比猿更接近蚯蚓」（more earthworm than ape）。",
+          discussion: ["<strong>理论意义</strong>：1958 年就点出「组织协调 vs 市场协调」的对比，这是后来交易成本经济学（Coase / Williamson）追问「企业边界」的先声。","<strong>局限</strong>：「特定性 vs 弥散性」的二分可能简化了真实组织——现实中两种逻辑常交织共存。","<strong>对今天的追问</strong>：如果算法（推荐、即时匹配、预测）大幅提高了「市场协调」的特定性，那么「组织」作为协调装置的存在理由，是否正在被 AI 重新侵蚀？"],
+          link: "这是「组织结构 × 技术架构互嵌」命题的起点——组织是一种「协调技术」，AI 是另一种「协调技术」，课程的核心追问正是二者如何替代、互补与重构。" },
+        anim: { intro: "我们今天一起读 March 与 Simon 一九五八年的《组织》——组织理论行为革命的奠基之作。",
+          question: "它要回答的核心问题是：组织为什么重要？它区别于市场的独特性，究竟在哪里？",
+          argumentSteps: ["先看一个基本事实：成年人超过三分之一清醒时间在组织中度过。儿童几乎同等程度处于学校组织。组织无处不在。","但更重要的不是量的多寡，而是质的差异。March 与 Simon 指出：组织影响的独特性在于——特定性。","所谓特定性，是说组织沟通沿特定渠道传到特定目的地，内容也特定——可极度简洁、依赖双方共享技术语言。","特定性落在'角色'上。组织角色高度精细化、稳定、书面化。成员所处的'他人环境'变得高度可预测。","可预测性带来协调。与市场对比，组织内交易是'预先计划、预先协调'的：发动机部门知道生产多少缸体，不是预测市场。","March 与 Simon 用生物学类比收束：组织是相互作用的个人集合体，拥有某种中枢协调系统——'比猿更接近蚯蚓'。"],
+          concepts: [{zh:"特定性",en:"specificity"},{zh:"角色",en:"role"},{zh:"协调",en:"coordination"}],
+          insight: "读到这里，停一下。1958 年他们提出的这个独特性，67 年后的今天，算法正在改写它。推荐、即时匹配、预测——市场协调的特定性被极大提高。组织作为协调装置的理由，是否正在被 AI 重新侵蚀？",
+          link: "这是本课程的核心追问：组织是一种协调技术，人工智能是另一种。两者如何替代、如何互补、如何在'互嵌'中重新分工——这是我们这学期的关键议题。" } },
+      { id: "1.2", title: "组织理论的文献", en: "The Literature of Organization Theory",
+        deep: { question: "组织理论从哪里来？它为什么在 1958 年还如此不成熟？",
+          argument: ["组织理论散落在<strong>六个学科来源</strong>：管理者经验、科学管理运动、社会学家（韦伯科层制）、社会心理学家（领导与士气）、政治学家（政府效率与民主控制）、经济学家（企业理论）。","要整合这些零散、重复、语言各异的文字，必须克服两大难题：<strong>缺乏共同语言</strong>（「关于组织没说什么，却用各种语言反复说了一遍」），以及<strong>假设与证据的巨大鸿沟</strong>（大量断言来自常识与经验，从未经受科学检验）。","因此本书的任务不是提供新证据，而是把既有假设<strong>重述为可检验的形式</strong>，为变量给出操作性定义，并指出哪些检验相关且可行。"],
+          concepts: [{zh:"共同语言",en:"common language",def:"整合碎片化组织理论所缺失的统一概念体系"},{zh:"操作性定义",en:"operational definition",def:"把抽象变量转化为可观测、可检验的操作指标"}],
+          example: "六个学科对「组织」各说各话：管理谈原则、社会学谈科层、心理学谈士气、政治学谈效率、经济学谈企业。",
+          discussion: ["<strong>理论意义</strong>：这篇 1958 年的「文献综述」精准诊断了组织理论的碎片化，这一诊断至今未过时。","<strong>对今天的追问</strong>：AI 时代「组织」的概念再次被技术话语碎片化——智能体、多智能体系统、组织智能……March 与 Simon 的「共同语言」呼吁反而更有现实意义。"],
+          link: "课程要做的，正是为「AI 与组织」建立共同语言——把算法、智能体、组织理论放进同一个坐标系里对话。" },
+        anim: { question: "组织理论从哪里来？为何 1958 年仍不成熟？",
+          argument: ["散落在六个学科来源","缺乏共同语言","假设与证据的巨大鸿沟","任务：重述为可检验的形式"],
+          concepts: [{zh:"共同语言",en:"common language"},{zh:"操作性定义",en:"operational definition"}],
+          insight: "AI 时代「组织」再次被技术话语碎片化，共同语言更稀缺。",
+          link: "课程要为「AI 与组织」建立共同语言" } },
+      { id: "1.3", title: "本书结构 · 三种关于人的模型", en: "Organization of This Book · Three Models of Man",
+        deep: { question: "用什么「关于人的假设」来组织全书？",
+          argument: ["March 与 Simon 指出：每一条关于组织的命题，背后都隐含一套「关于人的假设」。","据此可归入三种模型——<strong>工具模型</strong>（成员是被动工具，执行指令、不主动发起）、<strong>动机—态度模型</strong>（成员带价值观与目标，须被激励才参与，存在目标冲突）、<strong>决策者—问题解决者模型</strong>（感知与思考过程是解释行为的核心）。","三种模型对应全书结构：工具模型 → Ch2（科学管理）；动机—态度模型 → Ch3–5；决策者模型 → Ch6–7。","三种假设并不矛盾——人同时是工具、是动机载体、也是决策者，一套充分的理论必须三者兼顾。"],
+          concepts: [{zh:"工具模型",en:"instrument",def:"成员是被动执行者，对应科学管理（Ch2）"},{zh:"动机—态度模型",en:"motivation",def:"成员带目标参与、存在冲突，对应 Ch3–5"},{zh:"决策者模型",en:"decision maker",def:"感知思考为核心，对应 Ch6–7"}],
+          example: "同一个人，在泰勒眼里是「会干活的机器」，在梅奥眼里是「需要归属感的成员」，在 Simon 眼里是「有限理性的决策者」。",
+          discussion: ["<strong>理论意义</strong>：这是全书的骨架，也是组织理论史的「地图」——三个模型对应三个理论时代（科学管理 → 人际关系 → 认知/决策学派）。","<strong>对今天的追问</strong>：AI 时代是否正在催生「第四模型」——把组织成员视为「与 AI 共生的决策者」？三个模型是否穷尽了「人」，还是「人」本身也在被技术重新定义？"],
+          link: "课程的四个阶段（解释组织 → 技术嵌入 → 智能重构 → 公共治理），本质是对「三模型」的递进拓展——AI 逐一改写工具、动机、决策者的边界。" },
+        anim: { question: "用什么「关于人的假设」，组织全书？",
+          argument: ["每条组织命题都隐含「关于人的假设」","工具模型 → Ch2 科学管理","动机—态度模型 → Ch3–5","决策者模型 → Ch6–7","三者不矛盾，充分理论要兼顾"],
+          concepts: [{zh:"工具",en:"instrument"},{zh:"动机—态度",en:"motivation"},{zh:"决策者",en:"decision maker"}],
+          insight: "AI 时代是否正催生「第四模型」——与 AI 共生的决策者？",
+          link: "课程四阶段是对「三模型」的递进拓展" } },
+      { id: "1.4", title: "命题的类型", en: "Some Types of Propositions",
+        deep: { question: "如何让组织命题变得可检验？",
+          argument: ["全书把命题统一为三种格式——<strong>变量依赖命题</strong>（y 是 x 的函数，如「满意度越低，搜寻越多」，编号记作 [3.7 : 3.3, 3.4, 3.6]）；<strong>解剖式描述概括</strong>（如「组织的重要活动之一是开发新程序」，变量以 A 前缀编号）；<strong>功能性命题</strong>（结构/过程执行某功能，如「行为刚性增加行动的可辩护性」）。","编号不是标注，而是<strong>对因果方向的断言</strong>——每个命题都断言了独立变量影响因变量的机制。"],
+          concepts: [{zh:"变量依赖命题",en:"functional relation",def:"y 是 x 的函数，可检验的因果陈述"},{zh:"解剖式描述",en:"anatomical",def:"定性描述概括，以 A 前缀编号"},{zh:"功能性命题",en:"functional",def:"断言结构或过程执行某功能"}],
+          example: "「满意度越低，搜寻越多」——把「满意度」「搜寻量」操作化为可测变量后，命题即可被数据检验。",
+          discussion: ["<strong>理论意义</strong>：这是社会科学走向「科学」的方法论自觉，比当时流行的「管理格言」前进了一大步。","<strong>对今天的追问</strong>：AI 时代组织研究坐拥海量数据，但「命题可检验」依然稀缺——大量「智能体革命」论断仍是不可证伪的格言。March 与 Simon 的方法论提醒依然有效。"],
+          link: "课程强调「仿真结果不能单独证明现实因果」，正是继承了 March 与 Simon 对「证据」的严谨态度。" },
+        anim: { question: "如何让组织命题，变得可检验？",
+          argument: ["统一三种命题格式","变量依赖：y 是 x 的函数","解剖式描述概括","功能性命题","编号 = 对因果方向的断言"],
+          concepts: [{zh:"变量依赖",en:"functional relation"},{zh:"解剖式",en:"anatomical"},{zh:"功能性",en:"functional"}],
+          insight: "海量数据时代，「命题可检验」依然稀缺。",
+          link: "继承对「证据」的严谨态度" } },
+      { id: "1.5", title: "心理学公设 · 唤起集", en: "Some Psychological Postulates · The Evoked Set",
+        deep: { question: "分析组织行为，需要什么关于「人」的基本假设？",
+          argument: ["前瞻性公设：<strong>人 = 复杂的信息处理系统</strong>（兼容 Tolman、Bruner，以及 Newell 与 Simon 的早期工作——这正是日后认知科学与 AI 的起点）。","行为由「初始内部状态 + 环境」共同决定；内部状态大部分存于<strong>记忆</strong>。","记忆在任一时刻分为两部分：当下影响行为的<strong>唤起集（evoked set）</strong>，与远更庞大、此刻不起作用的部分。","据此区分两种影响过程：<strong>学习（learning）</strong>缓慢改变记忆内容，<strong>唤起（evocation）</strong>快速改变当下活跃的决定因素——两者未必遵循同一法则。","记忆内容可再分三类：<strong>价值观/目标、行动—结果关系（信念·感知·期望）、备选方案</strong>。刺激与唤起集相互决定。","核心结论：人是「选择、决策、问题解决」的有机体，但<strong>一次只能做一件事、只能注意到记忆与环境信息的一小部分</strong>——这是有限理性（Ch6）的心理种子。"],
+          concepts: [{zh:"唤起集",en:"evoked set",def:"记忆在当下影响行为的那一部分"},{zh:"学习 vs 唤起",en:"learning vs evocation",def:"慢改记忆内容 vs 快改当下活跃决定因素"},{zh:"信息处理系统",en:"information-processing",def:"把人视为选择、决策、问题解决的系统"}],
+          example: "同一个目标若以往靠某行动达成，唤起该目标就会唤起该行动——习惯正是「刺激—反应」联结被压入无意识的极端情形。",
+          discussion: ["<strong>理论意义</strong>：1958 年就提出「人 = 信息处理系统」，这是认知科学与人工智能的源头之一（Simon 本人即 AI 先驱，Newell 与 Simon 后来做出了通用问题求解器）。","<strong>核心洞察</strong>：「一次只能做一件事、只能注意到一小部分信息」= 注意力的有限性 = 有限理性的心理基础。","<strong>对今天的追问</strong>：大语言模型的「注意力机制」（attention）与「唤起集」有惊人的概念呼应——都是「有限注意力的选择性唤起」。这是课程最直接的理论交汇点。"],
+          link: "当「信息处理系统」从人扩展到 AI，组织的决策前提与程序如何被改写，是课程第三、四阶段的核心。" },
+        anim: { question: "分析组织行为，需要什么关于「人」的假设？",
+          argument: ["人 = 复杂的信息处理系统","记忆分「唤起集」+ 未唤起部分","学习慢 · 唤起快","记忆三类：价值观 · 信念 · 备选方案","人一次只能注意一小部分信息"],
+          concepts: [{zh:"唤起集",en:"evoked set"},{zh:"学习 vs 唤起",en:"learning vs evocation"},{zh:"信息处理系统",en:"information-processing"}],
+          insight: "大模型的「注意力机制」与「唤起集」，有惊人的概念呼应。",
+          link: "信息处理系统从人扩展到 AI，决策前提如何改写" } }
+    ] },
+    { no: "Ch2", title: "经典组织理论", en: "\"Classical\" Organization Theory", ready: false, sections: [] },
+    { no: "Ch3", title: "动机约束 · 组织内决策", en: "Intraorganizational Decisions", ready: false, sections: [] },
+    { no: "Ch4", title: "参与决策", en: "The Decision to Participate", ready: false, sections: [] },
+    { no: "Ch5", title: "冲突", en: "Conflict in Organizations", ready: false, sections: [] },
+    { no: "Ch6", title: "理性的认知限度", en: "Cognitive Limits on Rationality", ready: false, sections: [] },
+    { no: "Ch7", title: "规划与创新", en: "Planning and Innovation", ready: false, sections: [] }
+  ];
+
+  const chapterSel = document.getElementById("chapterSel");
+  const sectionSel = document.getElementById("sectionSel");
+  const modeText = document.getElementById("modeText");
+  const modeAnim = document.getElementById("modeAnim");
+  const textView = document.getElementById("textView");
+  const stageView = document.getElementById("stageView");
+  const stage = document.getElementById("stage");
+  const replayBtn = document.getElementById("replayBtn");
+  const bigPlay = document.getElementById("bigPlay");
+  const playPause = document.getElementById("playPause");
+  const playerBar = document.getElementById("playerBar");
+  const pbar = document.getElementById("pbar");
+  const pbarFill = document.getElementById("pbarFill");
+  const ptime = document.getElementById("ptime");
+  const downloadBtn = document.getElementById("downloadBtn");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const renderMode = new URLSearchParams(location.search).get("render") === "1";
+
+  CHAPTERS.forEach(c => {
+    const o = document.createElement("option");
+    o.value = c.no; o.textContent = `${c.no} · ${c.title}${c.ready ? "" : "（梳理中）"}`;
+    if (!c.ready) o.disabled = true;
+    chapterSel.appendChild(o);
+  });
+  function fillSections(ch) {
+    sectionSel.innerHTML = "";
+    ch.sections.forEach(s => { const o = document.createElement("option"); o.value = s.id; o.textContent = `${s.id} · ${s.title}`; sectionSel.appendChild(o); });
+  }
+  function renderText(section) {
+    document.getElementById("tKicker").textContent = `Ch1 · ${section.id}`;
+    document.getElementById("tTitle").textContent = section.title;
+    document.getElementById("tEn").textContent = section.en;
+    const d = section.deep;
+    const cards = d.concepts.map((c, i) => `<div class="card"><div class="no">${String(i + 1).padStart(2, "0")}</div><h3>${c.zh}</h3><div class="en">${c.en}</div><p>${c.def}</p></div>`).join("");
+    const args = d.argument.map(a => `<li>${a}</li>`).join("");
+    const disc = d.discussion.map(x => `<li>${x}</li>`).join("");
+    document.getElementById("tDeep").innerHTML = `
+      <div class="deep-q"><div class="deep-label">本节要回答的问题</div><div class="qtext">${d.question}</div></div>
+      <div class="deep-block"><div class="deep-label">论证脉络</div><ol>${args}</ol></div>
+      <div class="deep-block"><div class="deep-label">关键概念</div><div class="cards">${cards}</div></div>
+      <div class="deep-block"><div class="deep-label">原文例证</div><div class="example"><span class="tag">IN THE TEXT</span>${d.example}</div></div>
+      <div class="deep-block"><div class="deep-label">深度讨论</div><div class="discuss"><ul>${disc}</ul></div></div>
+      <div class="deep-block"><div class="deep-label">与课程的关联</div><div class="link"><span class="tag">WHY IT MATTERS</span>${d.link}</div></div>`;
+  }
+
+  // ===== 动画版：JS 时间轴引擎（11 幕，详细文案，~109s） =====
+  const scenes = [...document.querySelectorAll(".scene")];
+  const ANIM_TOTAL = 109;
+  const SCENE_BOUNDS = [
+    { name: "intro", from: 3.4,  to: 11.0 },
+    { name: "q",     from: 11.0, to: 18.5 },
+    { name: "a1",    from: 18.5, to: 26.5 },
+    { name: "a2",    from: 26.5, to: 35.5 },
+    { name: "a3",    from: 35.5, to: 45.0 },
+    { name: "a4",    from: 45.0, to: 54.0 },
+    { name: "a5",    from: 54.0, to: 64.0 },
+    { name: "a6",    from: 64.0, to: 74.0 },
+    { name: "c",     from: 74.0, to: 82.0 },
+    { name: "i",     from: 82.0, to: 97.0 },
+    { name: "l",     from: 97.0, to: 109.0 }
+  ];
+  let animPlaying = false, animStart = 0, animTime = 0, lastIdx = -1;
+
+  const clamp = (n, a = 0, b = 1) => Math.max(a, Math.min(b, n));
+  const mix = (a, b, t) => a + (b - a) * t;
+  const cubicOut = t => 1 - Math.pow(1 - clamp(t), 3);
+  const backOut = t => { const c1 = 1.42, c3 = c1 + 1; t = clamp(t); return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+  const seg = (t, a, b, ease = cubicOut) => ease(clamp((t - a) / (b - a)));
+  const set = (el, p) => Object.assign(el.style, p);
+
+  // 字幕（与配音对应，时间轴对齐）
+  const SUBTITLES = {
+    "1.1": [
+      { start: 3.4,  end: 11.0, text: "我们今天一起读 March 与 Simon 1958 年的《组织》" },
+      { start: 11.0, end: 18.5, text: "它要回答的核心问题是：组织为什么重要？" },
+      { start: 18.5, end: 26.5, text: "先看一个基本事实：组织无处不在" },
+      { start: 26.5, end: 35.5, text: "更重要的不是量的多寡，而是质的差异——特定性" },
+      { start: 35.5, end: 45.0, text: "特定性：组织沟通沿特定渠道传向特定目的地" },
+      { start: 45.0, end: 54.0, text: "特定性落在'角色'上：组织角色高度精细化" },
+      { start: 54.0, end: 64.0, text: "可预测性带来协调：组织内交易是预先计划、预先协调的" },
+      { start: 64.0, end: 74.0, text: "March 与 Simon 的生物学类比：组织是相互作用的个人集合体" },
+      { start: 74.0, end: 82.0, text: "三个关键词：特定性 · 角色 · 协调" },
+      { start: 82.0, end: 97.0, text: "组织作为协调装置的理由，是否正在被 AI 重新侵蚀？" },
+      { start: 97.0, end: 109.0, text: "组织与 AI 是两种协调技术" }
+    ]
+  };
+  let currentSubs = [];
+  const subtitleEl = document.getElementById("subtitle");
+
+  function renderAnim(section) {
+    document.getElementById("aqIntro").innerHTML = section.anim.intro || "";
+    document.getElementById("aqQuestion").innerHTML = section.anim.question;
+    const steps = section.anim.argumentSteps || [];
+    for (let i = 0; i < 6; i++) {
+      const el = document.getElementById("aqA" + (i + 1));
+      if (el) el.innerHTML = steps[i] || "";
+    }
+    document.getElementById("aqConcepts").innerHTML = section.anim.concepts.map(c => `<div class="concept-item"><div class="zh">${c.zh}</div><div class="en">${c.en}</div></div>`).join("");
+    document.getElementById("aqInsight").innerHTML = section.anim.insight;
+    document.getElementById("aqLink").innerHTML = section.anim.link;
+    document.getElementById("aqStamp").textContent = `ORGANIZATIONS · Ch1 ${section.id}`;
+    currentSubs = SUBTITLES[section.id] || [];
+  }
+
+  function setScene(name) {
+    scenes.forEach(s => s.classList.toggle("active", s.dataset.scene === name));
+  }
+
+  function renderAt(t) {
+    let idx = -1;
+    for (let i = 0; i < SCENE_BOUNDS.length; i++) if (t >= SCENE_BOUNDS[i].from && t < SCENE_BOUNDS[i].to) idx = i;
+    if (t >= SCENE_BOUNDS[SCENE_BOUNDS.length - 1].to) idx = SCENE_BOUNDS.length - 1;
+    if (t < 3.4) idx = -1; // 封面阶段，无 scene
+    if (idx !== lastIdx) { if (idx >= 0) setScene(SCENE_BOUNDS[idx].name); lastIdx = idx; }
+    if (renderMode) {
+      const coverEl = document.getElementById("cover");
+      if (t < 3.0) coverEl.style.opacity = "1";
+      else if (t < 3.4) coverEl.style.opacity = String(1 - (t - 3.0) / 0.4);
+      else coverEl.style.opacity = "0";
+    }
+
+    if (idx === 0) renderQ(t - SCENE_BOUNDS[0].from);
+    else if (idx === 1) renderQ(t - SCENE_BOUNDS[1].from);
+    else if (idx >= 2 && idx <= 7) renderStep(t - SCENE_BOUNDS[idx].from);
+    else if (idx === 8) renderConcepts(t - SCENE_BOUNDS[8].from);
+    else if (idx === 9) renderInsight(t - SCENE_BOUNDS[9].from);
+    else if (idx === 10) renderLink(t - SCENE_BOUNDS[10].from);
+    pbarFill.style.width = `${t / ANIM_TOTAL * 100}%`;
+    ptime.textContent = `${fmt(t)} / ${fmt(ANIM_TOTAL)}`;
+    const sub = currentSubs.find(s => t >= s.start && t < s.end);
+    if (sub) { subtitleEl.textContent = sub.text; subtitleEl.classList.add("show"); }
+    else subtitleEl.classList.remove("show");
+  }
+
+  function renderQ(t) {
+    set(document.querySelector('[data-scene="q"] .scene-label'), { opacity: seg(t, .05, .35), transform: `translateY(${mix(14, 0, seg(t, .05, .35))}px)` });
+    set(document.getElementById("aqQuestion"), { opacity: seg(t, .3, .8, backOut), transform: `translateY(${mix(30, 0, seg(t, .3, .8, backOut))}px)` });
+  }
+  function renderStep(t) {
+    const name = SCENE_BOUNDS[lastIdx] && SCENE_BOUNDS[lastIdx].name;
+    set(document.querySelector(`[data-scene="${name}"] .scene-label`), { opacity: seg(t, .05, .3), transform: `translateY(${mix(14, 0, seg(t, .05, .3))}px)` });
+    const el = document.getElementById("aq" + name.charAt(0).toUpperCase() + name.slice(1));
+    if (el) set(el, { opacity: seg(t, .3, .85, backOut), transform: `translateY(${mix(30, 0, seg(t, .3, .85, backOut))}px)` });
+  }
+  function renderConcepts(t) {
+    set(document.querySelector('[data-scene="concepts"] .scene-label'), { opacity: seg(t, .05, .3), transform: `translateY(${mix(14, 0, seg(t, .05, .3))}px)` });
+    document.querySelectorAll(".concept-item").forEach((el, i) => {
+      const base = .2 + i * .32;
+      const k = backOut(seg(t, base, base + .22));
+      set(el, { opacity: Math.min(1, k), transform: `translateY(${mix(40, 0, k)}px) scale(${mix(.94, 1, k)})` });
+    });
+  }
+  function renderInsight(t) {
+    set(document.querySelector('[data-scene="insight"] .scene-label'), { opacity: seg(t, .05, .3), transform: `translateY(${mix(14, 0, seg(t, .05, .3))}px)` });
+    set(document.getElementById("aqInsight"), { opacity: seg(t, .3, .8, backOut), transform: `translateY(${mix(30, 0, seg(t, .3, .8, backOut))}px)` });
+  }
+  function renderLink(t) {
+    set(document.getElementById("aqLink"), { opacity: seg(t, .05, .4, backOut), transform: `translateY(${mix(28, 0, seg(t, .05, .4, backOut))}px)` });
+    set(document.getElementById("aqStamp"), { opacity: seg(t, .5, .9), transform: `translateY(${mix(12, 0, seg(t, .5, .9))}px)` });
+  }
+
+  const fmt = s => `00:${String(Math.floor(s)).padStart(2, "0")}`;
+  function updatePlayerUI() {
+    playPause.textContent = animPlaying ? "⏸" : "▶";
+    playPause.setAttribute("aria-label", animPlaying ? "暂停" : "播放");
+    bigPlay.classList.toggle("hidden", animPlaying || animTime > 0);
+    playerBar.hidden = !(animTime > 0 || animPlaying);
+  }
+  function play() {
+    if (reducedMotion) return;
+    stage.classList.remove("is-playing", "paused", "idle"); void stage.offsetWidth; stage.classList.add("is-playing");
+    animTime = 0; animStart = performance.now(); animPlaying = true; lastIdx = -1;
+    scenes.forEach(s => s.classList.remove("active"));
+    renderAt(0); updatePlayerUI();
+  }
+  function pause() { animPlaying = false; stage.classList.add("paused"); updatePlayerUI(); }
+  function resume() { if (animTime >= ANIM_TOTAL) animTime = 0; animStart = performance.now(); animPlaying = true; stage.classList.remove("paused"); updatePlayerUI(); }
+  function toggle() { animPlaying ? pause() : resume(); }
+  function seekTo(t) {
+    animPlaying = false; animTime = clamp(t, 0, ANIM_TOTAL);
+    stage.classList.remove("is-playing", "paused", "idle"); void stage.offsetWidth;
+    if (animTime < 3.4) stage.classList.add(renderMode ? "idle" : "is-playing");
+    renderAt(animTime); updatePlayerUI();
+  }
+  function frame(now) {
+    if (animPlaying) {
+      animTime = (now - animStart) / 1000;
+      if (animTime >= ANIM_TOTAL) { animTime = ANIM_TOTAL; animPlaying = false; updatePlayerUI(); }
+      renderAt(animTime);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function resetToIdle() {
+    animPlaying = false; animTime = 0; lastIdx = -1;
+    stage.classList.remove("is-playing", "paused"); stage.classList.add("idle"); void stage.offsetWidth;
+    scenes.forEach(s => s.classList.remove("active"));
+    pbarFill.style.width = "0%"; ptime.textContent = `00:00 / ${fmt(ANIM_TOTAL)}`;
+    bigPlay.classList.remove("hidden"); playerBar.hidden = true; playPause.textContent = "▶";
+  }
+  function setMode(mode) {
+    const isText = mode === "text";
+    modeText.classList.toggle("active", isText); modeAnim.classList.toggle("active", !isText);
+    modeText.setAttribute("aria-selected", String(isText)); modeAnim.setAttribute("aria-selected", String(!isText));
+    textView.hidden = !isText; stageView.hidden = isText;
+    if (!isText) resetToIdle();
+  }
+
+  chapterSel.addEventListener("change", () => {
+    const ch = CHAPTERS.find(c => c.no === chapterSel.value);
+    if (!ch || !ch.ready) return;
+    fillSections(ch); renderText(ch.sections[0]); renderAnim(ch.sections[0]);
+    if (!stageView.hidden) resetToIdle();
+  });
+  sectionSel.addEventListener("change", () => {
+    const ch = CHAPTERS.find(c => c.no === chapterSel.value);
+    const s = ch.sections.find(x => x.id === sectionSel.value);
+    renderText(s); renderAnim(s);
+    if (!stageView.hidden) resetToIdle();
+  });
+  modeText.addEventListener("click", () => setMode("text"));
+  modeAnim.addEventListener("click", () => setMode("anim"));
+  bigPlay.addEventListener("click", play);
+  playPause.addEventListener("click", toggle);
+  replayBtn.addEventListener("click", play);
+  pbar.addEventListener("click", e => {
+    const r = pbar.getBoundingClientRect();
+    const ratio = (e.clientX - r.left) / r.width;
+    seekTo(ratio * ANIM_TOTAL);
+  });
+  downloadBtn.addEventListener("click", () => {
+    const ch = CHAPTERS.find(c => c.no === chapterSel.value);
+    const s = ch.sections.find(x => x.id === sectionSel.value);
+    downloadBtn.setAttribute("download", `Organizations-${s.id}-${s.title}.mp4`);
+  });
+
+  window.__bookGuide = {
+    duration: ANIM_TOTAL,
+    seek(t) { seekTo(t); },
+    play, pause, resume
+  };
+
+  fillSections(CHAPTERS[0]);
+  renderText(CHAPTERS[0].sections[0]);
+  renderAnim(CHAPTERS[0].sections[0]);
+  stage.classList.add("idle");
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

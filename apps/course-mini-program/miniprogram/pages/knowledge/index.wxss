@@ -1,0 +1,90 @@
+.knowledge-page { padding: 34rpx 32rpx calc(168rpx + env(safe-area-inset-bottom)); }
+
+.plaza-hero { padding: 18rpx 4rpx 8rpx; }
+.eyebrow.light { color: var(--accent); }
+.plaza-title {
+  margin-top: 10rpx;
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+  font-size: 56rpx;
+  font-weight: 700;
+  color: var(--ink);
+}
+.plaza-lead { margin-top: 14rpx; font-size: 25rpx; line-height: 1.75; color: var(--muted); }
+
+.gate-grid { display: flex; flex-direction: column; gap: 20rpx; margin-top: 34rpx; }
+.gate-card {
+  overflow: hidden;
+  border: 1rpx solid var(--line);
+  border-radius: 28rpx;
+  background: #fff;
+}
+.gate-cover {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 36rpx 32rpx;
+}
+.gate-cover--navy { background: var(--navy); }
+.gate-cover--orange { background: var(--orange); }
+
+.gate-icon { width: 48rpx; height: 48rpx; position: relative; }
+.gate-icon--refs { border: 3rpx solid #fff; border-radius: 6rpx 11rpx 11rpx 6rpx; }
+.gate-icon--refs::before {
+  content: "";
+  position: absolute;
+  top: 7rpx;
+  bottom: 7rpx;
+  left: 50%;
+  width: 3rpx;
+  background: #fff;
+  transform: translateX(-50%);
+}
+.gate-icon--projects::before,
+.gate-icon--projects::after {
+  content: "";
+  position: absolute;
+  top: 7rpx;
+  width: 17rpx;
+  height: 17rpx;
+  border-radius: 50% 50% 0 0;
+  background: #fff;
+}
+.gate-icon--projects::before { left: 7rpx; }
+.gate-icon--projects::after { right: 7rpx; }
+
+.gate-kicker {
+  color: rgba(255, 255, 255, .85);
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 22rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+
+.gate-body { padding: 28rpx 32rpx 32rpx; }
+.gate-title { font-size: 33rpx; font-weight: 700; color: var(--ink); }
+.gate-desc { margin-top: 10rpx; font-size: 24rpx; line-height: 1.75; color: var(--muted); }
+.gate-points { display: flex; flex-direction: column; gap: 10rpx; margin-top: 20rpx; }
+.gate-point {
+  position: relative;
+  padding-left: 28rpx;
+  font-size: 23rpx;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.gate-point::before {
+  content: "";
+  position: absolute;
+  left: 4rpx;
+  top: 13rpx;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.gate-cta {
+  display: inline-block;
+  margin-top: 24rpx;
+  color: var(--navy);
+  font-size: 25rpx;
+  font-weight: 600;
+}

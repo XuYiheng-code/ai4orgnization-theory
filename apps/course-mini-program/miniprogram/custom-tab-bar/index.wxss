@@ -1,0 +1,173 @@
+.tab-shell {
+  position: fixed;
+  z-index: 1000;
+  right: 18rpx;
+  bottom: 14rpx;
+  left: 18rpx;
+  overflow: hidden;
+  border: 1rpx solid rgba(10, 64, 122, .10);
+  border-radius: 34rpx;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 18rpx 60rpx rgba(10, 64, 122, .14);
+}
+
+.tab-bar {
+  display: flex;
+  height: 112rpx;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.tab-item {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  color: #5e6e7f;
+  font-family: sans-serif;
+  font-size: 19rpx;
+  gap: 8rpx;
+}
+
+.tab-item.selected {
+  color: #0a407a;
+  font-weight: 600;
+}
+
+.tab-icon {
+  width: 44rpx;
+  height: 44rpx;
+  position: relative;
+}
+
+/* 首页 home */
+.icon-home {
+  border: 3rpx solid currentColor;
+  border-radius: 9rpx;
+}
+.icon-home::before {
+  content: "";
+  position: absolute;
+  top: -16rpx;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-left: 21rpx solid transparent;
+  border-right: 21rpx solid transparent;
+  border-bottom: 17rpx solid currentColor;
+}
+.icon-home::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 7rpx;
+  width: 13rpx;
+  height: 15rpx;
+  transform: translateX(-50%);
+  background: currentColor;
+  border-radius: 2rpx;
+}
+
+/* 大纲 outline = 文档 */
+.icon-outline {
+  border: 3rpx solid currentColor;
+  border-radius: 6rpx;
+}
+.icon-outline::before,
+.icon-outline::after {
+  content: "";
+  position: absolute;
+  left: 8rpx;
+  right: 8rpx;
+  height: 3rpx;
+  background: currentColor;
+}
+.icon-outline::before { top: 12rpx; }
+.icon-outline::after { top: 21rpx; }
+
+/* 教材 book */
+.icon-book {
+  border: 3rpx solid currentColor;
+  border-radius: 5rpx 9rpx 9rpx 5rpx;
+}
+.icon-book::before {
+  content: "";
+  position: absolute;
+  top: 6rpx;
+  bottom: 6rpx;
+  left: 50%;
+  width: 3rpx;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+
+/* 知识 plaza = 网格集合 */
+.icon-plaza {
+  border: 3rpx solid currentColor;
+  border-radius: 9rpx;
+}
+.icon-plaza::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9rpx;
+  height: 9rpx;
+  background: currentColor;
+  border-radius: 2rpx;
+  transform: translate(-50%, -50%);
+  box-shadow: -13rpx 0 0 currentColor, 13rpx 0 0 currentColor, 0 -13rpx 0 currentColor, 0 13rpx 0 currentColor;
+}
+
+/* 问答 ask = 对话气泡 */
+.icon-ask {
+  border: 3rpx solid currentColor;
+  border-radius: 9rpx;
+}
+.icon-ask::before {
+  content: "";
+  position: absolute;
+  top: 10rpx;
+  left: 8rpx;
+  right: 8rpx;
+  height: 3rpx;
+  background: currentColor;
+  box-shadow: 0 9rpx 0 currentColor;
+}
+.icon-ask::after {
+  content: "";
+  position: absolute;
+  bottom: -7rpx;
+  right: 7rpx;
+  width: 0;
+  height: 0;
+  border-left: 8rpx solid transparent;
+  border-top: 8rpx solid currentColor;
+  border-right: 0 solid transparent;
+}
+
+/* 我的 person */
+.icon-person::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 13rpx;
+  width: 18rpx;
+  height: 18rpx;
+  border: 3rpx solid currentColor;
+  border-radius: 50%;
+}
+.icon-person::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 5rpx;
+  width: 34rpx;
+  height: 19rpx;
+  border: 3rpx solid currentColor;
+  border-bottom: 0;
+  border-radius: 22rpx 22rpx 0 0;
+}
+
+.safe-bottom { height: env(safe-area-inset-bottom); }

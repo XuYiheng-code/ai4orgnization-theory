@@ -1,0 +1,39 @@
+.privacy-page {
+  padding: 40rpx 36rpx 80rpx;
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+.privacy-h {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #142235;
+}
+
+.privacy-update {
+  font-size: 24rpx;
+  color: #8a857d;
+  margin: 12rpx 0 28rpx;
+}
+
+.privacy-section {
+  margin-bottom: 32rpx;
+}
+
+.privacy-h2 {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #33414f;
+  margin-bottom: 12rpx;
+}
+
+.privacy-p {
+  font-size: 27rpx;
+  line-height: 1.8;
+  color: #46535f;
+}
+
+.strong {
+  font-weight: 600;
+  color: #142235;
+}

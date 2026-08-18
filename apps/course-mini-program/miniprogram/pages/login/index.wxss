@@ -1,0 +1,201 @@
+/* 学院深蓝主色 + 白色卡片 + 橘色强调；视觉与官网 login.html 一致 */
+.login-page { min-height: 100vh; background: #f3f7fc; display: flex; flex-direction: column; }
+
+/* 顶部品牌区（深蓝，呼应首页首屏） */
+.login-art {
+  padding: 80rpx 46rpx 110rpx;
+  background: linear-gradient(165deg, #0a407a 0%, #134d92 60%, #1c63ad 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.login-art::before {
+  content: "";
+  position: absolute;
+  inset: -40rpx -40rpx auto auto;
+  width: 360rpx; height: 360rpx;
+  background: radial-gradient(circle, rgba(255, 145, 60, .25) 0%, rgba(255, 145, 60, 0) 70%);
+  pointer-events: none;
+}
+.brand-row { display: flex; align-items: center; gap: 26rpx; }
+.brand-mark {
+  width: 112rpx; height: 112rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 14rpx;
+  box-shadow: 0 12rpx 30rpx rgba(8, 47, 91, .28);
+  flex-shrink: 0;
+}
+.brand-logo { width: 100%; height: 100%; }
+.brand-text { display: flex; flex-direction: column; }
+.brand-eyebrow { color: #ffac6d; font-size: 22rpx; letter-spacing: 4rpx; font-weight: 600; }
+.brand-title { font-size: 44rpx; font-weight: 700; margin-top: 6rpx; }
+.brand-lead { margin-top: 28rpx; font-size: 24rpx; line-height: 1.6; color: #d8e4f3; max-width: 640rpx; }
+.brand-strong { color: #fff; font-weight: 600; }
+
+/* 主体白卡（向上突出于品牌区） */
+.login-card {
+  margin: -64rpx 32rpx 60rpx;
+  padding: 0 36rpx 36rpx;
+  background: #fff;
+  border-radius: 32rpx;
+  box-shadow: 0 18rpx 40rpx rgba(8, 47, 91, .08);
+  position: relative;
+  z-index: 1;
+}
+
+/* Tab 栏 */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  margin: 0 -36rpx 24rpx;
+  padding: 0 36rpx;
+  border-bottom: 2rpx solid #eef2f7;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: #8493a3;
+  padding: 28rpx 0 22rpx;
+  position: relative;
+  font-weight: 500;
+  transition: color .2s;
+}
+.tab.is-active { color: #0a407a; font-weight: 700; }
+.tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -2rpx;
+  transform: translateX(-50%);
+  width: 56rpx; height: 6rpx;
+  background: linear-gradient(90deg, #df7625, #ffac6d);
+  border-radius: 4rpx;
+}
+
+/* 表单面板：每个 pane 独立 mount（wx:if 条件渲染），保证渲染可靠性 */
+.form-pane { padding-top: 8rpx; }
+.form-title { font-size: 34rpx; font-weight: 700; color: #0a1f3d; margin: 18rpx 0 6rpx; }
+.form-hint { font-size: 24rpx; color: #6f7e90; line-height: 1.5; margin-bottom: 26rpx; }
+
+/* 字段 */
+.field { margin-bottom: 22rpx; }
+.field-label {
+  display: block;
+  font-size: 24rpx;
+  color: #3a4a5d;
+  margin-bottom: 10rpx;
+  font-weight: 500;
+}
+.field-label .muted { color: #a4b1c1; font-weight: 400; font-size: 22rpx; }
+.field-input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 100rpx;
+  padding: 30rpx 26rpx;
+  background: #f3f7fc;
+  border: 2rpx solid transparent;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  line-height: 1.5;
+  color: #0a1f3d;
+  transition: border-color .2s, background .2s;
+  display: flex;
+  align-items: center;
+}
+.field-input:focus,
+.field-input.focus {
+  background: #fff;
+  border-color: #0a407a;
+}
+/* 占位符：与输入文字同字号同基线，避免被 input 内框切掉 */
+.field-ph {
+  color: #a4b1c1;
+  font-size: 30rpx;
+  line-height: 1.5;
+}
+
+/* 角色切换（学生/游客） */
+.role-toggle { display: flex; gap: 16rpx; margin-bottom: 22rpx; }
+.role-option {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 14rpx;
+  padding: 22rpx 20rpx;
+  background: #f3f7fc;
+  border: 2rpx solid transparent;
+  border-radius: 18rpx;
+  transition: all .2s;
+}
+.role-option.is-active {
+  background: #fff;
+  border-color: #0a407a;
+  box-shadow: 0 8rpx 18rpx rgba(10, 64, 122, .10);
+}
+.role-dot {
+  width: 28rpx; height: 28rpx;
+  margin-top: 4rpx;
+  border-radius: 50%;
+  border: 4rpx solid #c2ccd9;
+  background: #fff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.role-option.is-active .role-dot {
+  border-color: #df7625;
+  background: #df7625;
+  box-shadow: inset 0 0 0 6rpx #fff;
+}
+.role-body { flex: 1; }
+.role-name { font-size: 28rpx; font-weight: 600; color: #0a1f3d; }
+.role-desc { font-size: 22rpx; color: #6f7e90; margin-top: 4rpx; line-height: 1.4; }
+
+/* 主按钮 */
+.form-actions { margin-top: 30rpx; }
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(90deg, #0a407a 0%, #134d92 100%);
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+  padding: 26rpx 0;
+  border-radius: 18rpx;
+  letter-spacing: 4rpx;
+  border: none;
+}
+.btn-primary[disabled] { opacity: .55; }
+.btn-primary::after { border: none; }
+
+/* 底部链接 */
+.form-foot {
+  margin-top: 24rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #6f7e90;
+}
+.form-foot .link { color: #df7625; margin: 0 6rpx; }
+.form-foot .dot { color: #c2ccd9; margin: 0 8rpx; }
+
+/* 反馈条 */
+.feedback {
+  margin: 24rpx -8rpx 0;
+  padding: 18rpx 22rpx;
+  font-size: 24rpx;
+  border-radius: 14rpx;
+  line-height: 1.5;
+}
+.feedback.is-error { background: #fff1ee; color: #c0392b; border: 1rpx solid #f4c7be; }
+.feedback.is-success { background: #e9f6ee; color: #1f7a3e; border: 1rpx solid #b9e3c8; }
+
+/* 隐私提示 */
+.privacy-note {
+  margin: 32rpx 0 12rpx;
+  text-align: center;
+  color: #8493a3;
+  font-size: 22rpx;
+  line-height: 1.6;
+  border-top: 2rpx dashed #e0e6ee;
+  padding-top: 22rpx;
+}

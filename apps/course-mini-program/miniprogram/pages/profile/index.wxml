@@ -1,0 +1,66 @@
+<view class="page-shell profile-page">
+  <view wx:if="{{!user}}" class="profile-guest">
+    <view class="guest-hero">
+      <view class="brand-mark"><image class="brand-logo" src="../../assets/course-logo.png" mode="aspectFit"></image></view>
+      <view class="guest-title">AI 智能问答助手</view>
+      <view class="guest-tagline">把组织理论 × 人工智能<br/>变成可对话、可查询的工具</view>
+    </view>
+    <view class="guest-cta">
+      <button class="primary-button" bindtap="openLogin">登录 / 注册</button>
+      <view class="guest-note">公开内容与知识库不登录也可以阅读。</view>
+    </view>
+  </view>
+
+  <block wx:else>
+    <!-- 身份卡 -->
+    <view class="profile-card">
+      <view class="avatar">{{user.avatar || avatarInitial}}</view>
+      <view class="profile-name">{{user.name}}</view>
+      <view class="role-badge {{user.accountType || 'guest'}}">{{user.accountType === 'student' ? '课程学生' : (user.accountType === 'guest' ? '游客' : '已登录')}}</view>
+      <view class="profile-meta" wx:if="{{user.studentId}}">学号 {{user.studentId}}</view>
+    </view>
+
+    <!-- 账号信息 -->
+    <view class="section-title">账号</view>
+    <view class="account-list">
+      <view class="account-row">
+        <text class="account-key">登录账号</text>
+        <text class="account-val">{{maskedAccount}}</text>
+      </view>
+      <view class="account-row" wx:if="{{user.email}}">
+        <text class="account-key">邮箱</text>
+        <text class="account-val">{{user.email}}</text>
+      </view>
+      <view class="account-row" wx:if="{{user.phone}}">
+        <text class="account-key">手机</text>
+        <text class="account-val">{{user.phone}}</text>
+      </view>
+      <view class="account-row">
+        <text class="account-key">会话到期</text>
+        <text class="account-val">{{sessionExpireText}}</text>
+      </view>
+    </view>
+
+    <view class="section-title">内容</view>
+    <view class="menu-list">
+      <view class="menu-item" hover-class="menu-item--active" hover-stay-time="100" bindtap="openAsk">
+        <view class="menu-main">
+          <text class="menu-title">我的问答历史</text>
+          <text class="menu-sub">打开对话抽屉查看全部记录</text>
+        </view>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" hover-class="menu-item--active" hover-stay-time="100" bindtap="openAbout">
+        <view class="menu-main"><text class="menu-title">关于本工具</text></view>
+        <text class="menu-arrow">›</text>
+      </view>
+      <view class="menu-item" hover-class="menu-item--active" hover-stay-time="100" bindtap="openPrivacy">
+        <view class="menu-main"><text class="menu-title">隐私与数据说明</text></view>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+
+    <button class="logout-button" bindtap="onLogout">退出登录</button>
+    <view class="profile-foot">登录数据由 www.ai4orgnization-theory.cn 后端统一存储，<br/>官网与小程序共享同一份账户与聊天记录。</view>
+  </block>
+</view>

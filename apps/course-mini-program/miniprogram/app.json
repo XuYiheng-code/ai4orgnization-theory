@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/splash/index",
+    "pages/home/index",
+    "pages/syllabus/index",
+    "pages/textbooks/index",
+    "pages/knowledge/index",
+    "pages/ask/index",
+    "pages/profile/index",
+    "pages/about/index",
+    "pages/login/index",
+    "pages/privacy/index",
+    "pages/webview/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "人工智能与组织管理",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#5e6e7f",
+    "selectedColor": "#0a407a",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/home/index", "text": "首页" },
+      { "pagePath": "pages/syllabus/index", "text": "大纲" },
+      { "pagePath": "pages/textbooks/index", "text": "教材" },
+      { "pagePath": "pages/knowledge/index", "text": "知识" },
+      { "pagePath": "pages/ask/index", "text": "问答" },
+      { "pagePath": "pages/profile/index", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "__usePrivacyCheck__": true
+}

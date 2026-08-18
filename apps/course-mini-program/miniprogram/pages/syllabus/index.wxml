@@ -1,0 +1,68 @@
+<view class="page-shell syllabus-page">
+  <view class="page-head">
+    <view>
+      <view class="eyebrow">Syllabus / 内容大纲</view>
+      <view class="page-title">16 周内容结构</view>
+    </view>
+  </view>
+  <view class="page-summary">内容沿着“解释组织—技术嵌入—智能重构—公共治理”推进。点击任一周次，可查看内容简介、理论框架与活动；简介会随实际讲解持续修订。</view>
+
+  <view class="stage-index">
+    <view class="stage-link" wx:for="{{stages}}" wx:key="no" data-sidx="{{index}}" bindtap="scrollToStage">
+      <text class="stage-link-no">STAGE {{item.no}}</text>
+      <text class="stage-link-title">{{item.title}}</text>
+    </view>
+  </view>
+
+  <view class="stage" wx:for="{{stages}}" wx:key="no" id="stage-{{index}}">
+    <view class="stage-head">
+      <view class="stage-no">{{item.no}}</view>
+      <view>
+        <view class="stage-title">{{item.title}}</view>
+        <view class="stage-summary">{{item.summary}}</view>
+      </view>
+    </view>
+    <view class="weeks">
+      <view class="week {{openWeek === item.gidx ? 'open' : ''}}" wx:for="{{item.weeks}}" wx:for-item="week" wx:key="gidx" data-gidx="{{week.gidx}}" bindtap="toggleWeek">
+        <view class="week-row">
+          <text class="week-no">{{week.no}}</text>
+          <text class="week-title">{{week.title}}</text>
+          <view class="week-toggle"></view>
+        </view>
+        <view wx:if="{{openWeek === week.gidx}}" class="week-body">
+          <view class="block" wx:for="{{week.blocks}}" wx:for-item="block" wx:key="label">
+            <view class="block-label">{{block.label}}</view>
+            <view class="block-text">{{block.text}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="extra-section">
+    <view class="content-title">每周内容怎样进行</view>
+    <view class="content-lead">除导论和期末环节外，内容讨论稿把每次 90 分钟分成两个部分。</view>
+    <view class="teaching">
+      <view class="format-block" wx:for="{{teaching}}" wx:key="title">
+        <view class="format-time">{{item.time}}</view>
+        <view class="format-title">{{item.title}}</view>
+        <view class="format-text">{{item.text}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="extra-section">
+    <view class="content-title">学习反馈</view>
+    <view class="content-lead">下方为内容配套的学习反馈示例，正式发布前会选定一套并统一到所有页面。</view>
+    <view class="assessment">
+      <view class="assessment-card" wx:for="{{assessment}}" wx:key="title">
+        <view class="assessment-score">{{item.score}}</view>
+        <view class="assessment-name">{{item.title}}</view>
+        <view class="assessment-text">{{item.text}}</view>
+      </view>
+    </view>
+    <view class="notice">本页没有擅自合并这两套方案。内容团队确认后，应同步修改大纲、平台与反馈数据结构。</view>
+  </view>
+
+  <view class="source-note">内容依据《人工智能与组织管理》16 周内容大纲。</view>
+</view>

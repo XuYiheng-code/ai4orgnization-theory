@@ -1,0 +1,8 @@
+<view class="webview-page">
+  <web-view wx:if="{{src}}" src="{{src}}"></web-view>
+  <view wx:else class="card empty-state">
+    <view class="empty-mark"></view>
+    <view class="empty-title">页面地址缺失</view>
+    <view class="empty-copy">请从课程内对应入口进入。</view>
+  </view>
+</view>

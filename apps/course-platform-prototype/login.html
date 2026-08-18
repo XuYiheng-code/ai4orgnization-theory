@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="课程平台登录：注册、登录、重置密码">
+  <script>if(location.protocol==='file:')location.replace('http://127.0.0.1:8765/login.html'+location.search+location.hash);</script>
+  <link rel="icon" href="course-logo-v2.svg">
+  <link rel="stylesheet" href="styles.css?v=11">
+  <title>登录｜人工智能与组织管理</title>
+</head>
+<body class="login-page">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-logo-frame"><img class="brand-logo" src="course-logo-v2.svg" alt="课程标识"></span>
+        <span class="brand-text"><strong>人工智能与组织管理</strong><small>AI & Organization</small></span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a class="nav-link" href="index.html">首页</a>
+        <a class="nav-link" href="syllabus.html">课程大纲</a>
+        <a class="nav-link" href="textbooks.html">课程教材</a>
+        <a class="nav-link" href="knowledge.html">知识广场</a>
+        <a class="nav-link" href="https://studio.ai4orgnization-theory.cn" target="_blank" rel="noopener">教学平台</a>
+        <a class="nav-link" href="about.html">关于</a>
+      </nav>
+      <a class="header-login is-active" href="login.html" data-auth-login>登录</a>
+      <button class="menu-button" type="button" aria-label="展开导航" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="login-section">
+      <div class="container login-grid">
+        <aside class="login-aside">
+          <div class="login-aside-eyebrow">AI & Organization</div>
+          <h1 class="login-aside-title">学习平台登录</h1>
+          <p class="login-aside-lead">注册后即可在教学平台生成课程，并发布到知识广场与同学互动。每个用户的项目和评论都相互隔离，不会丢失。</p>
+          <ul class="login-aside-points">
+            <li>邮箱或手机号 + 密码即可登录</li>
+            <li>课程学生需要填写学号，便于教师审核</li>
+            <li>忘记密码可凭原密码重置</li>
+            <li>数据本地保存，重启不丢失</li>
+          </ul>
+        </aside>
+
+        <div class="login-card">
+          <div class="login-tabs" role="tablist" aria-label="登录/注册/重置">
+            <button class="login-tab is-active" role="tab" aria-selected="true" data-mode="login" id="tab-login">登录</button>
+            <button class="login-tab" role="tab" aria-selected="false" data-mode="register" id="tab-register">注册</button>
+            <button class="login-tab" role="tab" aria-selected="false" data-mode="reset" id="tab-reset">重置密码</button>
+          </div>
+
+          <!-- 登录 -->
+          <form class="login-form is-active" id="form-login" data-form="login" novalidate>
+            <h2 class="login-form-title">登录你的账户</h2>
+            <p class="login-form-hint">使用注册时的邮箱或手机号 + 密码登录。</p>
+            <label class="login-field">
+              <span>邮箱 / 手机号</span>
+              <input type="text" name="account" autocomplete="username" required placeholder="you@example.com 或 13800000000">
+            </label>
+            <label class="login-field">
+              <span>密码</span>
+              <input type="password" name="password" autocomplete="current-password" required minlength="8" placeholder="至少 8 位">
+            </label>
+            <div class="login-form-actions">
+              <button type="submit" class="button primary">登录</button>
+              <button type="button" class="button link" data-switch="reset">忘记密码？</button>
+            </div>
+            <div class="login-feedback" id="feedback-login"></div>
+            <p class="login-foot">没有账号？<button type="button" class="button link" data-switch="register">立即注册</button></p>
+          </form>
+
+          <!-- 注册 -->
+          <form class="login-form" id="form-register" data-form="register" novalidate>
+            <h2 class="login-form-title">创建新账户</h2>
+            <p class="login-form-hint">先选择身份，课程学生需填学号。</p>
+            <fieldset class="login-field role-fieldset">
+              <legend>身份</legend>
+              <div class="role-toggle">
+                <label class="role-option">
+                  <input type="radio" name="accountType" value="student" required checked>
+                  <span class="role-option-body">
+                    <strong>课程学生</strong>
+                    <small>需要填写学号，便于教师审核</small>
+                  </span>
+                </label>
+                <label class="role-option">
+                  <input type="radio" name="accountType" value="guest">
+                  <span class="role-option-body">
+                    <strong>游客</strong>
+                    <small>公开浏览，不参与课程数据</small>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+            <label class="login-field" id="field-studentId">
+              <span>学号</span>
+              <input type="text" name="studentId" pattern="[\dA-Za-z\-]{4,20}" placeholder="例如 MF20260001">
+            </label>
+            <label class="login-field">
+              <span>姓名 / 昵称</span>
+              <input type="text" name="name" autocomplete="name" required maxlength="30" placeholder="将在课程作品上显示">
+            </label>
+            <label class="login-field">
+              <span>邮箱</span>
+              <input type="email" name="email" autocomplete="email" placeholder="you@example.com">
+            </label>
+            <label class="login-field">
+              <span>手机号 <small>（邮箱或手机号至少填一个）</small></span>
+              <input type="tel" name="phone" autocomplete="tel" placeholder="13800000000">
+            </label>
+            <label class="login-field">
+              <span>密码</span>
+              <input type="password" name="password" autocomplete="new-password" required minlength="8" placeholder="至少 8 位">
+            </label>
+            <div class="login-form-actions">
+              <button type="submit" class="button primary">注册并登录</button>
+            </div>
+            <div class="login-feedback" id="feedback-register"></div>
+            <p class="login-foot">已有账号？<button type="button" class="button link" data-switch="login">返回登录</button></p>
+          </form>
+
+          <!-- 重置密码 -->
+          <form class="login-form" id="form-reset" data-form="reset" novalidate>
+            <h2 class="login-form-title">重置密码</h2>
+            <p class="login-form-hint">凭原密码重置新密码。重置后所有设备需要重新登录。</p>
+            <label class="login-field">
+              <span>邮箱 / 手机号</span>
+              <input type="text" name="account" required placeholder="你注册时使用的账号">
+            </label>
+            <label class="login-field">
+              <span>原密码</span>
+              <input type="password" name="oldPassword" required minlength="8">
+            </label>
+            <label class="login-field">
+              <span>新密码</span>
+              <input type="password" name="newPassword" required minlength="8" placeholder="至少 8 位">
+            </label>
+            <div class="login-form-actions">
+              <button type="submit" class="button primary">重置密码</button>
+              <button type="button" class="button link" data-switch="login">返回登录</button>
+            </div>
+            <div class="login-feedback" id="feedback-reset"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-title">学习平台登录</div>
+      <div class="footer-meta">
+        注册 · 登录 · 重置密码<br>
+        © <span data-year></span> 课程团队
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js?v=11"></script>
+  <script src="login.js?v=11"></script>
+</body>
+</html>

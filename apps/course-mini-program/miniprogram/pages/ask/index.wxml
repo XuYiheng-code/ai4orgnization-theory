@@ -1,0 +1,126 @@
+<view class="ask-page">
+  <!-- 自定义导航 -->
+  <view class="ask-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-row">
+      <view class="nav-side" bindtap="openHistory" aria-label="历史会话">
+        <view class="nav-icon nav-icon--list"></view>
+        <text class="nav-side-label">历史</text>
+      </view>
+      <view class="nav-title-wrap">
+        <view class="nav-title">智能问答助手</view>
+        <view class="nav-sub">{{currentConversationTitle || '支持文字、语音、图片与文档输入'}}</view>
+      </view>
+      <view class="nav-side nav-side--right" bindtap="startNewConversation" aria-label="新建对话">
+        <view class="nav-icon nav-icon--plus"></view>
+        <text class="nav-side-label">新对话</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 欢迎页：仅引导提问，不放推荐问题 -->
+  <view class="ask-welcome" wx:if="{{messages.length === 0}}">
+    <view class="welcome-mark"></view>
+    <view class="welcome-hint">
+      <view class="welcome-title">有问题？随时告诉我</view>
+      <view class="welcome-copy">在底部输入框打字、按住说话，或者上传图片与文档，我都会基于课程内容尽力帮你。</view>
+    </view>
+  </view>
+
+  <!-- 消息列表 -->
+  <scroll-view wx:else class="message-list" scroll-y scroll-into-view="{{scrollIntoView}}" scroll-with-animation enhanced show-scrollbar="{{false}}">
+    <view class="message-list-inner">
+      <view wx:for="{{messages}}" wx:key="id" id="msg-{{item.id}}" class="message message--{{item.role}}">
+        <view class="message-bubble">
+          <view wx:if="{{item.attachments.length}}" class="message-attachments">
+            <view class="message-attachment" wx:for="{{item.attachments}}" wx:for-item="att" wx:key="name">
+              <text class="attachment-icon">{{att.type === 'image' ? '图片' : '文档'}}</text>
+              <text class="attachment-name">{{att.name}}</text>
+            </view>
+          </view>
+          <text class="message-text">{{item.content}}</text>
+        </view>
+      </view>
+      <view wx:if="{{loading}}" class="message message--assistant" id="msg-typing">
+        <view class="message-bubble bubble-loading">
+          <view class="typing-dot"></view>
+          <view class="typing-dot"></view>
+          <view class="typing-dot"></view>
+        </view>
+      </view>
+      <view class="list-bottom"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部输入区（始终固定在屏幕底部） -->
+  <view class="ask-input-bar" style="padding-bottom: {{safeAreaBottom}}px;">
+    <view class="input-row">
+      <view class="tool-btn" bindtap="toggleTools" aria-label="更多输入方式">+</view>
+      <input class="ask-input" value="{{inputValue}}" bindinput="onInput" confirm-type="send" bindconfirm="sendText" placeholder="输入你的问题，或按 + 选语音/图片/文档" placeholder-class="input-placeholder" />
+      <view wx:if="{{!inputValue && !pendingAttachments.length}}" class="voice-btn" bindtouchstart="startVoice" bindtouchend="stopVoice" bindtouchcancel="cancelVoice">按住 说话</view>
+      <view wx:else class="send-btn" bindtap="sendText">发送</view>
+    </view>
+
+    <view class="tools-panel" wx:if="{{showTools}}">
+      <view class="tool-item" bindtap="chooseImage">
+        <view class="tool-icon tool-icon--image"></view>
+        <text class="tool-label">图片</text>
+      </view>
+      <view class="tool-item" bindtap="chooseFile">
+        <view class="tool-icon tool-icon--file"></view>
+        <text class="tool-label">文档</text>
+      </view>
+      <view class="tool-item" bindtap="startVoiceTool">
+        <view class="tool-icon tool-icon--voice"></view>
+        <view class="tool-label-stack">
+          <text class="tool-label">语音</text>
+          <text class="tool-sub">按住底部说话</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 语音录制浮层 -->
+  <view class="voice-overlay" wx:if="{{recording}}">
+    <view class="voice-panel">
+      <view class="voice-wave"></view>
+      <view class="voice-tip">正在录音，松开发送</view>
+      <view class="voice-time">{{recordTime}}″</view>
+    </view>
+  </view>
+
+  <!-- 历史会话侧栏 -->
+  <view class="drawer-mask" wx:if="{{historyDrawer}}" bindtap="closeHistory"></view>
+  <view class="drawer {{historyDrawer ? 'drawer--open' : ''}}">
+    <view class="drawer-header">
+      <view class="drawer-title">历史对话</view>
+      <view class="drawer-new" bindtap="startNewConversation">
+        <view class="drawer-new-icon"></view>
+        <text>开启新对话</text>
+      </view>
+    </view>
+    <view class="drawer-sub">不同账号的对话互不可见，仅你能看到自己的历史</view>
+    <scroll-view class="drawer-list" scroll-y>
+      <view wx:if="{{historyLoading && historyList.length === 0}}" class="drawer-empty">加载中…</view>
+      <view wx:elif="{{historyList.length === 0}}" class="drawer-empty">
+        暂无历史对话，发送第一条问题即可自动保存
+      </view>
+      <view
+        wx:for="{{historyList}}"
+        wx:key="id"
+        class="drawer-item {{item.id === currentConversationId ? 'drawer-item--active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="selectHistory"
+      >
+        <view class="drawer-item-main">
+          <view class="drawer-item-title">{{item.title || '新对话'}}</view>
+          <view class="drawer-item-preview">
+            <text wx:if="{{item.preview}}" class="drawer-item-prefix">{{item.lastRole === 'assistant' ? '我' : '你'}}：</text>
+            <text>{{item.preview || '（暂无内容）'}}</text>
+          </view>
+          <view class="drawer-item-meta">{{item.messageCount || 0}} 条消息</view>
+        </view>
+        <view class="drawer-item-delete" data-id="{{item.id}}" catchtap="deleteHistory">删除</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

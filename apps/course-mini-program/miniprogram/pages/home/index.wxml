@@ -1,0 +1,101 @@
+<view class="home-page">
+  <!-- 首屏：放大品牌区 -->
+  <view class="home-hero">
+    <view class="hero-top">
+      <view class="brand-block">
+        <view class="brand-mark">
+          <image class="brand-logo" src="../../assets/course-logo.png" mode="aspectFit"></image>
+        </view>
+        <view class="brand-divider"></view>
+        <view class="school-mark">
+          <image class="school-logo" src="../../assets/nju-government-logo.png" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+
+    <view class="hero-mid">
+      <view class="eyebrow">{{hero.eyebrow}}</view>
+      <view class="home-title">{{hero.titleLead}}<text class="accent">{{hero.titleAccent}}</text></view>
+      <view class="home-lead">{{hero.lead}}</view>
+      <view class="course-team">
+        <view class="team-credit" wx:for="{{hero.team}}" wx:key="name"><text class="team-label">{{item.label}}</text><text class="team-name">{{item.name}}</text></view>
+      </view>
+    </view>
+
+    <view class="hero-bottom">
+      <view class="hero-actions">
+        <view class="primary-button" bindtap="goSyllabus">查看 16 周大纲</view>
+        <view class="secondary-button" bindtap="goTextbooks">阅读学习资料</view>
+      </view>
+      <view class="hero-meta">
+        <text>公共管理学习者</text>
+        <text>每周 90 分钟</text>
+        <text>允许使用 AI 工具</text>
+      </view>
+      <view class="scroll-cue" bindtap="scrollToFilm">
+        <text class="scroll-cue-label">继续了解 · 30 秒内容剪影</text>
+        <view class="scroll-cue-arrow"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 内容剪影：整页化 -->
+  <view class="film-section" id="film-section">
+    <view class="film-rail">
+      <view class="film-eyebrow">Film · 内容剪影</view>
+      <view class="film-title">30 秒<text class="film-title-accent">看完</text>，这门课程在讲什么</view>
+      <view class="film-frame">
+        <video class="film-video" src="https://www.ai4orgnization-theory.cn/assets/course-promo.mp4" poster="../../assets/course-promo-poster.png" controls playsinline></video>
+        <view class="film-timecode">
+          <text class="film-timecode-dot"></text>
+          <text>00:31 · REC</text>
+        </view>
+      </view>
+      <scroll-view class="film-chapters" scroll-x enhanced show-scrollbar="{{false}}">
+        <view class="film-chapter" wx:for="{{filmChapters}}" wx:key="no">
+          <text class="chapter-no">{{item.no}}</text>
+          <text class="chapter-label">{{item.label}}</text>
+          <text class="chapter-desc">{{item.desc}}</text>
+        </view>
+      </scroll-view>
+      <view class="film-cta" bindtap="goAsk">
+        <text class="film-cta-label">给我介绍一下课程大纲</text>
+        <view class="film-cta-arrow"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="map-section">
+    <view class="section-heading">
+      <view class="eyebrow">Map / 内容路径</view>
+      <view class="section-title">16 周内容安排</view>
+    </view>
+    <view class="phase-grid">
+      <view class="phase-card" wx:for="{{phases}}" wx:key="no" data-stage="{{item.stage}}" bindtap="goSyllabus">
+        <text class="phase-no">{{item.no}} · {{item.weeks}}</text>
+        <text class="phase-title">{{item.title}}</text>
+        <text class="phase-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="entries-section">
+    <view class="section-heading">
+      <view class="eyebrow">Explore / 内容入口</view>
+      <view class="section-title">从这里开始</view>
+    </view>
+    <view class="entry-grid entry-grid--two">
+      <view class="entry-card" wx:for="{{entries}}" wx:key="no" data-idx="{{index}}" bindtap="{{index === 0 ? 'goSyllabus' : 'goTextbooks'}}">
+        <text class="entry-no">{{item.no}}</text>
+        <text class="entry-title">{{item.title}}</text>
+        <text class="entry-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="home-footer">
+    <view class="footer-title">人工智能与组织管理</view>
+    <view class="footer-meta">16 周主题内容 · 本地内容站原型</view>
+    <view class="footer-link" bindtap="goAbout">关于本工具 ›</view>
+  </view>
+</view>

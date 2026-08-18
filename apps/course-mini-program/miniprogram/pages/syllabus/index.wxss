@@ -1,0 +1,171 @@
+.syllabus-page { padding: 34rpx 32rpx calc(132rpx + env(safe-area-inset-bottom)); }
+
+.stage-index {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  margin: 30rpx 0 8rpx;
+}
+.stage-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+  padding: 20rpx 24rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 18rpx;
+  background: var(--surface);
+}
+.stage-link-no {
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 20rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+  color: var(--navy);
+}
+.stage-link-title { font-size: 25rpx; font-weight: 600; color: var(--ink); }
+
+.stage { margin-top: 44rpx; }
+.stage-head { display: flex; gap: 20rpx; align-items: flex-start; }
+.stage-no {
+  flex-shrink: 0;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 18rpx;
+  background: var(--navy);
+  color: #fff;
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 30rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stage-title {
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.stage-summary { margin-top: 8rpx; font-size: 23rpx; line-height: 1.7; color: var(--muted); }
+
+.weeks { margin-top: 22rpx; display: flex; flex-direction: column; gap: 14rpx; }
+.week {
+  border: 1rpx solid var(--line);
+  border-radius: 20rpx;
+  background: #fff;
+  overflow: hidden;
+  transition: background .2s ease;
+}
+.week.open { background: var(--surface); }
+.week-row {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 24rpx;
+}
+.week-no {
+  flex-shrink: 0;
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 12rpx;
+  background: var(--blue-pale, #eef4fb);
+  color: var(--navy);
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 24rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.week-title {
+  flex: 1;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.week-toggle {
+  flex-shrink: 0;
+  width: 26rpx;
+  height: 26rpx;
+  position: relative;
+}
+.week-toggle::before,
+.week-toggle::after {
+  content: "";
+  position: absolute;
+  background: var(--muted);
+  border-radius: 2rpx;
+}
+.week-toggle::before { left: 11rpx; top: 3rpx; bottom: 3rpx; width: 3rpx; }
+.week-toggle::after { top: 11rpx; left: 3rpx; right: 3rpx; height: 3rpx; }
+.week.open .week-toggle::before { display: none; }
+
+.week-body { padding: 4rpx 24rpx 26rpx; display: flex; flex-direction: column; gap: 18rpx; }
+.block { display: flex; flex-direction: column; gap: 6rpx; }
+.block-label {
+  align-self: flex-start;
+  padding: 4rpx 14rpx;
+  border-radius: 999rpx;
+  background: var(--navy);
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 600;
+}
+.block-text { font-size: 25rpx; line-height: 1.75; color: var(--ink); }
+
+.extra-section { margin-top: 56rpx; }
+.content-title {
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+  font-size: 35rpx;
+  font-weight: 700;
+  color: var(--ink);
+}
+.content-lead { margin-top: 10rpx; font-size: 24rpx; line-height: 1.7; color: var(--muted); }
+
+.teaching { display: flex; gap: 16rpx; margin-top: 22rpx; }
+.format-block {
+  flex: 1;
+  padding: 24rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 20rpx;
+  background: var(--surface);
+}
+.format-time {
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--orange);
+}
+.format-title { margin-top: 8rpx; font-size: 26rpx; font-weight: 700; color: var(--ink); }
+.format-text { margin-top: 8rpx; font-size: 22rpx; line-height: 1.7; color: var(--muted); }
+
+.assessment { display: flex; flex-direction: column; gap: 14rpx; margin-top: 22rpx; }
+.assessment-card {
+  padding: 24rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 20rpx;
+  background: #fff;
+}
+.assessment-score {
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--navy);
+}
+.assessment-name { margin-top: 6rpx; font-size: 27rpx; font-weight: 700; color: var(--ink); }
+.assessment-text { margin-top: 6rpx; font-size: 23rpx; line-height: 1.7; color: var(--muted); }
+
+.notice {
+  margin-top: 18rpx;
+  padding: 18rpx 20rpx;
+  border-left: 6rpx solid var(--orange);
+  background: #fff6ee;
+  border-radius: 10rpx;
+  font-size: 22rpx;
+  line-height: 1.7;
+  color: #8a4a22;
+}
+
+.source-note { margin-top: 36rpx; font-size: 21rpx; color: var(--muted); line-height: 1.7; }

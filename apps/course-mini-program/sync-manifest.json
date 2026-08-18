@@ -1,0 +1,48 @@
+{
+  "version": "0.3",
+  "updatedAt": "2026-08-17",
+  "items": [
+    {
+      "feature": "课程首页",
+      "webFiles": ["index.html"],
+      "miniPages": ["pages/home/index"],
+      "strategy": "mobile-adapt",
+      "status": "synced"
+    },
+    {
+      "feature": "课程大纲",
+      "webFiles": ["syllabus.html"],
+      "miniPages": ["pages/syllabus/index"],
+      "strategy": "shared-content",
+      "status": "synced"
+    },
+    {
+      "feature": "课程教材",
+      "webFiles": ["textbooks.html"],
+      "miniPages": ["pages/textbooks/index"],
+      "strategy": "shared-content",
+      "status": "synced"
+    },
+    {
+      "feature": "知识广场",
+      "webFiles": ["knowledge.html"],
+      "miniPages": ["pages/knowledge/index"],
+      "strategy": "mobile-adapt",
+      "status": "synced"
+    },
+    {
+      "feature": "课程智能问答",
+      "webFiles": ["knowledge.html", "references.html"],
+      "miniPages": ["pages/ask/index"],
+      "strategy": "mobile-native",
+      "status": "prototype"
+    },
+    {
+      "feature": "关于课程",
+      "webFiles": ["about.html"],
+      "miniPages": ["pages/about/index"],
+      "strategy": "shared-content",
+      "status": "synced"
+    }
+  ]
+}

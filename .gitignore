@@ -1,0 +1,68 @@
+# ===== Dependencies =====
+node_modules/
+.pnp/
+.pnp.js
+
+# ===== Build / output artifacts =====
+.next/
+.out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# ===== Secrets & local env (keep *.example) =====
+.env
+.env.*
+!.env.example
+project.private.config.json
+*.local
+workbuddy_*.json
+
+# ===== WorkBuddy internal (memory / keys / runtime) =====
+.workbuddy/
+
+# ===== OS / editor =====
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# ===== Logs =====
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# ===== Runtime data stores (contain PII, auth sessions, uploads — NOT source) =====
+# OpenMAIC's own .gitignore already excludes its /data.
+apps/course-platform-prototype/data/
+**/uploads/
+
+# ===== Binary assets (visual/audio/video source, not source code) =====
+# SVG is kept (text-based source asset). brand/ binaries dropped; its *.md docs remain.
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.mp4
+*.mov
+*.webm
+*.aiff
+*.wav
+*.mp3
+*.ogg
+*.pdf
+*.zip
+*.tar.gz
+# Animation/video frame dumps and verification/e2e screenshots
+assets/_frames/
+verification-*/
+e2e/screenshots/
+e2e/__screenshots-619/
+
+# ===== Caches =====
+.cache/
+tmp/

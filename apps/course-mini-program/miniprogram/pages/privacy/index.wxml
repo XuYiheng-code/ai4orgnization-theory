@@ -1,0 +1,47 @@
+<view class="privacy-page">
+  <view class="privacy-h">隐私保护指引</view>
+  <view class="privacy-update">最近更新：2026-08-17</view>
+
+  <view class="privacy-section">
+    <view class="privacy-h2">一、我们是谁</view>
+    <view class="privacy-p">本小程序为《人工智能与组织管理》内容的学习辅助工具，由内容团队提供，服务端域名为 ai4orgnization-theory.cn。</view>
+  </view>
+
+  <view class="privacy-section">
+    <view class="privacy-h2">二、我们收集的信息</view>
+    <view class="privacy-p">1. 微信登录凭证（login code）：用于向微信换取你的微信 openid，以此建立你的账号会话。我们<text class="strong">不获取</text>你的微信密码、session_key 或支付信息。</view>
+    <view class="privacy-p">2. 问答内容：你在“问答”模块输入的文字、语音、图片、文档及由此产生的问答记录，会提交给本工具服务器。其中语音会先经语音识别服务（阿里百炼 qwen3-asr-flash）转为文字；图片与文档由视觉/文档解析服务读取内容；随后与你的文字问题一并转发给大语言模型服务（阿里百炼 qwen3.7-plus）以生成回答。这些数据仅用于回答你的问题，不会用于训练第三方模型。</view>
+    <view class="privacy-p">3. 可选的展示信息：如你主动设置，我们会保存你填写的展示名与头像，仅用于在小程序内标识你的账号，不会用于其他目的。</view>
+    <view class="privacy-p">4. 内嵌网页内容：资料、参考文献与项目平台通过微信 &lt;web-view&gt; 打开内容网站对应页面。这些页面由内容网站提供服务，其数据收集遵循该网站的隐私政策，不在本小程序服务端留存。</view>
+  </view>
+
+  <view class="privacy-section">
+    <view class="privacy-h2">三、我们如何使用</view>
+    <view class="privacy-p">用于建立账号、回答问题、提供可选的展示信息，并通过内嵌网页为你打开内容网站的资料、参考文献与项目平台。大纲、知识广场、智能问答等公开或半公开内容无需登录即可浏览。</view>
+  </view>
+
+  <view class="privacy-section">
+    <view class="privacy-h2">四、我们如何共享</view>
+    <view class="privacy-p">我们<text class="strong">不向任何第三方</text>出售或共享你的个人信息。你的内容仅由本工具服务器处理与存储。</view>
+  </view>
+
+  <view class="privacy-section">
+    <view class="privacy-h2">五、你的权利</view>
+    <view class="privacy-p">你可随时在“我的”页修改展示信息、申请注销账号与导出数据，也可在“问答”模块查看自己的提问历史。注销后我们将删除你的个人账号数据与问答历史。</view>
+  </view>
+
+  <view class="privacy-section">
+    <view class="privacy-h2">六、未成年人</view>
+    <view class="privacy-p">本工具主要面向公共管理学习者；若用户为未成年人，请在监护人知情同意后使用。</view>
+  </view>
+
+  <view class="privacy-section">
+    <view class="privacy-h2">七、联系方式</view>
+    <view class="privacy-p">如需行使上述权利或咨询隐私问题，可通过“我的 &gt; 关于本工具”中的联系方式与我们联系。</view>
+  </view>
+
+  <view class="privacy-section">
+    <view class="privacy-h2">八、变更说明</view>
+    <view class="privacy-p">本指引更新后将通过小程序内说明告知。继续使用即视为同意更新后的内容。</view>
+  </view>
+</view>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="知识广场：课程参考文献与项目课程平台的入口">
+  <script>if(location.protocol==='file:')location.replace('http://127.0.0.1:8765/knowledge.html'+location.search+location.hash);</script>
+  <link rel="icon" href="course-logo-v2.svg">
+  <link rel="stylesheet" href="styles.css?v=11">
+  <title>知识广场｜人工智能与组织管理</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-logo-frame"><img class="brand-logo" src="course-logo-v2.svg" alt="课程标识"></span>
+        <span class="brand-text"><strong>人工智能与组织管理</strong><small>AI & Organization</small></span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a class="nav-link" href="index.html">首页</a>
+        <a class="nav-link" href="syllabus.html">课程大纲</a>
+        <a class="nav-link" href="textbooks.html">课程教材</a>
+        <a class="nav-link active" href="knowledge.html">知识广场</a>
+        <a class="nav-link" href="https://studio.ai4orgnization-theory.cn" target="_blank" rel="noopener">教学平台</a>
+        <a class="nav-link" href="about.html">关于</a>
+      </nav>
+      <a class="header-login" href="login.html" data-auth-login>登录</a>
+      <button class="menu-button" type="button" aria-label="展开导航" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="plaza-hero">
+      <div class="container">
+        <div class="plaza-hero-eyebrow">Knowledge Plaza / 知识广场</div>
+        <h1 class="plaza-hero-title">知识广场</h1>
+        <p class="plaza-hero-lead">两个模块：课程参考文献与项目课程平台。各自单独呈现，点击下方卡片进入。</p>
+      </div>
+    </section>
+
+    <section class="plaza-gate">
+      <div class="container">
+        <div class="plaza-gate-grid">
+          <a class="gate-card gate-card--refs" href="references.html">
+            <div class="gate-card-cover">
+              <svg class="gate-card-icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <path d="M4 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/>
+                <path d="M20 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/>
+              </svg>
+              <span class="gate-card-kicker">Course References</span>
+            </div>
+            <div class="gate-card-body">
+              <h2 class="gate-card-title">课程参考文献</h2>
+              <p class="gate-card-desc">教师团队上新，提供在线阅读、原文件下载与深度梳理。点击「文献梳理」会跳转到包含文字版与动画版的导读。</p>
+              <ul class="gate-card-points">
+                <li>教师团队持续上新与完善</li>
+                <li>在线阅读 · 原文下载 · AI 问答</li>
+                <li>深度梳理：文字版 + 动画版</li>
+              </ul>
+              <span class="gate-card-cta">进入课程参考文献 →</span>
+            </div>
+          </a>
+
+          <a class="gate-card gate-card--projects" href="projects.html">
+            <div class="gate-card-cover">
+              <svg class="gate-card-icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <circle cx="9" cy="8" r="3"/>
+                <path d="M3 20a6 6 0 0 1 12 0"/>
+                <circle cx="17" cy="9" r="2.4"/>
+                <path d="M15 20a5 5 0 0 1 7 0"/>
+              </svg>
+              <span class="gate-card-kicker">Course Projects</span>
+            </div>
+            <div class="gate-card-body">
+              <h2 class="gate-card-title">项目课程平台</h2>
+              <p class="gate-card-desc">同学们在教学平台生成课程后，可以发布到这个广场。彼此看到、点赞、评论，把课堂学习变成一次共同讨论。</p>
+              <ul class="gate-card-points">
+                <li>类似 OpenMAIC 发现页的卡片</li>
+                <li>作者 · 点赞数 · 播放量 · 评论</li>
+                <li>一键从教学平台导入</li>
+              </ul>
+              <span class="gate-card-cta">进入项目课程平台 →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-title">知识广场</div>
+      <div class="footer-meta">
+        课程参考文献 · 项目课程平台<br>
+        © <span data-year></span> 课程团队
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js?v=11"></script>
+</body>
+</html>

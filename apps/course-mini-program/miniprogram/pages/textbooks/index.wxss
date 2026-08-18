@@ -1,0 +1,80 @@
+.textbooks-page { padding: 34rpx 32rpx calc(132rpx + env(safe-area-inset-bottom)); }
+
+.book-list { display: flex; flex-direction: column; gap: 16rpx; margin-top: 26rpx; }
+.book-card {
+  display: flex;
+  gap: 22rpx;
+  padding: 26rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 24rpx;
+  background: #fff;
+}
+.book-letter {
+  flex-shrink: 0;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 18rpx;
+  background: var(--navy);
+  color: #fff;
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+  font-size: 40rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.book-main { flex: 1; display: flex; flex-direction: column; gap: 8rpx; }
+.book-title { font-size: 30rpx; font-weight: 700; color: var(--ink); }
+.book-desc { font-size: 24rpx; line-height: 1.65; color: var(--muted); }
+.book-status { display: flex; flex-direction: column; gap: 6rpx; margin-top: 2rpx; }
+.pill {
+  align-self: flex-start;
+  padding: 5rpx 16rpx;
+  border-radius: 999rpx;
+  background: #fff6ee;
+  color: var(--orange);
+  font-size: 20rpx;
+  font-weight: 600;
+}
+.book-next { font-size: 22rpx; line-height: 1.55; color: var(--muted); }
+
+.chapter-preview { margin-top: 42rpx; }
+.content-title {
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+  font-size: 35rpx;
+  font-weight: 700;
+  color: var(--ink);
+}
+.content-lead { margin-top: 8rpx; font-size: 24rpx; line-height: 1.65; color: var(--muted); }
+
+.chapter-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+  margin-top: 20rpx;
+}
+.chapter {
+  display: flex;
+  align-items: flex-start;
+  gap: 18rpx;
+  padding: 24rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 20rpx;
+  background: var(--surface);
+}
+.chapter-tag {
+  flex-shrink: 0;
+  min-width: 96rpx;
+  text-align: center;
+  padding: 6rpx 12rpx;
+  border-radius: 10rpx;
+  background: var(--navy);
+  color: #fff;
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 20rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+.chapter-body { flex: 1; display: flex; flex-direction: column; gap: 6rpx; }
+.chapter-title { font-size: 28rpx; font-weight: 700; color: var(--ink); }
+.chapter-desc { font-size: 23rpx; line-height: 1.6; color: var(--muted); }

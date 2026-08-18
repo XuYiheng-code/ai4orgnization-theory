@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="项目课程平台：同学作品、互动学习与点赞评论">
+  <script>if(location.protocol==='file:')location.replace('http://127.0.0.1:8765/projects.html'+location.search+location.hash);</script>
+  <link rel="icon" href="course-logo-v2.svg">
+  <link rel="stylesheet" href="styles.css?v=11">
+  <title>项目课程平台｜人工智能与组织管理</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-logo-frame"><img class="brand-logo" src="course-logo-v2.svg" alt="课程标识"></span>
+        <span class="brand-text"><strong>人工智能与组织管理</strong><small>AI & Organization</small></span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a class="nav-link" href="index.html">首页</a>
+        <a class="nav-link" href="syllabus.html">课程大纲</a>
+        <a class="nav-link" href="textbooks.html">课程教材</a>
+        <a class="nav-link active" href="knowledge.html">知识广场</a>
+        <a class="nav-link" href="https://studio.ai4orgnization-theory.cn" target="_blank" rel="noopener">教学平台</a>
+        <a class="nav-link" href="about.html">关于</a>
+      </nav>
+      <a class="header-login" href="login.html" data-auth-login>登录</a>
+      <button class="menu-button" type="button" aria-label="展开导航" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="plaza-hero">
+      <div class="container">
+        <a class="plaza-back" href="knowledge.html">← 返回知识广场</a>
+        <div class="plaza-hero-eyebrow">Course Projects / 项目课程平台</div>
+        <h1 class="plaza-hero-title">同学的作品、互动与共学</h1>
+        <p class="plaza-hero-lead">同学们在教学平台生成课程后，可以发布到这个广场。彼此看到、点赞、评论，把课堂学习变成一次共同讨论。</p>
+      </div>
+    </section>
+
+    <section class="page-content">
+      <div class="container">
+        <div class="plaza-projects-head">
+          <div>
+            <strong>项目课程</strong>
+            <span id="plaza-count">正在加载项目</span>
+          </div>
+          <div class="plaza-projects-actions">
+            <button class="button primary compact" id="plaza-import" type="button">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+              一键导入我的课程
+            </button>
+          </div>
+        </div>
+
+        <div class="plaza-tools">
+          <label class="field-label">检索项目标题或标签
+            <input class="search" id="plaza-search" type="search" placeholder="例如：科层韧性、制度、案例">
+          </label>
+          <label class="field-label">排序方式
+            <select class="select" id="plaza-sort">
+              <option value="recent">最新发布</option>
+              <option value="views">最多播放</option>
+              <option value="likes">最多点赞</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="plaza-grid" id="plaza-grid"></div>
+        <div class="empty" id="plaza-empty">还没有匹配的项目。</div>
+
+        <div class="notice" style="margin-top:2rem">
+          「项目课程平台」是同学们的作品展示空间。点击「一键导入我的课程」会在教学平台中打开 OpenMAIC，你可以基于课堂资料生成课程，回到这里即可发布并与同学互动。正式上线后会接入登录与数据库。
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-title">项目课程平台</div>
+      <div class="footer-meta">
+        点赞 · 评论 · 共学<br>
+        © <span data-year></span> 课程团队
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js?v=11"></script>
+</body>
+</html>

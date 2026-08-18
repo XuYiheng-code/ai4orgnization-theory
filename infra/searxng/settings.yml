@@ -1,0 +1,17 @@
+use_default_settings: true
+
+search:
+  safe_search: 0
+  formats:
+    - html
+    - json
+
+server:
+  # The container is published only on 127.0.0.1. Replace this local-only
+  # signing value before exposing SearXNG through a public reverse proxy.
+  secret_key: openmaic-local-search-not-for-public-exposure
+  bind_address: "0.0.0.0"
+  limiter: false
+  public_instance: false
+  image_proxy: false
+

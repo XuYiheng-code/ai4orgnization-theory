@@ -1,0 +1,37 @@
+<view class="page-shell textbooks-page">
+  <view class="page-head">
+    <view>
+      <view class="eyebrow">Materials / 学习资料</view>
+      <view class="page-title">三条资料线</view>
+    </view>
+  </view>
+  <view class="page-summary">资料随内容逐章建设。正式发布的章节标明版本与来源，工作草稿不与已发布内容混在一起。</view>
+
+  <view class="book-list">
+    <view class="book-card" wx:for="{{books}}" wx:key="letter">
+      <view class="book-letter">{{item.letter}}</view>
+      <view class="book-main">
+        <view class="book-title">{{item.title}}</view>
+        <view class="book-desc">{{item.desc}}</view>
+        <view class="book-status">
+          <text class="pill">{{item.pill}}</text>
+          <text class="book-next">{{item.status}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="chapter-preview">
+    <view class="content-title">主资料拟议目录</view>
+    <view class="content-lead">目录按现有 16 周主题编排。章节名称会随内容讨论继续调整。</view>
+    <view class="chapter-grid">
+      <view class="chapter" wx:for="{{chapters}}" wx:key="title">
+        <text class="chapter-tag">{{item.tag}}</text>
+        <view class="chapter-body">
+          <text class="chapter-title">{{item.title}}</text>
+          <text class="chapter-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

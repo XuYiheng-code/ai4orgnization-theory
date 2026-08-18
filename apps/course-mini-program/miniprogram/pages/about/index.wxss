@@ -1,0 +1,40 @@
+.about-page { min-height: 100vh; background: #ffffff; }
+.about-hero { min-height: 520rpx; padding: 64rpx 38rpx 54rpx; overflow: hidden; background: #0a407a; color: #fff; position: relative; }
+.brand-mark { width: 124rpx; height: 124rpx; margin-bottom: 30rpx; padding: 18rpx; border-radius: 26rpx; background: #fff; box-shadow: 0 12rpx 30rpx rgba(8, 47, 91, .22); }
+.brand-logo { width: 100%; height: 100%; }
+.hero-number { position: absolute; top: -60rpx; right: -12rpx; color: rgba(255, 255, 255, .06); font-family: "DIN Alternate", sans-serif; font-size: 360rpx; font-weight: 700; line-height: 1; }
+.about-hero .eyebrow { position: relative; }
+.about-title { max-width: 610rpx; margin-top: 14rpx; font-size: 56rpx; font-weight: 700; letter-spacing: -2rpx; line-height: 1.15; position: relative; font-family: "Songti SC", "STSong", serif; }
+.about-copy { max-width: 610rpx; margin-top: 22rpx; color: #c9d6e6; font-size: 26rpx; line-height: 1.75; position: relative; }
+.hero-org { display: flex; margin-top: 30rpx; padding-top: 24rpx; align-items: center; gap: 16rpx; border-top: 1rpx solid rgba(255, 255, 255, .18); position: relative; }
+.org-logo { width: 56rpx; height: 56rpx; border-radius: 12rpx; background: #fff; padding: 6rpx; }
+.org-text { color: #d2dce8; font-family: sans-serif; font-size: 22rpx; line-height: 1.5; }
+.about-body { padding: 34rpx 32rpx 100rpx; }
+.teacher-card { display: grid; overflow: hidden; min-height: 290rpx; border: 1rpx solid #c3cee0; border-radius: 28rpx; grid-template-columns: 220rpx 1fr; background: #f3f7fc; }
+.teacher-card image { width: 100%; height: 100%; min-height: 290rpx; }
+.teacher-info { display: flex; padding: 30rpx 26rpx; justify-content: center; flex-direction: column; }
+.teacher-name { margin-top: 12rpx; font-size: 40rpx; font-weight: 700; }
+.teacher-role { margin-top: 10rpx; color: #5e6e7f; font-size: 22rpx; line-height: 1.6; }
+.teacher-bio { margin-top: 16rpx; color: #5e6e7f; font-size: 23rpx; line-height: 1.72; }
+.teacher-meta { margin-top: 18rpx; color: #46535f; font-size: 21rpx; line-height: 1.7; }
+.text-link { margin-top: 16rpx; color: #1a65b6; font-family: sans-serif; font-size: 23rpx; }
+.about-section { display: grid; margin-top: 24rpx; padding: 34rpx; border-radius: 27rpx; grid-template-columns: 64rpx 1fr; background: #f3f7fc; gap: 16rpx; }
+.about-section.dark { background: #0a407a; color: #fff; }
+.section-no { color: #df7625; font-family: "DIN Alternate", sans-serif; font-size: 27rpx; font-weight: 700; }
+.section-title { margin: 0; font-size: 31rpx; font-weight: 700; font-family: "Songti SC", "STSong", serif; }
+.section-copy { margin-top: 13rpx; color: #5e6e7f; font-size: 24rpx; line-height: 1.7; }
+.dark .section-copy { color: #c9d6e6; }
+.roadmap { margin-top: 40rpx; }
+.section-heading { margin-bottom: 22rpx; }
+.roadmap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18rpx; }
+.roadmap-item { padding: 26rpx 24rpx 22rpx; border: 1rpx solid #c3cee0; border-radius: 22rpx; background: #f3f7fc; }
+.roadmap-item.highlight { border-color: #df7625; background: #fdf1e6; }
+.roadmap-no { color: #1a65b6; font-family: "DIN Alternate", sans-serif; font-size: 26rpx; font-weight: 700; }
+.roadmap-item.highlight .roadmap-no { color: #df7625; }
+.roadmap-name { margin-top: 8rpx; font-size: 26rpx; font-weight: 700; }
+.roadmap-copy { margin-top: 10rpx; color: #5e6e7f; font-size: 21rpx; line-height: 1.65; }
+.roadmap-tag { display: inline-block; margin-top: 14rpx; padding: 4rpx 14rpx; border-radius: 999rpx; background: #e3e9f2; color: #5e6e7f; font-family: sans-serif; font-size: 19rpx; }
+.roadmap-item.highlight .roadmap-tag { background: #df7625; color: #fff; }
+.contact-card { margin-top: 24rpx; padding: 32rpx; border-top: 4rpx solid #0a407a; border-bottom: 1rpx solid #0a407a; }
+.contact-card > view:not(.eyebrow) { margin-top: 14rpx; font-size: 24rpx; line-height: 1.6; }
+.source-note { margin-top: 17rpx; color: #8493a3; font-family: sans-serif; font-size: 19rpx; line-height: 1.6; }

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520" role="img" aria-labelledby="title desc">
+  <title id="title">人工智能与组织管理课程标识</title>
+  <desc id="desc">AO 字标、环形组织模块与橙色核心构成的课程标识。</desc>
+  <defs>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M52 0H0V52" fill="none" stroke="#8fb1c2" stroke-opacity=".23" stroke-width="1"/>
+    </pattern>
+    <g id="link">
+      <path d="M0-34C29-34 58-14 82 0C58 14 29 34 0 34C-20 34-36 19-36 0S-20-34 0-34ZM0-14A14 14 0 1 0 0 14A14 14 0 1 0 0-14Z" fill="currentColor" fill-rule="evenodd"/>
+    </g>
+  </defs>
+  <rect width="520" height="520" rx="30" fill="#fff"/>
+  <rect width="520" height="520" rx="30" fill="url(#grid)"/>
+  <g fill="#3c88a1" opacity=".86">
+    <circle cx="61" cy="58" r="2.4"/><circle cx="425" cy="62" r="1.8"/><circle cx="477" cy="167" r="2.1"/>
+    <circle cx="466" cy="357" r="2.4"/><circle cx="397" cy="474" r="2.2"/><circle cx="111" cy="458" r="1.8"/>
+    <circle cx="38" cy="263" r="2"/><circle cx="91" cy="184" r="1.5"/><circle cx="305" cy="201" r="1.7"/>
+  </g>
+  <g color="#082f5b">
+    <g transform="translate(143 159) rotate(-47)"><use href="#link"/></g>
+    <g transform="translate(244 102) rotate(6)"><use href="#link"/></g>
+    <g transform="translate(363 139) rotate(48)"><use href="#link"/></g>
+    <g transform="translate(419 246) rotate(96)"><use href="#link"/></g>
+    <g transform="translate(365 363) rotate(145)"><use href="#link"/></g>
+  </g>
+  <g color="#ed721b" transform="translate(236 422) rotate(8)"><use href="#link"/></g>
+  <g fill="none" stroke="#082f5b" stroke-width="8" stroke-linecap="square" stroke-linejoin="round">
+    <path d="M54 344L102 244L132 286M76 303H120"/>
+    <circle cx="169" cy="299" r="49"/>
+  </g>
+  <circle cx="132" cy="286" r="9" fill="#ed721b" stroke="#fff" stroke-width="4"/>
+  <circle cx="279" cy="294" r="18" fill="#ed721b"/>
+</svg>

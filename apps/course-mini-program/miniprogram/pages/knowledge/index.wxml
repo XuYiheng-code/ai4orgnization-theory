@@ -1,0 +1,24 @@
+<view class="page-shell knowledge-page">
+  <view class="plaza-hero">
+    <view class="eyebrow light">Knowledge Plaza / 知识广场</view>
+    <view class="plaza-title">知识广场</view>
+    <view class="plaza-lead">两个模块：课程参考文献与项目课程平台。各自单独呈现，点击下方卡片进入。</view>
+  </view>
+
+  <view class="gate-grid">
+    <view class="gate-card" wx:for="{{gates}}" wx:key="id" data-url="{{item.url}}" data-title="{{item.title}}" bindtap="openGate">
+      <view class="gate-cover gate-cover--{{item.cover}}">
+        <view class="gate-icon gate-icon--{{item.id}}"></view>
+        <text class="gate-kicker">{{item.kicker}}</text>
+      </view>
+      <view class="gate-body">
+        <view class="gate-title">{{item.title}}</view>
+        <view class="gate-desc">{{item.desc}}</view>
+        <view class="gate-points">
+          <view class="gate-point" wx:for="{{item.points}}" wx:for-item="point" wx:key="*this">{{point}}</view>
+        </view>
+        <view class="gate-cta">{{item.cta}}</view>
+      </view>
+    </view>
+  </view>
+</view>

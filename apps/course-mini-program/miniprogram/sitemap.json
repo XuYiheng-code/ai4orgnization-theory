@@ -1,0 +1,33 @@
+{
+  "desc": "课程小程序页面索引规则",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "pages/home/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/syllabus/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/textbooks/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/knowledge/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/ask/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/about/index"
+    },
+    {
+      "action": "disallow",
+      "page": "*"
+    }
+  ]
+}

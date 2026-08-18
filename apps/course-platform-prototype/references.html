@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="课程参考文献：教师团队上新的阅读、下载与深度梳理">
+  <script>if(location.protocol==='file:')location.replace('http://127.0.0.1:8765/references.html'+location.search+location.hash);</script>
+  <link rel="icon" href="course-logo-v2.svg">
+  <link rel="stylesheet" href="styles.css?v=11">
+  <title>课程参考文献｜人工智能与组织管理</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-logo-frame"><img class="brand-logo" src="course-logo-v2.svg" alt="课程标识"></span>
+        <span class="brand-text"><strong>人工智能与组织管理</strong><small>AI & Organization</small></span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a class="nav-link" href="index.html">首页</a>
+        <a class="nav-link" href="syllabus.html">课程大纲</a>
+        <a class="nav-link" href="textbooks.html">课程教材</a>
+        <a class="nav-link active" href="knowledge.html">知识广场</a>
+        <a class="nav-link" href="https://studio.ai4orgnization-theory.cn" target="_blank" rel="noopener">教学平台</a>
+        <a class="nav-link" href="about.html">关于</a>
+      </nav>
+      <a class="header-login" href="login.html" data-auth-login>登录</a>
+      <button class="menu-button" type="button" aria-label="展开导航" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="plaza-hero">
+      <div class="container">
+        <a class="plaza-back" href="knowledge.html">← 返回知识广场</a>
+        <div class="plaza-hero-eyebrow">Course References / 课程参考文献</div>
+        <h1 class="plaza-hero-title">教师团队上新的阅读、下载与深度梳理</h1>
+        <p class="plaza-hero-lead">每条资料都提供在线阅读、原文件下载和深度梳理。点击「文献梳理」会跳转到包含文字版与动画版的导读阅读器。</p>
+      </div>
+    </section>
+
+    <section class="page-content">
+      <div class="container">
+        <div class="library-actionbar">
+          <div>
+            <strong>课程参考文献</strong>
+            <span id="library-count">正在读取资料目录</span>
+          </div>
+          <div class="library-upload-actions">
+            <input id="library-upload-input" type="file" accept=".pdf,.md,.docx,.txt" hidden>
+            <button class="button secondary compact" id="library-upload" type="button">上传资料</button>
+            <button class="button secondary compact" id="download-all" type="button">一键下载参考文献</button>
+          </div>
+        </div>
+
+        <div class="library-tools">
+          <label class="field-label">检索标题或关键词
+            <input class="search" id="library-search" type="search" placeholder="例如：March、制度、技术">
+          </label>
+          <label class="field-label">资料类型
+            <select class="select" id="library-type">
+              <option value="all">全部资料</option>
+              <option value="classic">经典著作</option>
+              <option value="handbook">研究手册</option>
+              <option value="frontier">前沿材料</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="library-layout">
+          <aside class="concepts">
+            <h2>概念索引</h2>
+            <div class="concept-buttons">
+              <button class="concept-button active" data-concept="all">全部</button>
+              <button class="concept-button" data-concept="decision">决策</button>
+              <button class="concept-button" data-concept="institution">制度</button>
+              <button class="concept-button" data-concept="process">过程</button>
+              <button class="concept-button" data-concept="technology">技术</button>
+              <button class="concept-button" data-concept="public">公共管理</button>
+            </div>
+          </aside>
+          <div>
+            <div class="library-list" id="library-list"></div>
+            <div class="empty" id="library-empty">没有匹配的资料。可以减少筛选条件。</div>
+          </div>
+        </div>
+
+        <div class="notice" style="margin-top:2rem">
+          下载和公开阅览仍须遵守原资料的版权与课程授权范围。<strong>「文献梳理」</strong>会跳转到包含文字版与动画版的导读阅读器。
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-title">课程参考文献</div>
+      <div class="footer-meta">
+        在线阅读 · 下载 · 文献梳理<br>
+        © <span data-year></span> 课程团队
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js?v=11"></script>
+</body>
+</html>

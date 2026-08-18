@@ -1,0 +1,171 @@
+page {
+  /* 品牌令牌：与已上线网站(ai4orgnization-theory.cn)保持一致
+     学院蓝 #0a407a / 蓝 #1a65b6 / 橙 #df7625 / 白 #fff / 沙蓝 #f3f7fc */
+  --navy: #0a407a;
+  --navy-deep: #082f5b;
+  --blue: #1a65b6;
+  --orange: #df7625;
+  --paper: #ffffff;
+  --surface: #f3f7fc;
+  --line: #d9e2ec;
+  --line-strong: #c3cee0;
+  --ink: #142235;
+  --muted: #5e6e7f;
+  --accent: #1a65b6;
+  --accent-warm: #df7625;
+  --danger: #9f4a36;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  font-size: 30rpx;
+}
+
+view, text, input, textarea, button, scroll-view {
+  box-sizing: border-box;
+}
+
+button {
+  font-family: inherit;
+}
+
+button::after {
+  border: 0;
+}
+
+.page-shell {
+  min-height: 100vh;
+  padding: 34rpx 32rpx calc(132rpx + env(safe-area-inset-bottom));
+}
+
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 38rpx;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 22rpx;
+  font-weight: 700;
+  letter-spacing: 3rpx;
+  text-transform: uppercase;
+}
+
+.page-title {
+  margin-top: 8rpx;
+  font-size: 58rpx;
+  font-weight: 700;
+  letter-spacing: -3rpx;
+  line-height: 1.08;
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+}
+
+.page-summary {
+  margin-top: 16rpx;
+  color: var(--muted);
+  font-size: 27rpx;
+  line-height: 1.75;
+}
+
+.section-title {
+  margin: 48rpx 0 22rpx;
+  font-size: 35rpx;
+  font-weight: 700;
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+}
+
+.card {
+  overflow: hidden;
+  border: 1rpx solid var(--line);
+  border-radius: 30rpx;
+  background: var(--surface);
+}
+
+.card + .card {
+  margin-top: 20rpx;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42rpx;
+  padding: 0 17rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  color: var(--muted);
+  font-family: sans-serif;
+  font-size: 21rpx;
+}
+
+.primary-button,
+.secondary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 92rpx;
+  border-radius: 22rpx;
+  font-family: sans-serif;
+  font-size: 29rpx;
+  font-weight: 600;
+}
+
+.primary-button {
+  background: var(--navy);
+  color: #fff;
+}
+
+.secondary-button {
+  border: 1rpx solid var(--navy);
+  background: transparent;
+  color: var(--navy);
+}
+
+.empty-state {
+  padding: 72rpx 44rpx;
+  text-align: center;
+}
+
+.empty-mark {
+  width: 68rpx;
+  height: 68rpx;
+  margin: 0 auto 24rpx;
+  border: 3rpx solid var(--navy);
+  border-radius: 50%;
+  position: relative;
+}
+
+.empty-mark::before,
+.empty-mark::after {
+  content: "";
+  position: absolute;
+  left: 17rpx;
+  right: 17rpx;
+  height: 3rpx;
+  background: var(--navy);
+}
+
+.empty-mark::before { top: 23rpx; }
+.empty-mark::after { top: 36rpx; }
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.empty-copy {
+  margin-top: 12rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+  line-height: 1.7;
+}
+
+.hairline {
+  height: 1rpx;
+  background: var(--line);
+}
+
+.safe-bottom {
+  height: env(safe-area-inset-bottom);
+}

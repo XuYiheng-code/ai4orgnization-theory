@@ -1,0 +1,1369 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>从 OpenMAIC 出发：教学平台决策参考</title>
+  <style>
+    :root {
+      --paper: #f4f0e6;
+      --paper-raised: #fbf8f0;
+      --ink: #1e2623;
+      --ink-muted: #59625d;
+      --teal: #1f5b57;
+      --teal-strong: #153f3c;
+      --cinnabar: #b54a32;
+      --straw: #d6c797;
+      --line: #c8c1b2;
+      --line-strong: #7a786f;
+      --success: #3f6b46;
+      --warning: #8a601c;
+      --danger: #9d332a;
+      --adopt: #245b51;
+      --wrap: #8a601c;
+      --build: #8f3d2c;
+      --hold: #64635f;
+      --font-display: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", STSong, serif;
+      --font-body: "Source Han Sans SC", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-24: 96px;
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-lg: 18px;
+      --shadow: 0 1px 0 rgb(30 38 35 / 7%), 0 24px 56px -40px rgb(30 38 35 / 55%);
+      --content: 1240px;
+      --reading: 42em;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 2%, rgb(214 199 151 / 30%), transparent 28rem),
+        linear-gradient(90deg, rgb(30 38 35 / 2%) 1px, transparent 1px),
+        var(--paper);
+      background-size: auto, 32px 32px, auto;
+      font-family: var(--font-body);
+      font-size: clamp(16px, .25vw + 15px, 18px);
+      line-height: 1.75;
+      text-rendering: optimizeLegibility;
+      line-break: strict;
+    }
+
+    a { color: var(--teal); text-underline-offset: .2em; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--cinnabar); outline-offset: 3px; }
+    ::selection { color: var(--ink); background: rgb(214 199 151 / 70%); }
+
+    .progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      z-index: 80;
+      width: 0;
+      height: 4px;
+      background: var(--cinnabar);
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      top: 8px;
+      left: 8px;
+      padding: 10px 14px;
+      color: var(--paper-raised);
+      background: var(--ink);
+      transform: translateY(-160%);
+      transition: transform 180ms ease;
+    }
+    .skip-link:focus { transform: none; }
+
+    .masthead {
+      border-top: 8px solid var(--ink);
+      border-bottom: 1px solid var(--line-strong);
+      background: rgb(244 240 230 / 92%);
+    }
+    .masthead-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--content);
+      min-height: 58px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 64px);
+      gap: var(--space-4);
+    }
+    .brand {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+    .issue {
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      gap: clamp(40px, 6vw, 88px);
+      max-width: var(--content);
+      margin: 0 auto;
+      padding: clamp(38px, 6vw, 86px) clamp(20px, 4vw, 64px) var(--space-24);
+    }
+    main { min-width: 0; }
+    .toc {
+      position: sticky;
+      top: 24px;
+      align-self: start;
+      border-left: 1px solid var(--line);
+      padding-left: var(--space-4);
+      font-size: 14px;
+    }
+    .toc-title {
+      margin: 0 0 10px;
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .toc a {
+      display: block;
+      min-height: 36px;
+      padding: 7px 0;
+      color: var(--ink-muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 180ms ease, border-color 180ms ease;
+    }
+    .toc a:hover,
+    .toc a[aria-current="true"] { color: var(--cinnabar); border-color: var(--line); }
+
+    .eyebrow,
+    .section-index,
+    .tag,
+    .source-key,
+    .status,
+    .metric-label,
+    .kicker {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hero {
+      position: relative;
+      padding: 0 0 var(--space-16);
+      border-bottom: 4px solid var(--ink);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 17px;
+      width: clamp(90px, 15vw, 190px);
+      height: 1px;
+      background: var(--cinnabar);
+      box-shadow: 0 6px 0 var(--cinnabar);
+    }
+    .eyebrow {
+      margin: 0 0 var(--space-4);
+      color: var(--cinnabar);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .16em;
+    }
+    h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
+    h1 {
+      max-width: 10.5em;
+      margin: 0;
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 600;
+      line-height: 1.03;
+      letter-spacing: -.04em;
+    }
+    .hero-deck {
+      max-width: 35em;
+      margin: var(--space-6) 0 0;
+      color: var(--ink-muted);
+      font-size: clamp(18px, 1vw + 15px, 24px);
+      line-height: 1.65;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3) var(--space-6);
+      margin-top: var(--space-8);
+      color: var(--ink-muted);
+      font-size: 13px;
+    }
+    .hero-meta span { padding-top: 7px; border-top: 1px solid var(--line); }
+
+    section { scroll-margin-top: 24px; }
+    .section { padding: var(--space-24) 0 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr);
+      gap: var(--space-6);
+      align-items: start;
+      margin-bottom: var(--space-8);
+    }
+    .section-index {
+      padding-top: 7px;
+      color: var(--cinnabar);
+      font-size: 12px;
+      letter-spacing: .12em;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 54px);
+      font-weight: 600;
+      line-height: 1.18;
+      letter-spacing: -.025em;
+    }
+    h3 {
+      margin: 0 0 var(--space-3);
+      font-size: clamp(21px, 1.4vw, 28px);
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    p { max-width: var(--reading); margin: 0 0 var(--space-4); }
+    .lede { color: var(--ink-muted); font-size: 19px; }
+    .note { color: var(--ink-muted); font-size: 14px; }
+
+    .decision {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(250px, .75fr);
+      gap: 0;
+      margin-top: var(--space-12);
+      background: var(--ink);
+      color: var(--paper-raised);
+      box-shadow: var(--shadow);
+    }
+    .decision-main { padding: clamp(26px, 4vw, 48px); }
+    .decision-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(26px, 4vw, 42px);
+      color: var(--ink);
+      background: var(--straw);
+    }
+    .kicker {
+      margin: 0 0 var(--space-4);
+      color: var(--straw);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .13em;
+    }
+    .decision-side .kicker { color: var(--teal-strong); }
+    .decision h2 {
+      max-width: 13em;
+      font-size: clamp(30px, 4vw, 50px);
+      color: var(--paper-raised);
+    }
+    .decision p { max-width: 34em; margin-top: var(--space-4); color: rgb(251 248 240 / 78%); }
+    .decision-side strong {
+      display: block;
+      max-width: 9em;
+      font-family: var(--font-display);
+      font-size: 28px;
+      line-height: 1.35;
+    }
+    .decision-side span { margin-top: var(--space-8); font-size: 13px; }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: var(--space-8);
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .principle { min-height: 180px; padding: var(--space-6); background: var(--paper-raised); }
+    .principle .number {
+      display: block;
+      margin-bottom: var(--space-6);
+      color: var(--cinnabar);
+      font-family: var(--font-display);
+      font-size: 42px;
+      line-height: 1;
+    }
+    .principle p { margin: 0; color: var(--ink-muted); font-size: 15px; }
+
+    .metric-band {
+      display: grid;
+      grid-template-columns: 1.2fr repeat(3, 1fr);
+      margin: var(--space-8) 0 var(--space-6);
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--line);
+    }
+    .metric {
+      min-height: 148px;
+      padding: var(--space-4) var(--space-4) var(--space-6) 0;
+      border-right: 1px solid var(--line);
+    }
+    .metric + .metric { padding-left: var(--space-4); }
+    .metric:last-child { border-right: 0; }
+    .metric-value {
+      display: block;
+      margin-top: var(--space-2);
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4vw, 60px);
+      font-weight: 600;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+    .metric-label { color: var(--ink-muted); font-size: 11px; letter-spacing: .08em; }
+    .metric-note { display: block; margin-top: var(--space-3); color: var(--ink-muted); font-size: 12px; line-height: 1.45; }
+
+    .evidence-strip {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-8);
+      margin-top: var(--space-8);
+      padding: var(--space-8);
+      border: 1px solid var(--line);
+      background: rgb(251 248 240 / 72%);
+    }
+    .evidence-strip .big-number {
+      color: var(--teal-strong);
+      font-family: var(--font-display);
+      font-size: clamp(54px, 8vw, 92px);
+      font-weight: 600;
+      line-height: .95;
+      font-variant-numeric: tabular-nums;
+    }
+    .evidence-strip ul { margin: 0; padding-left: 1.2em; }
+    .evidence-strip li + li { margin-top: var(--space-2); }
+
+    .stack {
+      display: grid;
+      gap: var(--space-3);
+      margin-top: var(--space-8);
+    }
+    .layer {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr) 125px;
+      gap: var(--space-6);
+      align-items: start;
+      padding: var(--space-6);
+      border-left: 5px solid var(--teal);
+      background: var(--paper-raised);
+      box-shadow: 0 1px 0 rgb(30 38 35 / 8%);
+    }
+    .layer-name { font-family: var(--font-display); font-size: 21px; font-weight: 600; }
+    .layer p { margin: 0; color: var(--ink-muted); font-size: 15px; }
+    .layer .source-key { justify-self: end; color: var(--ink-muted); font-size: 11px; }
+
+    .callout {
+      display: grid;
+      grid-template-columns: 8px minmax(0, 1fr);
+      gap: var(--space-6);
+      margin: var(--space-8) 0 0;
+      padding: var(--space-6);
+      border: 1px solid var(--line);
+      background: var(--paper-raised);
+    }
+    .callout::before { content: ""; display: block; background: var(--cinnabar); }
+    .callout p:last-child { margin-bottom: 0; }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin: var(--space-8) 0 var(--space-4);
+    }
+    .filter-button {
+      min-height: 44px;
+      padding: 9px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      background: transparent;
+      transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+    .filter-button:hover,
+    .filter-button[aria-pressed="true"] { color: var(--paper-raised); background: var(--ink); border-color: var(--ink); }
+
+    .table-wrap { overflow-x: auto; border-top: 2px solid var(--ink); }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 15px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { color: var(--paper-raised); background: var(--ink); font-weight: 600; white-space: nowrap; }
+    tbody tr { background: rgb(251 248 240 / 42%); }
+    tbody tr:nth-child(even) { background: rgb(251 248 240 / 78%); }
+    tbody tr[hidden] { display: none; }
+    td:first-child { min-width: 150px; font-weight: 600; }
+    td:nth-child(2) { min-width: 160px; }
+    td:nth-child(3) { min-width: 260px; }
+    td:last-child { min-width: 125px; }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 8px;
+      border: 1px solid currentColor;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      white-space: nowrap;
+    }
+    .status-adopt { color: var(--adopt); }
+    .status-wrap { color: var(--wrap); }
+    .status-build { color: var(--build); }
+    .status-hold { color: var(--hold); }
+
+    .risk-list { display: grid; gap: var(--space-4); margin-top: var(--space-8); }
+    .risk {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr);
+      gap: var(--space-4);
+      padding: var(--space-6) 0;
+      border-top: 1px solid var(--line);
+    }
+    .risk-level {
+      color: var(--danger);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .risk h3 { font-family: var(--font-body); font-size: 18px; }
+    .risk p { margin-bottom: var(--space-2); color: var(--ink-muted); font-size: 15px; }
+    .risk .source-key { color: var(--ink-muted); font-size: 11px; }
+
+    .architecture {
+      margin-top: var(--space-8);
+      padding: clamp(18px, 3vw, 34px);
+      border: 1px solid var(--line);
+      background: var(--paper-raised);
+      box-shadow: var(--shadow);
+    }
+    .architecture-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 100px minmax(0, 1fr);
+      gap: var(--space-6);
+      align-items: stretch;
+    }
+    .arch-column { border-top: 5px solid var(--ink); }
+    .arch-column.engine { border-color: var(--teal); }
+    .arch-title { padding: var(--space-4) 0; font-family: var(--font-display); font-size: 24px; font-weight: 600; }
+    .arch-list { display: grid; gap: var(--space-2); }
+    .arch-item { padding: 12px 14px; border: 1px solid var(--line); background: var(--paper); font-size: 14px; }
+    .arch-arrow { display: grid; place-items: center; color: var(--cinnabar); }
+    .arch-arrow svg { width: 74px; height: 74px; overflow: visible; }
+    .data-foundation {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: var(--space-8);
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .data-foundation div { padding: 15px; background: var(--teal-strong); color: var(--paper-raised); font-size: 13px; text-align: center; }
+    .arch-caption { margin: var(--space-4) 0 0; color: var(--ink-muted); font-size: 13px; }
+
+    .route-options {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+    .route {
+      position: relative;
+      padding: var(--space-6);
+      border: 1px solid var(--line);
+      background: rgb(251 248 240 / 72%);
+    }
+    .route.recommended { border: 2px solid var(--teal); background: var(--paper-raised); }
+    .tag {
+      display: inline-block;
+      margin-bottom: var(--space-6);
+      padding: 3px 7px;
+      color: var(--ink-muted);
+      border: 1px solid var(--line);
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+    .route.recommended .tag { color: var(--paper-raised); border-color: var(--teal); background: var(--teal); }
+    .route h3 { font-size: 22px; }
+    .route p { color: var(--ink-muted); font-size: 14px; }
+
+    .unit-flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(110px, 1fr));
+      margin-top: var(--space-8);
+      overflow-x: auto;
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--line);
+    }
+    .unit-step { min-width: 126px; padding: var(--space-4); border-right: 1px solid var(--line); }
+    .unit-step:last-child { border-right: 0; }
+    .unit-step .step-no { color: var(--cinnabar); font-family: var(--font-mono); font-size: 11px; }
+    .unit-step strong { display: block; margin: var(--space-2) 0; font-size: 14px; line-height: 1.45; }
+    .unit-step span { color: var(--ink-muted); font-size: 12px; line-height: 1.5; }
+
+    .roadmap { display: grid; gap: 0; margin-top: var(--space-8); border-top: 2px solid var(--ink); }
+    .phase {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr) minmax(230px, .7fr);
+      gap: var(--space-6);
+      padding: var(--space-6) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .phase-time { color: var(--cinnabar); font-family: var(--font-mono); font-size: 12px; }
+    .phase h3 { font-family: var(--font-body); font-size: 19px; }
+    .phase p { margin: 0; color: var(--ink-muted); font-size: 14px; }
+    .gate { padding-left: var(--space-4); border-left: 3px solid var(--straw); }
+    .gate strong { display: block; margin-bottom: var(--space-2); font-size: 13px; }
+
+    .decision-checklist {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 240px;
+      gap: var(--space-8);
+      margin-top: var(--space-8);
+      padding: var(--space-8);
+      color: var(--paper-raised);
+      background: var(--ink);
+    }
+    .check-items { display: grid; gap: var(--space-3); }
+    .check-item {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: var(--space-3);
+      align-items: start;
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid rgb(251 248 240 / 16%);
+    }
+    .check-item input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--straw); }
+    .check-item label { cursor: pointer; }
+    .check-item small { display: block; color: rgb(251 248 240 / 64%); }
+    .scoreboard { align-self: start; padding: var(--space-6); color: var(--ink); background: var(--straw); }
+    .score-number { display: block; font-family: var(--font-display); font-size: 64px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+    .score-label { font-size: 13px; }
+    .score-status { margin: var(--space-4) 0 0; font-weight: 600; }
+    .reset-button {
+      min-height: 44px;
+      margin-top: var(--space-6);
+      padding: 8px 12px;
+      border: 1px solid var(--ink);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      background: transparent;
+    }
+
+    .source-list { counter-reset: sources; display: grid; gap: 0; margin-top: var(--space-8); border-top: 2px solid var(--ink); }
+    .source {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .source-key { color: var(--cinnabar); font-size: 11px; font-weight: 700; }
+    .source code { font-family: var(--font-mono); font-size: 12px; overflow-wrap: anywhere; }
+    .source p { margin: 0; color: var(--ink-muted); }
+
+    .footer {
+      margin-top: var(--space-24);
+      padding-top: var(--space-6);
+      border-top: 4px solid var(--ink);
+      color: var(--ink-muted);
+      font-size: 13px;
+    }
+
+    .reveal { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal { opacity: 0; transform: translateY(14px); animation: reveal 600ms cubic-bezier(.2,.7,.2,1) forwards; }
+      .reveal:nth-child(2) { animation-delay: 80ms; }
+      .reveal:nth-child(3) { animation-delay: 160ms; }
+      @keyframes reveal { to { opacity: 1; transform: none; } }
+    }
+
+    @media (max-width: 1100px) {
+      .shell { grid-template-columns: minmax(0, 1fr) 190px; gap: 42px; }
+      .metric-band { grid-template-columns: repeat(2, 1fr); }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .route-options { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 820px) {
+      .shell { display: block; padding-top: 42px; }
+      .toc { display: none; }
+      .decision, .decision-checklist { grid-template-columns: 1fr; }
+      .principles { grid-template-columns: 1fr; }
+      .evidence-strip { grid-template-columns: 1fr; }
+      .layer { grid-template-columns: 1fr; gap: var(--space-3); }
+      .layer .source-key { justify-self: start; }
+      .architecture-grid { grid-template-columns: 1fr; }
+      .arch-arrow { min-height: 64px; transform: rotate(90deg); }
+      .data-foundation { grid-template-columns: repeat(2, 1fr); }
+      .phase { grid-template-columns: 100px minmax(0, 1fr); }
+      .phase .gate { grid-column: 2; }
+    }
+
+    @media (max-width: 560px) {
+      .masthead-inner { align-items: flex-start; flex-direction: column; padding-top: 12px; padding-bottom: 12px; }
+      h1 { font-size: clamp(44px, 14vw, 64px); }
+      .hero::after { display: none; }
+      .section { padding-top: var(--space-16); }
+      .section-head { grid-template-columns: 1fr; gap: var(--space-2); }
+      .metric-band { grid-template-columns: 1fr; }
+      .metric, .metric + .metric { min-height: 0; padding: var(--space-4) 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .metric:last-child { border-bottom: 0; }
+      .data-foundation { grid-template-columns: 1fr; }
+      .phase { grid-template-columns: 1fr; gap: var(--space-2); }
+      .phase .gate { grid-column: auto; }
+      .decision-checklist { padding: var(--space-6); }
+      .scoreboard { order: -1; }
+    }
+
+    @media print {
+      @page { size: A4; margin: 16mm; }
+      body { background: #fff; color: #111; font-size: 10pt; }
+      .progress, .skip-link, .toc, .filter-bar, .reset-button { display: none !important; }
+      .masthead { border-top-width: 4px; background: #fff; }
+      .shell { display: block; max-width: none; padding: 12mm 0 0; }
+      .hero { padding-bottom: 12mm; }
+      h1 { max-width: none; font-size: 34pt; }
+      h2 { font-size: 22pt; }
+      h3 { font-size: 14pt; }
+      .section { padding-top: 14mm; }
+      .decision, .decision-checklist { break-inside: avoid; color: #111; background: #fff; border: 2px solid #111; }
+      .decision h2, .decision p, .decision-checklist { color: #111; }
+      .decision-side, .scoreboard { color: #111; background: #eee; }
+      .principle, .layer, .architecture, .route, .source, .risk, .phase, tr { break-inside: avoid; }
+      .table-wrap { overflow: visible; }
+      table { font-size: 8pt; }
+      th { color: #fff; background: #111; }
+      .architecture-grid { grid-template-columns: 1fr 50px 1fr; }
+      .arch-arrow { transform: none; }
+      .status { color: #111 !important; }
+      .footer { margin-top: 16mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="reading-progress" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="brand">《人工智能与组织理论》课程平台</div>
+      <div class="issue">DECISION BRIEF · 08 / 2026</div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <main id="main">
+      <header class="hero reveal">
+        <p class="eyebrow">OPENMAIC AUDIT / v1.0</p>
+        <h1>从 OpenMAIC 出发，建设一套能运行课程的教学平台</h1>
+        <p class="hero-deck">这份报告回答三个问题：OpenMAIC 已经积累了什么；它与我们的课程平台还差什么；怎样复用它，而不把课程、评价和学生数据交给一个通用课堂生成器。</p>
+        <div class="hero-meta">
+          <span>调研快照：2026-08-14</span>
+          <span>核对版本：OpenMAIC v0.3.2</span>
+          <span>交付形态：离线 HTML 决策参考</span>
+          <span>video-shotcraft：N/A（无视频交付）</span>
+        </div>
+      </header>
+
+      <section class="section reveal" id="decision">
+        <div class="decision">
+          <div class="decision-main">
+            <p class="kicker">建议决定</p>
+            <h2>把 OpenMAIC 定位为互动课堂引擎，不把它当作整个平台。</h2>
+            <p>我们的平台继续掌握身份、班级、课程内容、来源与证据、作业、研究项目和正式评价。OpenMAIC 负责把审核后的课程对象转换为场景，运行多智能体课堂、交互练习与 PBL，并提供编辑和导出能力。</p>
+          </div>
+          <div class="decision-side">
+            <div>
+              <p class="kicker">推荐路线</p>
+              <strong>先隔离试点，后包级集成</strong>
+            </div>
+            <span>首轮只做一个样板单元，不直接覆盖 16 周课程。</span>
+          </div>
+        </div>
+
+        <div class="principles" aria-label="四条平台边界">
+          <article class="principle">
+            <span class="number">01</span>
+            <h3>课程平台是准本</h3>
+            <p>教材、案例、量规和活动先在课程平台形成版本。OpenMAIC 生成的内容必须经过教师审核，才能发布为课堂场景。</p>
+          </article>
+          <article class="principle">
+            <span class="number">02</span>
+            <h3>OpenMAIC 是运行层</h3>
+            <p>复用场景 DSL、渲染、编辑、播放、多智能体讨论、PBL 和导出。通过适配层与课程对象、学习记录连接。</p>
+          </article>
+          <article class="principle">
+            <span class="number">03</span>
+            <h3>正式评价留在人手里</h3>
+            <p>测验和智能体评语只用于形成性反馈。正式成绩、发布和数据删除由教师或课程管理员确认。</p>
+          </article>
+          <article class="principle">
+            <span class="number">04</span>
+            <h3>先用公开或合成数据</h3>
+            <p>在生产级身份、班级隔离和审计接入之前，不向 OpenMAIC 试点环境写入学生名单、成绩、私有作业或真实对话。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="snapshot">
+        <div class="section-head">
+          <div class="section-index">01 / 07</div>
+          <div>
+            <h2>OpenMAIC 已经形成了什么</h2>
+            <p class="lede">它已经从演示项目长成一套课堂内容生成与运行系统。积累主要在课程场景协议、课堂运行能力、编辑与导出、模型适配和工程测试，不在高校教学管理。</p>
+          </div>
+        </div>
+
+        <div class="metric-band" aria-label="OpenMAIC 项目快照">
+          <div class="metric">
+            <span class="metric-label">CURRENT RELEASE</span>
+            <span class="metric-value">v0.3.2</span>
+            <span class="metric-note">仓库创建于 2026-03-11；本次核对的提交即 2026-08-14 发布版本。</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">GITHUB STARS</span>
+            <span class="metric-value">20,741</span>
+            <span class="metric-note">GitHub API 快照值，不是长期固定数字。</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">FORKS</span>
+            <span class="metric-value">4,110</span>
+            <span class="metric-note">GitHub API 的 open_issues_count 为 205（其中也含开放 PR），项目仍在快速变化。</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">OPEN PACKAGES</span>
+            <span class="metric-value">6</span>
+            <span class="metric-note">DSL、renderer、editor、generation、importer、storage。</span>
+          </div>
+        </div>
+
+        <div class="stack" aria-label="OpenMAIC 能力层">
+          <article class="layer">
+            <div class="layer-name">课程生成</div>
+            <p>输入主题或材料，先生成课程大纲，再把各个节点生成场景；支持文档解析、网页检索、图片、语音和视频提供商。</p>
+            <div class="source-key">S2 · S3</div>
+          </article>
+          <article class="layer">
+            <div class="layer-name">场景协议</div>
+            <p>Stage / Scene 结构已经独立为 DSL，正式包含 slide、quiz、interactive、PBL 四类场景，并带版本、校验和迁移机制。</p>
+            <div class="source-key">S3</div>
+          </article>
+          <article class="layer">
+            <div class="layer-name">课堂运行</div>
+            <p>播放状态机和动作引擎控制讲解、聚光、激光笔、白板、语音及组件交互；导演图决定下一位智能体发言。</p>
+            <div class="source-key">S2 · S4</div>
+          </article>
+          <article class="layer">
+            <div class="layer-name">互动学习</div>
+            <p>测验支持选择题和简答题；PBL v2 已含角色、里程碑、微任务、提交、评价、过程事件与学习者熟练度状态。</p>
+            <div class="source-key">S3 · S6</div>
+          </article>
+          <article class="layer">
+            <div class="layer-name">编辑与交付</div>
+            <p>提供可组合的幻灯片编辑器、只读渲染器、PPTX 导入，以及 PPTX、交互 HTML、课堂 ZIP 和可选 MP4 导出。</p>
+            <div class="source-key">S2 · S3</div>
+          </article>
+          <article class="layer">
+            <div class="layer-name">持久化与安全</div>
+            <p>浏览器与 PostgreSQL 后端共用文档、运行记录和资产存储契约；交互 HTML 放在不含同源权限的沙箱 iframe 中。</p>
+            <div class="source-key">S5 · S7</div>
+          </article>
+        </div>
+
+        <div class="evidence-strip">
+          <div>
+            <div class="big-number">500+</div>
+            <div class="note">论文所述参与学生规模</div>
+          </div>
+          <div>
+            <h3>它还有一条研究积累</h3>
+            <ul>
+              <li>论文报告了超过 10 万条学习记录，覆盖 500 多名学生。</li>
+              <li>课程生成评测使用 20 份跨学科大学课程 PPT，整体自动评测为 3.89 / 5。</li>
+              <li>另有 5 门课程、60 个样本和 2,573 篇检索支撑文档的专家评估；课后问卷样本为 319 人。</li>
+            </ul>
+            <p class="note">这些结果支持 MAIC 的理念和前序系统，不等于当前开源仓库 v0.3.2 的每个模块都经过相同规模验证。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="boundary">
+        <div class="section-head">
+          <div class="section-index">02 / 07</div>
+          <div>
+            <h2>强项很清楚，边界也很清楚</h2>
+            <p class="lede">OpenMAIC 解决的是“如何生成和运行一堂 AI 课堂”。我们的项目还要解决“课程由谁负责、学生属于哪个班、证据从哪里来、作业如何修改、谁确认成绩”。</p>
+          </div>
+        </div>
+
+        <div class="filter-bar" role="group" aria-label="筛选决策项">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">全部</button>
+          <button class="filter-button" type="button" data-filter="adopt" aria-pressed="false">直接采用</button>
+          <button class="filter-button" type="button" data-filter="wrap" aria-pressed="false">包装改造</button>
+          <button class="filter-button" type="button" data-filter="build" aria-pressed="false">课程平台自研</button>
+          <button class="filter-button" type="button" data-filter="hold" aria-pressed="false">暂缓</button>
+        </div>
+
+        <div class="table-wrap">
+          <table id="decision-table">
+            <thead>
+              <tr>
+                <th scope="col">能力</th>
+                <th scope="col">OpenMAIC 现状</th>
+                <th scope="col">本课程的处理</th>
+                <th scope="col">决定</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-status="adopt">
+                <td>场景 DSL 与迁移</td>
+                <td>Stage / Scene / Action 已独立为带校验、版本和迁移的包。</td>
+                <td>作为互动课程的交换格式；平台课程对象通过适配器生成发布版本。</td>
+                <td><span class="status status-adopt">直接采用</span></td>
+              </tr>
+              <tr data-status="adopt">
+                <td>渲染、编辑与导出</td>
+                <td>有 renderer、editor、PPTX importer，支持多种导出。</td>
+                <td>用于教师备课和课堂活动编辑；保留教师预览与发布确认。</td>
+                <td><span class="status status-adopt">直接采用</span></td>
+              </tr>
+              <tr data-status="wrap">
+                <td>课程生成管线</td>
+                <td>两阶段生成，覆盖大纲和场景内容。</td>
+                <td>只从已审核材料生成；输出进入草稿区，不能直接覆盖教材或公开课程。</td>
+                <td><span class="status status-wrap">包装改造</span></td>
+              </tr>
+              <tr data-status="wrap">
+                <td>多智能体课堂</td>
+                <td>导演按角色、优先级和上下文选择下一位发言者；一次请求最多运行一轮导演到智能体。</td>
+                <td>把“教师—学生智能体”改成课程角色，并保存发言理由、动作和教师介入记录。</td>
+                <td><span class="status status-wrap">包装改造</span></td>
+              </tr>
+              <tr data-status="wrap">
+                <td>PBL v2</td>
+                <td>已有角色、里程碑、任务、提交、评价和事件记录。</td>
+                <td>改造成“组织问题—理论—实验—证据—反例—复核”的课程活动；结论必须引用平台内证据。</td>
+                <td><span class="status status-wrap">包装改造</span></td>
+              </tr>
+              <tr data-status="wrap">
+                <td>测验与形成性反馈</td>
+                <td>选择题本地评分，简答题由模型给分与评语。</td>
+                <td>只作为练习反馈；移除失败时自动给一半分的逻辑，正式评价回到教师端。</td>
+                <td><span class="status status-wrap">包装改造</span></td>
+              </tr>
+              <tr data-status="build">
+                <td>身份、班级与权限</td>
+                <td>当前 server persistence 明确是开发参考，不提供真实用户隔离。</td>
+                <td>由课程平台实现学生、助教、教师、管理员、班级隔离、学期归档和学校身份接入。</td>
+                <td><span class="status status-build">平台自研</span></td>
+              </tr>
+              <tr data-status="build">
+                <td>课程内容与来源</td>
+                <td>能读取材料和检索网页，但不等于课程知识库的来源治理。</td>
+                <td>平台保存教材版本、引用段落、许可、可见范围和负责人；回答区分材料、教师观点和模型推断。</td>
+                <td><span class="status status-build">平台自研</span></td>
+              </tr>
+              <tr data-status="build">
+                <td>作业与正式成绩</td>
+                <td>有 PBL submission 和 evaluation，不是按高校课程运行设计的作业与成绩系统。</td>
+                <td>实现任务发布、量规、多次提交、版本差异、助教草稿、教师确认和审计。</td>
+                <td><span class="status status-build">平台自研</span></td>
+              </tr>
+              <tr data-status="build">
+                <td>研究工作台</td>
+                <td>通用 PBL 不区分现实证据、仿真证据和派生分析。</td>
+                <td>平台保存问题、来源、主张、设计、产物、反例与审核，导出可复核研究包。</td>
+                <td><span class="status status-build">平台自研</span></td>
+              </tr>
+              <tr data-status="hold">
+                <td>语音克隆与实时数字人</td>
+                <td>已有多种 TTS / ASR 和 VoxCPM2 声音克隆适配。</td>
+                <td>文字问答和教学规则稳定后再评估；先处理肖像、声音授权、费用和审核。</td>
+                <td><span class="status status-hold">暂缓</span></td>
+              </tr>
+              <tr data-status="hold">
+                <td>MP4 导出</td>
+                <td>可选渲染服务依赖 Chromium 与 FFmpeg，默认标准资源档要求 10 GiB 内存。</td>
+                <td>首轮平台不把视频导出列入教学流程；需要传播片时再单独部署。</td>
+                <td><span class="status status-hold">暂缓</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <div>
+            <h3>内容积累不能外包给通用生成器</h3>
+            <p>OpenMAIC 能把材料变成课堂，但《人工智能与组织理论》的课程判断、16 周结构、组织理论概念、案例、量规和教师观点仍要由课程团队编写和审核。平台的辨识度来自这套内容和学习方法，不来自“多智能体”这个功能标签。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="risks">
+        <div class="section-head">
+          <div class="section-index">03 / 07</div>
+          <div>
+            <h2>进入正式班级前，先补六处缺口</h2>
+            <p class="lede">这些缺口会直接影响学生数据、成绩和课程可信度，属于上线门槛。</p>
+          </div>
+        </div>
+
+        <div class="risk-list">
+          <article class="risk">
+            <div class="risk-level">P0</div>
+            <div>
+              <h3>开发令牌不提供用户隔离</h3>
+              <p>仓库明确说明公开编译的 persistence token 不是秘密，任何能打开页面的人都可以选择 learner key 读取或写入分区。正式运行必须换成真实会话验证，并从服务端身份派生班级和学生分区。</p>
+              <div class="source-key">S5</div>
+            </div>
+          </article>
+          <article class="risk">
+            <div class="risk-level">P0</div>
+            <div>
+              <h3>简答题故障时会自动给基础分</h3>
+              <p>当前 quiz-grade 前端在评分接口失败时回退为约一半分。这个设计适合保持练习流程不中断，不适合课程正式成绩。我们应改成“待教师复核”，不得生成分数。</p>
+              <div class="source-key">S6</div>
+            </div>
+          </article>
+          <article class="risk">
+            <div class="risk-level">P0</div>
+            <div>
+              <h3>来源追溯还不是课程证据系统</h3>
+              <p>材料解析和网页检索能帮助生成，但课程回答还需要段落级引用、可见范围、许可、知识库版本和拒答评测。学生研究中的现实证据与仿真证据也必须分开。</p>
+              <div class="source-key">L1 · L2</div>
+            </div>
+          </article>
+          <article class="risk">
+            <div class="risk-level">P1</div>
+            <div>
+              <h3>交互 HTML 仍需课程侧策略</h3>
+              <p>OpenMAIC 已移除 iframe 的同源权限，能阻止生成脚本读取宿主 Cookie、localStorage 和 DOM；但沙箱仍允许脚本、表单和弹窗。正式环境还要限制外联域名、上传类型、资源大小和教师发布权限。</p>
+              <div class="source-key">S7</div>
+            </div>
+          </article>
+          <article class="risk">
+            <div class="risk-level">P1</div>
+            <div>
+              <h3>上游变化很快</h3>
+              <p>仓库从 3 月到 8 月连续发布，6 月改为 MIT 并拆出 SDK，7—8 月又重做持久化和资产注册。集成时要锁定版本、保留适配层，并用兼容性测试验证升级。</p>
+              <div class="source-key">S1 · S2</div>
+            </div>
+          </article>
+          <article class="risk">
+            <div class="risk-level">P1</div>
+            <div>
+              <h3>开源许可变宽松，不代表所有资产都可直接用</h3>
+              <p>主仓库当前是 MIT。依赖、模型、搜索结果、生成图片、声音样本和上传材料各有自己的许可与个人信息边界，仍需逐项记录。</p>
+              <div class="source-key">S1 · S2</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="section-head">
+          <div class="section-index">04 / 07</div>
+          <div>
+            <h2>目标架构：课程平台掌握状态，OpenMAIC 提供课堂能力</h2>
+            <p class="lede">两边通过明确的活动发布和学习事件契约连接。OpenMAIC 不直接写用户、班级、正式成绩或研究结论。</p>
+          </div>
+        </div>
+
+        <figure class="architecture" aria-labelledby="arch-title">
+          <figcaption id="arch-title" class="note">推荐的系统边界</figcaption>
+          <div class="architecture-grid">
+            <div class="arch-column">
+              <div class="arch-title">课程平台 · System of Record</div>
+              <div class="arch-list">
+                <div class="arch-item">公开课程站、教材、知识库</div>
+                <div class="arch-item">身份、班级、角色和权限</div>
+                <div class="arch-item">作业、量规、多次提交、教师确认</div>
+                <div class="arch-item">研究问题、来源、证据、分析与审核</div>
+                <div class="arch-item">课程版本、模型调用、费用与审计</div>
+              </div>
+            </div>
+
+            <div class="arch-arrow" aria-hidden="true">
+              <svg viewBox="0 0 100 100" fill="none">
+                <path d="M8 34h67" stroke="currentColor" stroke-width="3"/>
+                <path d="M63 21l14 13-14 13" stroke="currentColor" stroke-width="3"/>
+                <path d="M92 66H25" stroke="currentColor" stroke-width="3"/>
+                <path d="M37 53L23 66l14 13" stroke="currentColor" stroke-width="3"/>
+              </svg>
+            </div>
+
+            <div class="arch-column engine">
+              <div class="arch-title">OpenMAIC · Classroom Engine</div>
+              <div class="arch-list">
+                <div class="arch-item">课程对象 → Stage / Scene DSL</div>
+                <div class="arch-item">幻灯片、测验、交互场景和 PBL</div>
+                <div class="arch-item">多智能体导演、讲解、白板和动作</div>
+                <div class="arch-item">教师编辑、预览、PPTX / HTML 导出</div>
+                <div class="arch-item">运行事件、提交和反馈草稿</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="data-foundation" aria-label="共同基础设施">
+            <div>PostgreSQL + pgvector</div>
+            <div>S3 兼容对象存储</div>
+            <div>模型网关与限额</div>
+            <div>审计、评测与备份</div>
+          </div>
+          <p class="arch-caption">适配层只交换两个对象：经教师发布的“课堂活动版本”和可审计的“学习事件”。两边都不能绕过平台权限直接修改正式评价。</p>
+        </figure>
+
+        <div class="route-options" aria-label="三种技术路线比较">
+          <article class="route">
+            <span class="tag">DEMO ONLY</span>
+            <h3>直接 fork 整仓</h3>
+            <p>最快看到完整课堂，但会把通用产品的身份、持久化、设置和 UI 一起背进来。适合演示，不适合作为长期架构。</p>
+          </article>
+          <article class="route recommended">
+            <span class="tag">PILOT · RECOMMENDED</span>
+            <h3>隔离子应用 + 适配层</h3>
+            <p>首轮把锁定版本的 OpenMAIC 运行在受控的 <code>/lab</code> 路径，只用公开或合成数据。课程平台负责启动活动并回收事件。</p>
+          </article>
+          <article class="route">
+            <span class="tag">LONG TERM</span>
+            <h3>按包集成</h3>
+            <p>逐步引入 DSL、renderer、editor、generation 与 storage contract，把课堂能力嵌入主站。工作量更高，但产品边界最稳。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="pilot-unit">
+        <div class="section-head">
+          <div class="section-index">05 / 07</div>
+          <div>
+            <h2>先用一个样板单元检验它</h2>
+            <p class="lede">建议主题沿用现有项目设定：“AI 辅助公共服务与一线裁量”。它同时需要组织理论、多角色讨论、决策场景、证据评审和人机责任划分，可以检验 OpenMAIC 是否适合这门课。</p>
+          </div>
+        </div>
+
+        <div class="unit-flow" aria-label="样板教学单元学习链">
+          <div class="unit-step">
+            <span class="step-no">01</span>
+            <strong>组织问题</strong>
+            <span>AI 建议与一线裁量发生冲突时，谁有权决定？</span>
+          </div>
+          <div class="unit-step">
+            <span class="step-no">02</span>
+            <strong>理论材料</strong>
+            <span>有限理性、街头官僚、组织控制和问责。</span>
+          </div>
+          <div class="unit-step">
+            <span class="step-no">03</span>
+            <strong>场景讲解</strong>
+            <span>教师数字入口讲解概念，引用课程资料。</span>
+          </div>
+          <div class="unit-step">
+            <span class="step-no">04</span>
+            <strong>多角色 PBL</strong>
+            <span>窗口人员、主管、服务对象、审计角色共同决策。</span>
+          </div>
+          <div class="unit-step">
+            <span class="step-no">05</span>
+            <strong>学生产出</strong>
+            <span>决策备忘录 + 3 分钟学术脱口秀提纲。</span>
+          </div>
+          <div class="unit-step">
+            <span class="step-no">06</span>
+            <strong>双重评审</strong>
+            <span>量规证据检查 + 反例与替代解释。</span>
+          </div>
+          <div class="unit-step">
+            <span class="step-no">07</span>
+            <strong>教师确认</strong>
+            <span>反馈发布、正式评价和优秀作品授权。</span>
+          </div>
+        </div>
+
+        <div class="callout">
+          <div>
+            <h3>样板单元的验收对象</h3>
+            <p>验收应看：学生能否把一个组织问题推进为有理论、有证据、有竞争解释的判断；平台能否保留人和智能体的分工、引用、修改和教师裁决。若这条学习链走不通，增加语音、3D 或更多智能体都没有意义。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="roadmap">
+        <div class="section-head">
+          <div class="section-index">06 / 07</div>
+          <div>
+            <h2>十二周技术与教学验证路线</h2>
+            <p class="lede">每一阶段都有退出条件。没有达到退出条件，不把更多课程内容和学生数据带入系统。</p>
+          </div>
+        </div>
+
+        <div class="roadmap">
+          <article class="phase">
+            <div class="phase-time">第 1—2 周</div>
+            <div>
+              <h3>锁定版本，完成隔离复现</h3>
+              <p>保存 v0.3.2 提交、许可证与依赖清单；用公开材料复现课程生成、播放、编辑和导出。记录服务器资源和模型成本。</p>
+            </div>
+            <div class="gate">
+              <strong>退出条件</strong>
+              <p>本地与测试服务器可重复部署；没有学生私有数据；主要功能有一份可复跑检查表。</p>
+            </div>
+          </article>
+          <article class="phase">
+            <div class="phase-time">第 3—5 周</div>
+            <div>
+              <h3>制作样板单元</h3>
+              <p>把课程对象映射为 DSL；按“公共服务与一线裁量”制作讲解、讨论、PBL 和学生产出，不开放自动发布。</p>
+            </div>
+            <div class="gate">
+              <strong>退出条件</strong>
+              <p>教师能编辑和发布一个版本；学生完成活动；主要结论能回到课程来源和过程事件。</p>
+            </div>
+          </article>
+          <article class="phase">
+            <div class="phase-time">第 6—8 周</div>
+            <div>
+              <h3>接入平台身份与学习事件</h3>
+              <p>实现签名启动、班级授权、活动版本、事件回传和审计。OpenMAIC 侧不保存正式成绩，测验故障转入教师复核。</p>
+            </div>
+            <div class="gate">
+              <strong>退出条件</strong>
+              <p>两个测试班级交叉验证不可见；事件带用户、班级、活动版本和时间；无公开开发令牌。</p>
+            </div>
+          </article>
+          <article class="phase">
+            <div class="phase-time">第 9—10 周</div>
+            <div>
+              <h3>补齐来源与评测</h3>
+              <p>接入课程知识库；区分课程资料、教师确认观点和模型推断；建立至少 30 个课程问题和拒答样例。</p>
+            </div>
+            <div class="gate">
+              <strong>退出条件</strong>
+              <p>课程团队冻结来源支持率、拒答正确率和不可接受错误；测试中不出现捏造来源。</p>
+            </div>
+          </article>
+          <article class="phase">
+            <div class="phase-time">第 11—12 周</div>
+            <div>
+              <h3>小规模真实教学</h3>
+              <p>选择一个小组或一次课堂活动试运行，观察任务完成、讨论质量、二次修改、教师工作量、故障与成本。</p>
+            </div>
+            <div class="gate">
+              <strong>退出条件</strong>
+              <p>学生完成一次“学习—产出—反馈—修改”；教师确认评价；完成备份恢复和数据删除演练。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="go-no-go">
+        <div class="section-head">
+          <div class="section-index">07 / 07</div>
+          <div>
+            <h2>需要课程团队确认的六项决定</h2>
+            <p class="lede">勾选状态只保存在当前浏览器，便于讨论时记录；它不代表已经完成技术验收。</p>
+          </div>
+        </div>
+
+        <div class="decision-checklist">
+          <div class="check-items">
+            <div class="check-item">
+              <input id="d1" type="checkbox" data-decision>
+              <label for="d1">同意“课程平台为准本，OpenMAIC 为互动课堂引擎”这一边界。<small>它决定后续数据模型与代码归属。</small></label>
+            </div>
+            <div class="check-item">
+              <input id="d2" type="checkbox" data-decision>
+              <label for="d2">首轮只制作“AI 辅助公共服务与一线裁量”样板单元。<small>不一次性迁移 16 周课程。</small></label>
+            </div>
+            <div class="check-item">
+              <input id="d3" type="checkbox" data-decision>
+              <label for="d3">接受“隔离子应用试点 → 按包集成”的技术路线。<small>试点锁定 OpenMAIC v0.3.2。</small></label>
+            </div>
+            <div class="check-item">
+              <input id="d4" type="checkbox" data-decision>
+              <label for="d4">在生产身份接入前，只使用公开或合成数据。<small>不导入学生名单、作业、成绩和真实对话。</small></label>
+            </div>
+            <div class="check-item">
+              <input id="d5" type="checkbox" data-decision>
+              <label for="d5">OpenMAIC 测验和 PBL 评价只用于形成性反馈。<small>正式成绩由教师确认，故障时不自动给分。</small></label>
+            </div>
+            <div class="check-item">
+              <input id="d6" type="checkbox" data-decision>
+              <label for="d6">明确样板单元的内容负责人、技术负责人和教师验收人。<small>三类责任不能由同一个“智能体角色”替代。</small></label>
+            </div>
+          </div>
+          <aside class="scoreboard" aria-live="polite">
+            <span class="score-number" id="decision-score">0/6</span>
+            <span class="score-label">已确认决定</span>
+            <p class="score-status" id="decision-status">尚未形成开工边界</p>
+            <button class="reset-button" id="reset-decisions" type="button">清空本页记录</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="sources">
+        <div class="section-head">
+          <div class="section-index">附录</div>
+          <div>
+            <h2>事实依据与本地材料</h2>
+            <p class="lede">动态数字均以 2026-08-14 的核对结果为准。页面为离线文件，因此来源以仓库坐标、文件路径和 DOI 标识，不加载远程资源。</p>
+          </div>
+        </div>
+
+        <div class="source-list">
+          <div class="source">
+            <div class="source-key">S1</div>
+            <p>GitHub API：<code>repos/THU-MAIC/OpenMAIC</code>。用于仓库创建时间、星标、fork、开放 issue、当前许可证和默认分支快照。</p>
+          </div>
+          <div class="source">
+            <div class="source-key">S2</div>
+            <p>OpenMAIC v0.3.2：<code>README.md</code>、<code>CHANGELOG.md</code>、<code>docker-compose.yml</code>。用于功能、发布节奏、部署与资源要求。</p>
+          </div>
+          <div class="source">
+            <div class="source-key">S3</div>
+            <p>OpenMAIC packages：<code>packages/@openmaic/dsl</code>、<code>renderer</code>、<code>editor</code>、<code>generation</code>、<code>importer</code>、<code>storage</code>。</p>
+          </div>
+          <div class="source">
+            <div class="source-key">S4</div>
+            <p>OpenMAIC orchestration：<code>lib/orchestration/director-graph.ts</code> 与 <code>director-prompt.ts</code>。用于多智能体调度边界判断。</p>
+          </div>
+          <div class="source">
+            <div class="source-key">S5</div>
+            <p>OpenMAIC persistence：<code>packages/@openmaic/storage/README.md</code>、<code>docs/reference-server.md</code>、<code>lib/persistence/server-auth.ts</code>。</p>
+          </div>
+          <div class="source">
+            <div class="source-key">S6</div>
+            <p>OpenMAIC quiz：<code>app/api/quiz-grade/route.ts</code> 与 <code>components/scene-renderers/quiz-view.tsx</code>。</p>
+          </div>
+          <div class="source">
+            <div class="source-key">S7</div>
+            <p>OpenMAIC interactive security：<code>components/scene-renderers/InteractiveIframeHost.tsx</code> 与 <code>tests/security/iframe-sandbox.test.ts</code>。</p>
+          </div>
+          <div class="source">
+            <div class="source-key">S8</div>
+            <p>论文：<cite>From MOOC to MAIC: Reimagine Online Teaching and Learning Through LLM-Driven Agents</cite>，DOI <code>10.1007/s11390-025-6000-0</code>。</p>
+          </div>
+          <div class="source">
+            <div class="source-key">L1</div>
+            <p>本地项目：<code>docs/00-平台总体方案.md</code> 与 <code>docs/02-MVP范围与验收.md</code>。</p>
+          </div>
+          <div class="source">
+            <div class="source-key">L2</div>
+            <p>本地项目：<code>docs/05-研究平台与数字公共治理培养方案.md</code>、<code>docs/07-平台制作规划-v0.3.md</code> 与 <code>AGENTS.md</code>。</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>建议下一项工作：冻结样板单元的教学目标、材料、角色、学生产出和教师量规，再进入 OpenMAIC 技术试点。页面不把动态 GitHub 数字或论文结果当成产品承诺。</p>
+      </footer>
+    </main>
+
+    <nav class="toc" aria-label="页面目录">
+      <p class="toc-title">Contents</p>
+      <a href="#decision">首要决定</a>
+      <a href="#snapshot">现有积累</a>
+      <a href="#boundary">采用边界</a>
+      <a href="#risks">上线缺口</a>
+      <a href="#architecture">目标架构</a>
+      <a href="#pilot-unit">样板单元</a>
+      <a href="#roadmap">十二周路线</a>
+      <a href="#go-no-go">待确认决定</a>
+      <a href="#sources">事实依据</a>
+    </nav>
+  </div>
+
+  <script>
+    (function () {
+      var progress = document.getElementById('reading-progress');
+      function updateProgress() {
+        var root = document.documentElement;
+        var max = root.scrollHeight - root.clientHeight;
+        progress.style.width = (max > 0 ? root.scrollTop / max * 100 : 0) + '%';
+      }
+      addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      var filterButtons = Array.prototype.slice.call(document.querySelectorAll('[data-filter]'));
+      var rows = Array.prototype.slice.call(document.querySelectorAll('#decision-table tbody tr'));
+      filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var filter = button.getAttribute('data-filter');
+          filterButtons.forEach(function (item) {
+            item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+          });
+          rows.forEach(function (row) {
+            row.hidden = filter !== 'all' && row.getAttribute('data-status') !== filter;
+          });
+        });
+      });
+
+      var decisions = Array.prototype.slice.call(document.querySelectorAll('[data-decision]'));
+      var score = document.getElementById('decision-score');
+      var status = document.getElementById('decision-status');
+      var storageKey = 'openmaic-decision-brief-v1';
+
+      function readSaved() {
+        try { return JSON.parse(localStorage.getItem(storageKey) || '{}'); }
+        catch (error) { return {}; }
+      }
+
+      function renderDecisionScore() {
+        var count = decisions.filter(function (item) { return item.checked; }).length;
+        score.textContent = count + '/6';
+        status.textContent = count === 6 ? '可以进入受控试点' : count >= 4 ? '边界接近明确' : '尚未形成开工边界';
+      }
+
+      var saved = readSaved();
+      decisions.forEach(function (item) {
+        item.checked = saved[item.id] === true;
+        item.addEventListener('change', function () {
+          var next = {};
+          decisions.forEach(function (checkbox) { next[checkbox.id] = checkbox.checked; });
+          try { localStorage.setItem(storageKey, JSON.stringify(next)); } catch (error) {}
+          renderDecisionScore();
+        });
+      });
+      document.getElementById('reset-decisions').addEventListener('click', function () {
+        decisions.forEach(function (item) { item.checked = false; });
+        try { localStorage.removeItem(storageKey); } catch (error) {}
+        renderDecisionScore();
+      });
+      renderDecisionScore();
+
+      var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+      var sections = tocLinks.map(function (link) { return document.querySelector(link.getAttribute('href')); }).filter(Boolean);
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            tocLinks.forEach(function (link) {
+              link.setAttribute('aria-current', link.getAttribute('href') === '#' + entry.target.id ? 'true' : 'false');
+            });
+          });
+        }, { rootMargin: '-20% 0px -68% 0px' });
+        sections.forEach(function (section) { observer.observe(section); });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+.home-page {
+  padding: 0 0 calc(132rpx + env(safe-area-inset-bottom));
+  background: var(--paper);
+}
+
+/* Hero 区域：占据首屏视高 */
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 56rpx 24rpx calc(80rpx + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(circle at 90% 0%, rgba(255, 159, 67, 0.08), transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(10, 64, 122, 0.06), transparent 55%),
+    var(--paper);
+}
+.hero-top { flex-shrink: 0; }
+.hero-mid { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; padding: 32rpx 0; }
+.hero-bottom { flex-shrink: 0; padding-top: 30rpx; }
+
+/* 放大品牌区：双 logo 对称布局，无文字 */
+.brand-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56rpx;
+  padding: 40rpx 40rpx;
+  border-radius: 48rpx;
+  background: #ffffff;
+  box-shadow: 0 28rpx 80rpx rgba(10, 64, 122, .16);
+}
+.brand-mark {
+  width: 248rpx;
+  height: 248rpx;
+  flex-shrink: 0;
+  padding: 26rpx;
+  border-radius: 56rpx;
+  background: linear-gradient(135deg, #f5f8fc 0%, #ffffff 100%);
+  box-shadow: inset 0 0 0 2rpx rgba(10, 64, 122, .10), 0 18rpx 40rpx rgba(10, 64, 122, .14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-logo { width: 100%; height: 100%; }
+
+/* 中间分隔线：渐变细竖线 */
+.brand-divider {
+  width: 2rpx;
+  height: 160rpx;
+  background: linear-gradient(to bottom, rgba(10, 64, 122, 0) 0%, rgba(10, 64, 122, .22) 50%, rgba(10, 64, 122, 0) 100%);
+  flex-shrink: 0;
+}
+
+/* 校徽：去掉外层圆框/白底/阴影，让 logo 本身直接铺满容器（单独放大） */
+.school-mark {
+  width: 280rpx;
+  height: 280rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.school-logo { width: 100%; height: 100%; }
+
+.home-title {
+  margin-top: 14rpx;
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+  font-size: 72rpx;
+  font-weight: 700;
+  letter-spacing: -2rpx;
+  line-height: 1.1;
+}
+.home-title .accent { color: var(--orange); }
+
+.home-lead {
+  margin-top: 22rpx;
+  color: var(--muted);
+  font-size: 28rpx;
+  line-height: 1.78;
+}
+
+.course-team {
+  display: flex;
+  gap: 32rpx;
+  margin-top: 28rpx;
+}
+.team-credit { display: flex; align-items: baseline; gap: 6rpx; }
+.team-label { font-size: 24rpx; color: var(--muted); }
+.team-name { font-size: 28rpx; font-weight: 600; color: var(--ink); }
+
+.hero-actions {
+  display: flex;
+  gap: 18rpx;
+  margin-top: 40rpx;
+}
+.hero-actions .primary-button,
+.hero-actions .secondary-button { flex: 1; }
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+  margin-top: 28rpx;
+}
+.hero-meta text {
+  padding: 8rpx 18rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 999rpx;
+  color: var(--muted);
+  font-size: 21rpx;
+}
+
+/* 继续了解提示 */
+.scroll-cue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8rpx;
+  margin-top: 40rpx;
+  padding: 14rpx 0;
+  opacity: .75;
+}
+.scroll-cue-label { font-size: 22rpx; color: var(--muted); letter-spacing: 1rpx; }
+.scroll-cue-arrow {
+  width: 12rpx;
+  height: 12rpx;
+  border-right: 2rpx solid var(--muted);
+  border-bottom: 2rpx solid var(--muted);
+  transform: rotate(45deg);
+  animation: scrollBounce 1.6s infinite ease-in-out;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: .5; }
+  50% { transform: rotate(45deg) translate(4rpx, 4rpx); opacity: 1; }
+}
+
+/* 区块标题 */
+.section-heading { margin: 56rpx 36rpx 26rpx; }
+.section-heading .section-title {
+  margin-top: 8rpx;
+  font-size: 40rpx;
+  font-weight: 700;
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+}
+
+/* 内容剪影：整页占满 */
+.film-section {
+  position: relative;
+  margin-top: 16rpx;
+  background: linear-gradient(180deg, #0a2647 0%, #11365f 100%);
+  color: #fff;
+  overflow: hidden;
+}
+.film-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(255, 159, 67, .22), transparent 55%),
+    radial-gradient(circle at 5% 95%, rgba(20, 90, 140, .55), transparent 55%);
+  pointer-events: none;
+}
+.film-rail {
+  position: relative;
+  padding: 96rpx 36rpx 110rpx;
+}
+.film-eyebrow {
+  font-size: 24rpx;
+  letter-spacing: 6rpx;
+  color: #ff9f43;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: "DIN Alternate", sans-serif;
+}
+.film-title {
+  margin-top: 16rpx;
+  font-size: 56rpx;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -1rpx;
+  font-family: "Songti SC", "STSong", "SimSun", Georgia, serif;
+}
+.film-title-accent {
+  color: #ff9f43;
+  margin: 0 4rpx;
+}
+.film-frame {
+  position: relative;
+  margin-top: 36rpx;
+  border-radius: 28rpx;
+  overflow: hidden;
+  background: #061a30;
+  box-shadow: 0 20rpx 60rpx rgba(2, 8, 16, .4);
+}
+.film-video { display: block; width: 100%; height: 380rpx; }
+.film-timecode {
+  position: absolute;
+  top: 20rpx; right: 24rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 6rpx 14rpx;
+  border-radius: 999rpx;
+  background: rgba(0, 0, 0, .35);
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+  font-family: "DIN Alternate", sans-serif;
+  color: #ff6868;
+}
+.film-timecode-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #ff6868;
+  animation: recBlink 1.4s infinite;
+}
+@keyframes recBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .25; }
+}
+
+.film-chapters {
+  margin-top: 32rpx;
+  white-space: nowrap;
+  display: flex;
+  gap: 16rpx;
+}
+.film-chapter {
+  flex: 0 0 240rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  padding: 26rpx 26rpx 28rpx;
+  border-radius: 24rpx;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1rpx solid rgba(255, 255, 255, 0.12);
+  white-space: normal;
+}
+.chapter-no {
+  font-family: "DIN Alternate", sans-serif;
+  font-weight: 700;
+  font-size: 36rpx;
+  letter-spacing: 1rpx;
+  color: #ff9f43;
+}
+.chapter-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #fff;
+}
+.chapter-desc {
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .65);
+}
+
+.film-cta {
+  margin-top: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  padding: 24rpx 38rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #ff9f43 0%, #ff7f3e 100%);
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+  box-shadow: 0 12rpx 30rpx rgba(255, 159, 67, .35);
+  align-self: center;
+}
+.film-cta:active { transform: scale(.98); }
+.film-cta-arrow {
+  width: 14rpx; height: 14rpx;
+  border-right: 3rpx solid #fff;
+  border-top: 3rpx solid #fff;
+  transform: rotate(45deg);
+}
+
+/* 课程路径 */
+.map-section { padding: 24rpx 0 0; }
+.phase-grid { display: flex; flex-direction: column; gap: 18rpx; padding: 0 36rpx; }
+.phase-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  padding: 28rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 26rpx;
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+.phase-card::after {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 6rpx;
+  background: var(--orange);
+}
+.phase-no {
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 22rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+  color: var(--navy);
+}
+.phase-title { font-size: 31rpx; font-weight: 700; color: var(--ink); }
+.phase-desc { font-size: 24rpx; line-height: 1.7; color: var(--muted); }
+
+/* 课程入口 */
+.entries-section { padding: 24rpx 0 0; }
+.entry-grid { display: flex; flex-direction: column; gap: 16rpx; padding: 0 36rpx; }
+.entry-grid--two { display: grid; grid-template-columns: 1fr 1fr; gap: 16rpx; }
+.entry-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  padding: 28rpx;
+  border: 1rpx solid var(--line);
+  border-radius: 26rpx;
+  background: #fff;
+}
+.entry-no {
+  font-family: "DIN Alternate", sans-serif;
+  font-size: 21rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+  color: var(--accent);
+}
+.entry-title { font-size: 32rpx; font-weight: 700; color: var(--ink); }
+.entry-desc { font-size: 24rpx; line-height: 1.7; color: var(--muted); }
+
+/* 页脚 */
+.home-footer {
+  margin-top: 64rpx;
+  padding: 32rpx 36rpx 0;
+  border-top: 1rpx solid var(--line);
+}
+.footer-title { font-size: 27rpx; font-weight: 700; color: var(--ink); }
+.footer-meta { margin-top: 6rpx; font-size: 22rpx; color: var(--muted); }
+.footer-link {
+  display: inline-block;
+  margin-top: 18rpx;
+  color: var(--navy);
+  font-size: 25rpx;
+  font-weight: 600;
+}
