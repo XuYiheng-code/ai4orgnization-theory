@@ -21,4 +21,42 @@ function getCourseOverview() {
   });
 }
 
-module.exports = { getCourseOverview };
+// 大纲切片：与网站单一数据源对齐（/v1/course/syllabus）。
+function getSyllabus() {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: BASE + '/v1/course/syllabus',
+      method: 'GET',
+      timeout: 10000,
+      success: (res) => {
+        if (res.statusCode === 200 && res.data && !res.data.error) {
+          resolve(res.data);
+        } else {
+          reject(new Error('课程大纲加载失败（HTTP ' + res.statusCode + '）'));
+        }
+      },
+      fail: (err) => reject(err),
+    });
+  });
+}
+
+// 学习资料切片：与网站单一数据源对齐（/v1/course/textbooks）。
+function getTextbooks() {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: BASE + '/v1/course/textbooks',
+      method: 'GET',
+      timeout: 10000,
+      success: (res) => {
+        if (res.statusCode === 200 && res.data && !res.data.error) {
+          resolve(res.data);
+        } else {
+          reject(new Error('学习资料加载失败（HTTP ' + res.statusCode + '）'));
+        }
+      },
+      fail: (err) => reject(err),
+    });
+  });
+}
+
+module.exports = { getCourseOverview, getSyllabus, getTextbooks };

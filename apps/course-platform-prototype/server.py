@@ -1129,6 +1129,127 @@ DEFAULT_COURSE_CONTENT = {
         {"no": "01 / SYLLABUS", "title": "内容大纲", "desc": "四个阶段、16 周主题、内容安排与学习反馈方式。"},
         {"no": "02 / MATERIALS", "title": "学习资料", "desc": "主资料、人工智能基础素养与 AI 实操指南。"},
     ],
+    # 大纲（小程序"内容大纲"页与网站共用此源，编辑即两端同步）
+    "syllabus": {
+        "stages": [
+            {
+                "no": "01",
+                "title": "组织理论：解释组织",
+                "summary": "先回答组织为何存在、如何决策、怎样处理信息和依赖，再用这些概念观察人工智能。",
+                "weeks": [
+                    {"gidx": 0, "no": "01", "title": "导论课：人类组织发生、发展、变革与消亡的基本逻辑", "blocks": [
+                        {"label": "理论框架", "text": "韦伯官僚制理论与数字时代治理（DEG）。"},
+                        {"label": "研讨活动", "text": "组织的第一性原理、理性与利益、情感与制度、有限理性与注意力。"},
+                    ]},
+                    {"gidx": 1, "no": "02", "title": "有限理性与自动化决策（ADM）", "blocks": [
+                        {"label": "理论框架", "text": "西蒙的有限理性；监督式与非监督式学习、偏误—方差权衡、回归与分类。"},
+                        {"label": "研讨活动", "text": "选择一个公共部门 AI 应用，启动案例与系统架构分析。"},
+                    ]},
+                    {"gidx": 2, "no": "03", "title": "信息处理、知识管理与大语言模型（LLMs）", "blocks": [
+                        {"label": "理论框架", "text": "Galbraith 的组织信息处理理论；知识表示与语义检索。"},
+                        {"label": "课堂活动", "text": "提示词工程工作坊，测试地方政府规章分析与幻觉问题。"},
+                    ]},
+                    {"gidx": 3, "no": "04", "title": "资源依赖、云生态与政企互惠", "blocks": [
+                        {"label": "理论框架", "text": "Pfeffer 与 Salancik 的资源依赖理论；平台治理。"},
+                        {"label": "本周任务", "text": "提交“交付物 1：案例选择与系统架构图”。"},
+                    ]},
+                ],
+            },
+            {
+                "no": "02",
+                "title": "技术嵌入：重塑结构与协作",
+                "summary": "追踪技术进入工作流程后，内部控制、团队协作、领导方式和变革路径发生的具体变化。",
+                "weeks": [
+                    {"gidx": 4, "no": "05", "title": "算法管理与内部控制系统", "blocks": [
+                        {"label": "理论框架", "text": "Edwards 的控制类型学；Ouchi 的市场、科层与氏族控制。"},
+                        {"label": "研讨活动", "text": "行政效率与一线网格员自主权之间的权衡。"},
+                    ]},
+                    {"gidx": 5, "no": "06", "title": "小组动力、人机协作与协同", "blocks": [
+                        {"label": "理论框架", "text": "动态团队（Flash Teams）、智能增强与代理工作流。"},
+                        {"label": "课堂活动", "text": "“绿野仙踪”模拟：在编写代码前模拟 AI 工作流，识别协作瓶颈。"},
+                    ]},
+                    {"gidx": 6, "no": "07", "title": "战略领导力与组织变革管理", "blocks": [
+                        {"label": "理论框架", "text": "双元性领导力；组织数据就绪框架。"},
+                        {"label": "研讨活动", "text": "诊断数字基础设施部署中战略对齐与一线执行脱节的原因。"},
+                    ]},
+                    {"gidx": 7, "no": "08", "title": "期中案例工作坊：利益相关者对齐与提示词优化", "blocks": [
+                        {"label": "课堂活动", "text": "让 LLM 扮演“高阻力组织成员”，对利益相关者分析草案进行压力测试。"},
+                        {"label": "本周任务", "text": "提交“交付物 2：利益相关者与协作分析备忘录”。"},
+                    ]},
+                ],
+            },
+            {
+                "no": "03",
+                "title": "智能行动者：重构决策与权力",
+                "summary": "把人工智能视为参与判断和行动的新角色，分析裁量、公共价值、制度稳定与平台权力。",
+                "weeks": [
+                    {"gidx": 8, "no": "09", "title": "街头官僚与算法自由裁量权", "blocks": [
+                        {"label": "理论框架", "text": "Lipsky 的街头官僚理论；算法厌恶与算法裁量权。"},
+                        {"label": "案例讨论", "text": "一线工作者如何规避或操纵自动化任务分配系统。"},
+                    ]},
+                    {"gidx": 9, "no": "10", "title": "以人为本的服务设计与公共价值创造", "blocks": [
+                        {"label": "理论框架", "text": "Mark Moore 的公共价值战略三角；以人为本的设计与价值主张。"},
+                        {"label": "本周任务", "text": "启动“交付物 3”，评估所选 AI 系统的公共价值与行政权衡。"},
+                    ]},
+                    {"gidx": 10, "no": "11", "title": "制度理论、官僚神话与敏捷性", "blocks": [
+                        {"label": "理论框架", "text": "Meyer 与 Rowan 的制度理论；脱耦、礼仪性合规、敏捷开发与敏捷采购。"},
+                        {"label": "研讨活动", "text": "为公共部门从“瀑布式”采购转向“敏捷式”迭代制定变革方案。"},
+                    ]},
+                    {"gidx": 11, "no": "12", "title": "数字公共基础设施（DPI）与平台型政府", "blocks": [
+                        {"label": "理论框架", "text": "公共产品理论与平台政府（GaaP）模型。"},
+                        {"label": "本周任务", "text": "提交“交付物 3：公共价值与 SWOT 分析备忘录”。"},
+                    ]},
+                ],
+            },
+            {
+                "no": "04",
+                "title": "公共治理：约束算法与责任",
+                "summary": "把公平、程序、司法审查和监管放在同一套责任框架中，形成可审计的 AI 实施方案。",
+                "weeks": [
+                    {"gidx": 12, "no": "13", "title": "算法偏见、社会公平与代表性官僚制", "blocks": [
+                        {"label": "理论框架", "text": "代表性官僚制理论与算法公平的数学定义。"},
+                        {"label": "课堂活动", "text": "算法审计研讨：识别公开数据集中的代表性偏差。"},
+                    ]},
+                    {"gidx": 13, "no": "14", "title": "行政程序、司法审查与自动化决策诉讼", "blocks": [
+                        {"label": "理论框架", "text": "正当程序原则与自动化决策的司法审查。"},
+                        {"label": "课堂活动", "text": "模拟行政听证会，质询自动化系统的可解释性与公平问题。"},
+                    ]},
+                    {"gidx": 14, "no": "15", "title": "比较监管与战略技术政策", "blocks": [
+                        {"label": "理论框架", "text": "响应式监管理论与比较技术政策。"},
+                        {"label": "课堂活动", "text": "代表不同利益主体讨论监管沙盒的设计。"},
+                    ]},
+                    {"gidx": 15, "no": "16", "title": "期末报告展示：AI 落地路线图", "blocks": [
+                        {"label": "结构化周次安排", "text": "期末小组展示及专家评审，提交 AI 落地路线图与总结报告。"},
+                        {"label": "内容批注中的另一项规定", "text": "第 16 周进行开卷随堂测验，答案分为“最优答案”和“人机协同反思与改进”两部分。两种安排尚需内容团队统一。"},
+                    ]},
+                ],
+            },
+        ],
+        "teaching": [
+            {"time": "30′", "title": "理论与基础知识", "text": "讲解，并与 AI 数字人对话，介绍概念、理论与现象。"},
+            {"time": "60′", "title": "课堂学术脱口秀", "text": "学习者围绕本周主题进行 3 分钟陈述。录音转写进入知识广场，录像片段需另行取得授权。"},
+        ],
+        "assessment": [
+            {"score": "示例", "title": "学习反馈方案（示例）", "text": "学术脱口秀与期末随堂测验，作为学习过程反馈的两种形式。"},
+            {"score": "示例", "title": "综合学习反馈（示例）", "text": "课堂参与、阶段交付物与期末项目共同构成学习反馈。"},
+        ],
+    },
+    # 学习资料（小程序"学习资料"页与网站共用此源）
+    "textbooks": {
+        "books": [
+            {"letter": "A", "title": "人工智能与公共组织", "desc": "主资料。内容对应 16 周主题，从组织理论、技术与协作进入算法裁量、公共价值、制度与监管。", "pill": "逐章建设", "status": "下一步：选择样板单元，完成两节可公开阅读的样章。"},
+            {"letter": "B", "title": "人工智能基础素养", "desc": "解释生成式 AI、大语言模型、知识库与智能体的基本原理，也帮助学习者识别幻觉、偏见和数据风险。", "pill": "已有内容基础", "status": "来源：AI 素养培训项目中的 D1—D5 能力框架。"},
+            {"letter": "C", "title": "AI 实操指南", "desc": "围绕结构化指令、文档处理、知识检索、Skill、数据分析与安全使用，组织成可直接练习的短章节。", "pill": "待选编", "status": "下一步：整理现有教程，确认版权与课程适用范围。"},
+        ],
+        "chapters": [
+            {"tag": "PART I", "title": "组织为何存在", "desc": "官僚制、有限理性、信息处理与资源依赖。"},
+            {"tag": "PART II", "title": "技术如何进入组织", "desc": "算法管理、团队协作、领导力与组织变革。"},
+            {"tag": "PART III", "title": "智能体成为行动者", "desc": "裁量权、公共价值、制度张力与平台政府。"},
+            {"tag": "PART IV", "title": "公共责任如何安放", "desc": "算法公平、正当程序、司法审查与监管。"},
+            {"tag": "METHOD", "title": "人机协同学习", "desc": "提示词、角色模拟、算法审计与批判性核查。"},
+            {"tag": "PROJECT", "title": "AI 落地路线图", "desc": "把组织设计、技术可行性和合规性放入同一方案。"},
+        ],
+    },
 }
 
 
@@ -1138,10 +1259,17 @@ def load_course_content():
     返回结构见 DEFAULT_COURSE_CONTENT。每次请求实时读盘，
     因此编辑 course-content.json 后无需重启服务即可生效。
     文件缺失或损坏时回退默认并落地默认文件，便于首次部署引导。
+
+    迁移补全：磁盘文件缺省顶层键（如 syllabus / textbooks）时，
+    用默认值补齐，保证 GET 始终返回完整结构，且 POST 可正常持久化。
     """
     try:
         if COURSE_CONTENT_FILE.exists():
-            return json.loads(COURSE_CONTENT_FILE.read_text(encoding="utf-8"))
+            loaded = json.loads(COURSE_CONTENT_FILE.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                merged = dict(DEFAULT_COURSE_CONTENT)
+                merged.update(loaded)  # 磁盘值优先，缺失键回退默认
+                return merged
     except (json.JSONDecodeError, OSError):
         pass
     # 首次运行或文件损坏：落地默认文件并回退
@@ -1153,6 +1281,11 @@ def load_course_content():
     except OSError:
         pass
     return DEFAULT_COURSE_CONTENT
+
+
+def save_course_content(content):
+    """原子写回课程展示内容（tmp + fsync + os.replace）。"""
+    _atomic_write_json(COURSE_CONTENT_FILE, content)
 
 
 class CourseHandler(SimpleHTTPRequestHandler):
@@ -1249,6 +1382,12 @@ class CourseHandler(SimpleHTTPRequestHandler):
             # 课程展示内容（大纲 / FILM 章节 / 课程介绍 / 入口文案）。
             # 公开只读，无需登录；小程序与网站共用，编辑 JSON 即两端同步。
             return self.send_json(load_course_content())
+        if parsed.path in ("/api/course/syllabus", "/v1/course/syllabus"):
+            # 大纲切片（与网站单一数据源对齐，供小程序"内容大纲"页拉取）。
+            return self.send_json(load_course_content().get("syllabus", {}))
+        if parsed.path in ("/api/course/textbooks", "/v1/course/textbooks"):
+            # 学习资料切片（与网站单一数据源对齐，供小程序"学习资料"页拉取）。
+            return self.send_json(load_course_content().get("textbooks", {}))
         if parsed.path == "/v1/file":
             return self.serve_uploaded_file(parse_qs(parsed.query).get("name", [""])[0])
         if parsed.path == "/v1/conversations":
@@ -1303,7 +1442,7 @@ class CourseHandler(SimpleHTTPRequestHandler):
         if self.path == "/v1/asr":
             return self.receive_v1_asr()
         # 白名单：/v1/* 与已知 /api/* 放行，其余 404
-        if not self.path.startswith(("/api/plaza/", "/api/auth/", "/v1/")):
+        if not self.path.startswith(("/api/plaza/", "/api/auth/", "/api/course/", "/v1/")):
             if self.path not in ("/api/ask", "/api/translate"):
                 return self.send_error(404)
         # JSON body 读取（部分端点需要）
@@ -1347,7 +1486,83 @@ class CourseHandler(SimpleHTTPRequestHandler):
             return self.handle_auth_login(payload)
         if self.path == "/api/auth/reset-password":
             return self.handle_auth_reset_password(payload)
+        if self.path in ("/api/course/content", "/v1/course/content"):
+            return self.handle_course_content_update(payload)
         return self.send_error(404)
+
+    # ───────────────── Course content (编辑/对齐) ─────────────────
+    def _course_editor_authorized(self):
+        """课程编辑鉴权：满足任一即通过。
+
+        1) 已登录会话且 role ∈ COURSE_EDITOR_ROLES（默认 teacher,admin）；
+        2) 或 Authorization: Bearer <COURSE_EDIT_TOKEN>（环境变量，未设置则不启用）。
+
+        返回 (ok, reason)：reason="login" 表示未登录（应 401），
+        reason="teacher" 表示已登录但角色无权（应 403）。
+        """
+        user = current_user_from_request(self)
+        editor_roles = {
+            r.strip() for r in os.getenv("COURSE_EDITOR_ROLES", "teacher,admin").split(",") if r.strip()
+        }
+        if user and user.get("role") in editor_roles:
+            return True, None
+        auth = self.headers.get("Authorization", "")
+        token = auth[len("Bearer "):].strip() if auth.startswith("Bearer ") else None
+        expected = os.getenv("COURSE_EDIT_TOKEN")
+        if expected and token and secrets.compare_digest(token, expected):
+            return True, None
+        return False, ("teacher" if user else "login")
+
+    def handle_course_content_update(self, payload):
+        """带鉴权的课程内容更新（POST /api|v1/course/content）。
+
+        写入 course-content.json 这一单一数据源；网站与小程序共用，
+        因此一次更新即两端同步，构成"更新课程内容"的闭环。
+        """
+        ok, reason = self._course_editor_authorized()
+        if not ok:
+            msg = (
+                "未授权：需要教师或管理员身份。" if reason == "teacher"
+                else "未授权：请先登录，或提供编辑令牌（Authorization: Bearer）。"
+            )
+            return self.send_json({"error": msg}, 403 if reason == "teacher" else 401)
+        if not isinstance(payload, dict):
+            return self.send_json({"error": "请求体必须是 JSON 对象。"}, 400)
+
+        current = load_course_content()
+        # 只允许更新已知顶层键，并对结构做轻量类型校验，避免把错误结构写进单一数据源。
+        ALLOWED = ("hero", "filmChapters", "phases", "entries", "syllabus", "textbooks")
+        for key in ALLOWED:
+            if key not in payload:
+                continue
+            val = payload[key]
+            if isinstance(val, dict):
+                # 对象型字段（hero / syllabus / textbooks）做深合并，
+                # 保留未提供的兄弟字段，避免局部更新冲掉整段。
+                if isinstance(current.get(key), dict):
+                    merged = dict(current[key])
+                    merged.update(val)
+                    current[key] = merged
+                else:
+                    current[key] = val
+            elif isinstance(val, list):
+                # 列表型字段（filmChapters / phases / entries）整体替换。
+                current[key] = val
+            else:
+                return self.send_json({"error": f"字段 {key} 必须是数组或对象。"}, 400)
+
+        current["version"] = int(current.get("version", 1)) + 1
+        current["updatedAt"] = time.strftime("%Y-%m-%d")
+        try:
+            save_course_content(current)
+        except OSError as exc:
+            return self.send_json({"error": f"写入课程内容失败：{exc}"}, 500)
+        return self.send_json({
+            "ok": True,
+            "version": current["version"],
+            "updatedAt": current["updatedAt"],
+            "content": current,
+        })
 
     # ───────────────── Auth handlers ─────────────────
     def handle_auth_register(self, payload):

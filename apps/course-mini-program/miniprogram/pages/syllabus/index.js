@@ -1,3 +1,5 @@
+const course = require('../../services/course.js');
+
 Page({
   data: {
     openWeek: 0,
@@ -107,6 +109,25 @@ Page({
 
   onShow() {
     if (this.getTabBar()) this.getTabBar().setData({ selected: 1 });
+  },
+
+  onLoad() {
+    this.refreshSyllabus();
+  },
+
+  // 从后端单一数据源拉取大纲；成功则覆盖本地兜底值，弱网/接口异常保留默认值。
+  refreshSyllabus() {
+    course.getSyllabus()
+      .then((data) => {
+        const patch = {};
+        if (Array.isArray(data.stages)) patch.stages = data.stages;
+        if (Array.isArray(data.teaching)) patch.teaching = data.teaching;
+        if (Array.isArray(data.assessment)) patch.assessment = data.assessment;
+        if (Object.keys(patch).length) this.setData(patch);
+      })
+      .catch((err) => {
+        console.warn('[syllabus] 大纲加载失败，使用本地兜底：', err);
+      });
   },
 
   toggleWeek(event) {

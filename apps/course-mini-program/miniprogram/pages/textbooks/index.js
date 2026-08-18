@@ -1,3 +1,5 @@
+const course = require('../../services/course.js');
+
 Page({
   data: {
     books: [
@@ -17,5 +19,23 @@ Page({
 
   onShow() {
     if (this.getTabBar()) this.getTabBar().setData({ selected: 2 });
+  },
+
+  onLoad() {
+    this.refreshTextbooks();
+  },
+
+  // 从后端单一数据源拉取学习资料；成功则覆盖本地兜底值，弱网/接口异常保留默认值。
+  refreshTextbooks() {
+    course.getTextbooks()
+      .then((data) => {
+        const patch = {};
+        if (Array.isArray(data.books)) patch.books = data.books;
+        if (Array.isArray(data.chapters)) patch.chapters = data.chapters;
+        if (Object.keys(patch).length) this.setData(patch);
+      })
+      .catch((err) => {
+        console.warn('[textbooks] 学习资料加载失败，使用本地兜底：', err);
+      });
   }
 });

@@ -66,3 +66,14 @@ e2e/__screenshots-619/
 # ===== Caches =====
 .cache/
 tmp/
+
+# ===== 课程站运行必需的本地媒体（页面直接引用，被上面全局二进制规则排除的例外）=====
+# 仅放行被 HTML/JS 引用、缺失会导致页面裂开/视频无源的 6 个文件；动画帧 dump(_frames) 仍排除。
+!apps/course-platform-prototype/assets/nju-government-logo.png
+!apps/course-platform-prototype/assets/yujunbo.jpg
+!apps/course-platform-prototype/assets/course-promo-poster.png
+!apps/course-platform-prototype/assets/course-promo.mp4
+!apps/course-platform-prototype/assets/course-promo.webm
+!apps/course-platform-prototype/assets/guide-organizations-ch1-1.mp4
+
+# ===== OpenMAIC 视频导出字体（KaTeX/Noto Sans）功能必需，按设计保留（非密钥）=====

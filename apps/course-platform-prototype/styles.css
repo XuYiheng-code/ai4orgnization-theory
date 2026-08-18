@@ -1287,6 +1287,25 @@ button, .button, .nav-link, .entry-card, summary { cursor: pointer; }
 .week-panel { margin-top: .15rem; }
 .week-panel[hidden] { display: none; }
 
+/* 延伸阅读（课堂引用与拓展） */
+.reading-extra { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px dashed var(--rule); }
+.reading-sub { font-size: .8rem; color: var(--muted); letter-spacing: .04em; margin: 0 0 .55rem; }
+.reading-sublist { gap: .5rem; }
+.reading-sublist li { color: var(--ink); font-size: .85rem; }
+.reading-sublist li::marker { color: var(--orange); }
+.reading-sublist li .src { color: var(--muted); }
+
+/* 概念速查 · 读者指南 */
+.glossary { background: var(--blue-pale); border: 1px solid var(--rule); border-radius: var(--radius); padding: 1.5rem 1.8rem; margin: 2.2rem 0; }
+.glossary > h2 { font: 700 1.22rem/1.3 var(--display); color: var(--navy); margin: 0 0 .35rem; }
+.glossary > p { color: var(--muted); margin: 0 0 1.15rem; font-size: .9rem; }
+.gloss { display: grid; grid-template-columns: repeat(2, 1fr); gap: .85rem 1.5rem; margin: 0; }
+.gloss > div { background: var(--paper); border: 1px solid var(--rule); border-left: 3px solid var(--orange); border-radius: 10px; padding: .75rem .95rem; }
+.gloss dt { font-weight: 700; color: var(--navy); margin: 0 0 .25rem; font-size: .9rem; line-height: 1.3; }
+.gloss dt .en { color: var(--muted); font-weight: 400; font-size: .76rem; }
+.gloss dd { margin: 0; color: var(--ink); font-size: .84rem; line-height: 1.55; }
+@media (max-width: 760px) { .gloss { grid-template-columns: 1fr; } }
+
 @media print {
   body { background: white; color: black; }
   body::before, .site-header, .site-footer, .hero-actions, .library-tools, .concepts, .platform-shell, .toast, .course-film { display: none !important; }
